@@ -1,18 +1,11 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#loginmodal')
-
-//ログイン処理を行うモーダル
-const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
-    //仮メインページからstateを渡すLoginModalIsOpen（初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
-    //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
-    //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
-
+const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
 
     ////////css///////////css///////////css///////
     const modalContainer = {
-        backgroundColor: "blue",
+        backgroundColor: "red",
         height: "460px",
         width: "500px",
         display: "flex",
@@ -41,10 +34,10 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
             backgroundColor: 'rgba(200, 200, 200, 0.75)',
         },
         content: {
-            display:"flex",
+            display: "flex",
             justifyContent: "center",
             alignItems: "center",
-    
+
             //真ん中に寄せる
             top: "17%",
             left: "30%",
@@ -63,29 +56,28 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
         },
     }
     ////////css///////////css///////////css///////
-
     return (
         <Modal
-            isOpen={LoginModalIsOpen}
-            onRequestClose={closeLoginModal.bind(THIS)}
+            isOpen={SignUpModalIsOpen}
+            onRequestClose={closeSignUpModal.bind(THIS)}
             style={customStyles}
             contentLabel="Example Modal"
         >
             <div style={modalContainer}>
                 <div style={modalText}>
                     <form>
-                        <h1>仮ログイン画面</h1>
+                        <h1>仮サインアップ画面</h1>
                         <p>メールアドレス</p>
                         <input type="email" />
                         <p>パスワード</p>
                         <input type="password" />
                         <br />
-                        <button>ログイン</button>
+                        <button>登録</button>
                     </form>
                 </div>
             </div>
         </Modal>
     );
-};
+}
 
-export default LoginModal;
+export default SigunUpModal;

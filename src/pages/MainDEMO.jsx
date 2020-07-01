@@ -1,32 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
 import LoginModal from '../LoginModal'
-import Modal from 'react-modal';
+import SignUpModal from '../SignUpModal'
 
-
-Modal.setAppElement('#loginmodal')
 
 class MainDEMO extends React.Component {//仮のメインページ
     constructor(props) {
         super(props);
 
         this.state = {
-            IsOpenModal: false,//モーダルが開いているかの情報
-
+            LoginModalIsOpen: false,//モーダルが開いているかの情報
+            SignUpModalIsOpen: false,//モーダルが開いているかの情報
         }
+
     }
     ///js//////js/////////js/////////js///////
-    openModal() {
-        this.setState({ modalIsOpen: true });
+    openLoginModal() {
+        this.setState({ LoginModalIsOpen: true });
         
     }
 
-    closeModal() {
-        this.setState({ modalIsOpen: false });
+    closeLoginModal() {
+        this.setState({ LoginModalIsOpen: false });
     }
+    
+    openSignUpModal() {
+        this.setState({ SignUpModalIsOpen: true });
+        
+    }
+
+    closeSignUpModal() {
+        this.setState({ SignUpModalIsOpen: false });
+    }
+
 
     ///js//////js/////////js/////////js///////
     render() {
@@ -73,9 +82,10 @@ class MainDEMO extends React.Component {//仮のメインページ
                     <LeftSideBar />
                     <div style={mainPage}>
 
-                        <button type="submit" onClick={this.openModal.bind(this)}>ログインする</button>
-                        <LoginModal modalIsOpen={ this.state.modalIsOpen } closeModal={this.closeModal} THIS={this}/>
-                        
+                        <button type="submit" onClick={this.openLoginModal.bind(this)}>ログインする</button>
+                        <button type="submit" onClick={this.openSignUpModal.bind(this)}>会員登録する</button>
+                        <LoginModal LoginModalIsOpen={this.state.LoginModalIsOpen} closeLoginModal={this.closeLoginModal} THIS={this}/>
+                        <SignUpModal SignUpModalIsOpen={this.state.SignUpModalIsOpen} closeSignUpModal={this.closeSignUpModal} THIS={this} />
                     </div>
 
                 </div>
