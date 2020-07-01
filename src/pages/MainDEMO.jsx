@@ -5,7 +5,7 @@ import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
 import LoginModal from '../LoginModal'
 import Modal from 'react-modal';
-// import State from '../State';
+
 
 Modal.setAppElement('#loginmodal')
 
@@ -19,14 +19,14 @@ class MainDEMO extends React.Component {//仮のメインページ
         }
     }
     ///js//////js/////////js/////////js///////
-    // openModal() {
-    //     this.setState({ modalIsOpen: true });
+    openModal() {
+        this.setState({ modalIsOpen: true });
         
-    // }
+    }
 
-    // closeModal() {
-    //     this.setState({ modalIsOpen: false });
-    // }
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    }
 
     ///js//////js/////////js/////////js///////
     render() {
@@ -72,9 +72,10 @@ class MainDEMO extends React.Component {//仮のメインページ
                     <RightSideBar />
                     <LeftSideBar />
                     <div style={mainPage}>
-                        <button type="submit" onClick={() => { console.log("aaa")}}>ログインする</button>
-                        <LoginModal  />
-                        <p>a</p>
+
+                        <button type="submit" onClick={this.openModal.bind(this)}>ログインする</button>
+                        <LoginModal modalIsOpen={ this.state.modalIsOpen } closeModal={this.closeModal} THIS={this}/>
+                        
                     </div>
 
                 </div>
