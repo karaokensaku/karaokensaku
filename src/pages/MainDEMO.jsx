@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
 import LoginModal from '../LoginModal'
-import { render } from '@testing-library/react';
+import Modal from 'react-modal';
+
+
+Modal.setAppElement('#loginmodal')
 
 class MainDEMO extends React.Component {//仮のメインページ
     constructor(props) {
         super(props);
 
         this.state = {
-           IsOpenModal :false,//モーダルが開いているかの情報
-           
-        }
-        
-        ///js//////js/////////js/////////js///////
+            IsOpenModal: false,//モーダルが開いているかの情報
 
-        ///js//////js/////////js/////////js///////
+        }
     }
+    ///js//////js/////////js/////////js///////
+    openModal() {
+        this.setState({ modalIsOpen: true });
+        
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    }
+
+    ///js//////js/////////js/////////js///////
     render() {
         //////////css//////////css/////////css//////
         const containerCSS = {
@@ -62,10 +72,10 @@ class MainDEMO extends React.Component {//仮のメインページ
                     <RightSideBar />
                     <LeftSideBar />
                     <div style={mainPage}>
-                        <form >
-                            <button type="submit">ログインする</button>
-                        </form>
 
+                        <button type="submit" onClick={this.openModal.bind(this)}>ログインする</button>
+                        <LoginModal modalIsOpen={ this.state.modalIsOpen } closeModal={this.closeModal} THIS={this}/>
+                        
                     </div>
 
                 </div>
