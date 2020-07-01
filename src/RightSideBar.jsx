@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GuestRightSideBar = () => {
+const RightSideBar = () => {
 
     ////////////css/////////css////////css////////
     const rightSideBarCSS = {
@@ -29,4 +29,4 @@ const GuestRightSideBar = () => {
     );
 }
 
-export default GuestRightSideBar;
+export default RightSideBar;
