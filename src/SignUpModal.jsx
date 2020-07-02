@@ -81,18 +81,28 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
                 <div style={modalText}>
                     <form onSubmit={handlesubmit}>
                         <h1>仮サインアップ画面</h1>
-                        <p>メールアドレス</p>
+                        <label htmlFor='email'>E-mail</label>
                         <input
-                            type="email"
-                            onChange={e => {setEmail(e.target.value)}}
-                        />
-                        <p>パスワード</p>
+                            name='email'
+                            type='email'
+                            id='email'
+                            placeholder='Email'
+                            onChange={e => {
+                                setEmail(e.target.value)
+                            }}
+                        /><br/>
+                        <label htmlFor='password'>Password</label>
                         <input
-                            type="password"
-                            onChange={e => { setPassword(e.target.value) }}
+                            name='password'
+                            type='password'
+                            id='password'
+                            placeholder='Password'
+                            onChange={e => {
+                                setPassword(e.target.value)
+                            }}
                         />
                         <br />
-                        <button>登録</button>
+                        <button type="submit">登録</button>
                     </form>
                 </div>
             </div>

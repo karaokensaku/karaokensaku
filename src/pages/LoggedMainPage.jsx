@@ -3,14 +3,27 @@ import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
+import firebase from '../config/firebase'
 
 import { Route, Redirect } from 'react-router-dom'
 import { AuthContext } from '../AuthService'
 
 const MainDEMO = () => {//仮のメインページ
 
-    ///js//////js/////////js/////////js///////
+    const user = useContext(AuthContext);
 
+    ///js//////js/////////js/////////js///////
+    const LogOut = (user) => {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            firebase.auth().signOut().then(() => {
+                console.log("ログアウトしました");
+            })
+                .catch((error) => {
+                    console.log(`ログアウト時にエラーが発生しました (${error})`);
+                });
+        });
+    }
 
     ///js//////js/////////js/////////js///////
 
@@ -57,6 +70,7 @@ const MainDEMO = () => {//仮のメインページ
                 <LeftSideBar />
                 <div style={mainPage}>
                     <p>ログインできました！</p>
+                    <button onClick={LogOut}>ログアウト</button>
                 </div>
 
             </div>

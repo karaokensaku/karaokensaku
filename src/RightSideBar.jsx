@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { AuthContext } from './AuthService';
 const RightSideBar = () => {
 
     ////////////css/////////css////////css////////
@@ -21,10 +21,19 @@ const RightSideBar = () => {
         color: "black",
     }//右サイドバーのスタイル
     /////////////css/////////css////////css///////
-    
+
+    const user = useContext(AuthContext) //ユーザー情報引っ張ってくる
+
+    var renderRightSideBar;
+    if (user) {
+        renderRightSideBar = <i class="fas fa-user-circle"></i>
+    } else {
+        renderRightSideBar = <p>ログインするとここにユーザー情報が表示されます</p>
+    }
+
     return (
         <div style={rightSideBarCSS}>
-            <i class="fas fa-user-circle"></i>
+            {renderRightSideBar}
         </div>
     );
 }

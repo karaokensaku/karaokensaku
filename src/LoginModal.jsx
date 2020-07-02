@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
-const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS, history}) => {
+const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
     //仮メインページからstateを渡すLoginModalIsOpen（初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
@@ -44,10 +44,10 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS, history}) => {
             backgroundColor: 'rgba(200, 200, 200, 0.75)',
         },
         content: {
-            display:"flex",
+            display: "flex",
             justifyContent: "center",
             alignItems: "center",
-    
+
             //真ん中に寄せる
             top: "17%",
             left: "30%",
@@ -66,19 +66,22 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS, history}) => {
         },
     }
     ////////css///////////css///////////css///////
+
     //////js////////js//////////js//////////js///
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
     const handlesubmit = e => {
         e.preventDefault();
-        firebase.auth().signInWithEmailAndPassword(email,password)
-        .then(() =>{ 
-            history.push("/")
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                debugger
+                history.push("/")
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
     }
 
@@ -97,20 +100,35 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS, history}) => {
         >
             <div style={modalContainer}>
                 <div style={modalText}>
-                    <form onChange={handlesubmit}>
+                    <form onSubmit={handlesubmit}>
                         <h1>仮ログイン画面</h1>
-                        <p>メールアドレス</p>
+
+                        <label htmlFor='email'>E-mail</label>
+                        <br />
                         <input
-                            type="email"
-                            onChange={e => { setEmail(e.target.value) }}
+                            type='email'
+                            id='email'
+                            name='email'
+                            placeholder='Email'
+                            onChange={e => {
+                                setEmail(e.target.value)
+                            }}
                         />
-                        <p>パスワード</p>
+
+                        <br />
+                        <label htmlFor='password'>Password</label>
+                        <br />
                         <input
-                            type="password"
-                            onChange={e => { setPassword(e.target.value) }}
+                            type='password'
+                            id='password'
+                            name='password'
+                            placeholder='password'
+                            onChange={e => {
+                                setPassword(e.target.value)
+                            }}
                         />
                         <br />
-                        <button>ログイン</button>
+                        <button type="submit">ログイン</button>
                     </form>
                 </div>
             </div>
