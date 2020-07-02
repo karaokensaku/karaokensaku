@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useContext } from 'react'
 import Modal from 'react-modal';
+import firebase from './config/firebase';
+import { AuthContext } from './AuthService';
+import { Redirect } from 'react-router-dom';
 
 Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
-const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
+const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS, history}) => {
     //仮メインページからstateを渡すLoginModalIsOpen（初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
@@ -63,7 +66,28 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
         },
     }
     ////////css///////////css///////////css///////
+    //////js////////js//////////js//////////js///
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
 
+    const handlesubmit = e => {
+        e.preventDefault();
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then(() =>{ 
+            history.push("/")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    }
+
+    const user = useContext(AuthContext)
+
+    if (user) {
+        return <Redirect to="/" />
+    }
+    //////js////////js//////////js//////////js///
     return (
         <Modal
             isOpen={LoginModalIsOpen}
@@ -73,12 +97,18 @@ const LoginModal = ({LoginModalIsOpen, closeLoginModal, THIS}) => {
         >
             <div style={modalContainer}>
                 <div style={modalText}>
-                    <form>
+                    <form onChange={handlesubmit}>
                         <h1>仮ログイン画面</h1>
                         <p>メールアドレス</p>
-                        <input type="email" />
+                        <input
+                            type="email"
+                            onChange={e => { setEmail(e.target.value) }}
+                        />
                         <p>パスワード</p>
-                        <input type="password" />
+                        <input
+                            type="password"
+                            onChange={e => { setPassword(e.target.value) }}
+                        />
                         <br />
                         <button>ログイン</button>
                     </form>

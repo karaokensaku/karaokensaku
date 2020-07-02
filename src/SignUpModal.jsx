@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
+import firebase from './config/firebase';
+
+Modal.setAppElement('#loginmodal')
 
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
 
@@ -56,6 +59,17 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
         },
     }
     ////////css///////////css///////////css///////
+
+    //////js////////js//////////js//////////js///
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+
+    const handlesubmit = e => {
+        e.preventDefault();
+        firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)})
+        
+    }
+    //////js////////js//////////js//////////js///
     return (
         <Modal
             isOpen={SignUpModalIsOpen}
@@ -65,12 +79,18 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
         >
             <div style={modalContainer}>
                 <div style={modalText}>
-                    <form>
+                    <form onSubmit={handlesubmit}>
                         <h1>仮サインアップ画面</h1>
                         <p>メールアドレス</p>
-                        <input type="email" />
+                        <input
+                            type="email"
+                            onChange={e => {setEmail(e.target.value)}}
+                        />
                         <p>パスワード</p>
-                        <input type="password" />
+                        <input
+                            type="password"
+                            onChange={e => { setPassword(e.target.value) }}
+                        />
                         <br />
                         <button>登録</button>
                     </form>
