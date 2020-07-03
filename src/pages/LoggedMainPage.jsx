@@ -64,7 +64,7 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
     /////////css/////////////css//////////css///////
     return (
         <>
-            <Header />
+            <Header  LogOut={LogOut}/>
             <div style={containerCSS} name="mainContainer">
                 <RightSideBar />
                 <LeftSideBar />
