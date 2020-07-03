@@ -66,16 +66,16 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
 
     const handlesubmit = e => {
         e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)})
+        firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)}) //サインアップの処理
         
     }
     //////js////////js//////////js//////////js///
     return (
         <Modal
-            isOpen={SignUpModalIsOpen}
-            onRequestClose={closeSignUpModal.bind(THIS)}
+            isOpen={SignUpModalIsOpen}                      //trueなら表示
+            onRequestClose={closeSignUpModal.bind(THIS)}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
             style={customStyles}
-            contentLabel="Example Modal"
+            contentLabel="SignUp Modal"
         >
             <div style={modalContainer}>
                 <div style={modalText}>

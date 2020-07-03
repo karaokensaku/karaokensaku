@@ -19,15 +19,15 @@ const RightSideBar = () => {
 
         backgroundColor: "white",
         color: "black",
-    }//右サイドバーのスタイル
+    }                                                                       //右サイドバーのスタイル
     /////////////css/////////css////////css///////
 
-    const user = useContext(AuthContext) //ユーザー情報引っ張ってくる
+    const user = useContext(AuthContext)                                    //ユーザー情報引っ張ってくる
 
     var renderRightSideBar;
-    if (user) {
+    if (user) {                                                             //ログイン状態ならユーザー情報を表示
         renderRightSideBar = <i class="fas fa-user-circle"></i>
-    } else {
+    } else {                                                                //未ログイン状態なら他の表示
         renderRightSideBar = <p>ログインするとここにユーザー情報が表示されます</p>
     }
 

@@ -3,21 +3,22 @@ import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
-import LoginModal from '../LoginModal'
-import SignUpModal from '../SignUpModal'
+import LoginModal from '../LoginModal'                          //ログイン用モーダル
+import SignUpModal from '../SignUpModal'                        //サインアウト用モーダル
 
 
-class MainDEMO extends React.Component {//仮のメインページ
+class MainDEMO extends React.Component {                        //仮のユーザー用メインページ
     constructor(props) {
         super(props);
 
         this.state = {
-            LoginModalIsOpen: false,//モーダルが開いているかの情報
-            SignUpModalIsOpen: false,//モーダルが開いているかの情報
+            LoginModalIsOpen: false,                            //モーダルが開いているかの情報
+            SignUpModalIsOpen: false,                           //モーダルが開いているかの情報
         }
 
     }
     ///js//////js/////////js/////////js///////
+                                                                //モーダルを開いたり閉じたりする関数達
     openLoginModal() {
         this.setState({ LoginModalIsOpen: true });
         
@@ -36,7 +37,6 @@ class MainDEMO extends React.Component {//仮のメインページ
         this.setState({ SignUpModalIsOpen: false });
     }
 
-
     ///js//////js/////////js/////////js///////
     render() {
         //////////css//////////css/////////css//////
@@ -54,7 +54,7 @@ class MainDEMO extends React.Component {//仮のメインページ
             padding: "10px",
             color: "white",
         }
-        //containerのcss
+                                                                //containerのcss
 
         const mainPage = {
             display: "flex",
@@ -72,7 +72,7 @@ class MainDEMO extends React.Component {//仮のメインページ
             height: "100%",
             padding: "10px",
         }
-        //真ん中のメインページのcss
+                                                                //真ん中のメインページのcss
         /////////css/////////////css//////////css///////
         return (
             <>
@@ -84,7 +84,10 @@ class MainDEMO extends React.Component {//仮のメインページ
 
                         <button type="submit" onClick={this.openLoginModal.bind(this)}>ログインする</button>
                         <button type="submit" onClick={this.openSignUpModal.bind(this)}>会員登録する</button>
-                        <LoginModal LoginModalIsOpen={this.state.LoginModalIsOpen} closeLoginModal={this.closeLoginModal} THIS={this}/>
+                        
+                        {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
+                        <LoginModal LoginModalIsOpen={this.state.LoginModalIsOpen} closeLoginModal={this.closeLoginModal} THIS={this}/>　
+                        {/* サインモーダル用に開くか閉じるかの処理を渡す */}
                         <SignUpModal SignUpModalIsOpen={this.state.SignUpModalIsOpen} closeSignUpModal={this.closeSignUpModal} THIS={this} />
                     </div>
 

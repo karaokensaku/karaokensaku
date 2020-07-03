@@ -1,8 +1,9 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import {AuthContext} from './AuthService';
 
 
 const Header = () => {
+
 /////////////////CSS//////////////////
     const headerTitle = {
         color: "blue",
@@ -36,8 +37,16 @@ const Header = () => {
         color: "snow",
         textDecoration: "none",
     }
-//////////////////↑CSS↑/////////////////////////
+//////////////////CSS/////////////////
 
+/////js///////js////////////js////////
+    const user = useContext(AuthContext);                           //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
+    const renderHeader = user => {
+        if(user){
+            
+        }
+    }
+/////js///////js////////////js////////
     return (
         <header style={headerCSS}>
             <form >

@@ -8,7 +8,7 @@ Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
 const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
-    //仮メインページからstateを渡すLoginModalIsOpen（初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
+    //仮メインページからstate([LoginModalIsOpen] 初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
 
@@ -34,8 +34,8 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
         width: "400px",
     }
 
-    const customStyles = {//modalのスタイル
-        overlay: {//クリックするとモーダルを閉じる部分（画面外）のスタイル
+    const customStyles = {                                                 //modalのスタイリングの書き方は以下
+        overlay: {                                                         //クリックするとモーダルを閉じる部分（画面外灰色の部分）のスタイル
             position: 'fixed',
             top: 0,
             left: 0,
@@ -48,12 +48,12 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
             justifyContent: "center",
             alignItems: "center",
 
-            //真ん中に寄せる
+            //モーダルを真ん中に寄せる
             top: "17%",
             left: "30%",
             right: "30%",
             bottom: "17%",
-            //真ん中に寄せる
+            //モーダルを真ん中に寄せる
 
             position: 'absolute',
             border: '1px solid #ccc',
@@ -75,8 +75,8 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
         e.preventDefault();
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
-                debugger
-                history.push("/")
+
+                history.push("/")                                          //成功したら/にリダイレクトして初回のページ遷移をする
                 
             })
             .catch(err => {
@@ -88,13 +88,14 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
     const user = useContext(AuthContext)
 
     if (user) {
-        return <Redirect to="/" />
+        return <Redirect to="/" />                                         //ログイン状態ならLoggedMainPageに遷移
     }
+
     //////js////////js//////////js//////////js///
     return (
         <Modal
             isOpen={LoginModalIsOpen}
-            onRequestClose={closeLoginModal.bind(THIS)}
+            onRequestClose={closeLoginModal.bind(THIS)}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
             style={customStyles}
             contentLabel="Example Modal"
         >

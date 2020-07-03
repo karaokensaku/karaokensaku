@@ -10,11 +10,12 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
-{/* AuthProviderでラップすることで、 */}
-{/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
+          {/* AuthProviderでラップすることで、 */}
+          {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
 
         <Router>
           <Switch>
+            {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
             <LoggedInRoute exact path='/' component={LoggedMainPage}/>
             <Route exact path='/maindemo' component={MainDEMO} />
           </Switch>

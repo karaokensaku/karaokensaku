@@ -3,18 +3,18 @@ import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
-import firebase from '../config/firebase'
 
-import { Route, Redirect } from 'react-router-dom'
-import { AuthContext } from '../AuthService'
+import firebase from '../config/firebase'               //firebaseインポート
 
-const MainDEMO = () => {//仮のメインページ
+import { AuthContext } from '../AuthService'            //ユーザー情報が入っている
 
-    const user = useContext(AuthContext);
+const LoggedainDEMO = () => {                           //仮のユーザー用メインページ
+
+    const user = useContext(AuthContext);               //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
     ///js//////js/////////js/////////js///////
-    const LogOut = (user) => {
-
+    const LogOut = (user) => {                          //ログアウト処理
+        debugger
         firebase.auth().onAuthStateChanged((user) => {
             firebase.auth().signOut().then(() => {
                 console.log("ログアウトしました");
@@ -42,7 +42,7 @@ const MainDEMO = () => {//仮のメインページ
         padding: "10px",
         color: "white",
     }
-    //containerのcss
+                                                        //containerのcss
 
     const mainPage = {
         display: "flex",
@@ -60,7 +60,7 @@ const MainDEMO = () => {//仮のメインページ
         height: "100%",
         padding: "10px",
     }
-    //真ん中のメインページのcss
+                                                        //真ん中のメインページのcss
     /////////css/////////////css//////////css///////
     return (
         <>
@@ -72,7 +72,6 @@ const MainDEMO = () => {//仮のメインページ
                     <p>ログインできました！</p>
                     <button onClick={LogOut}>ログアウト</button>
                 </div>
-
             </div>
             <Footer />
         </>
@@ -80,4 +79,4 @@ const MainDEMO = () => {//仮のメインページ
 
 }
 
-export default MainDEMO;
+export default LoggedainDEMO;
