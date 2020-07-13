@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
@@ -7,38 +7,31 @@ import LoginModal from '../LoginModal'                          //ログイン�
 import SignUpModal from '../SignUpModal'                        //サインアウト用モーダル
 
 
-class MainDEMO extends React.Component {                        //仮のユーザー用メインページ
-    constructor(props) {
-        super(props);
+const MainDEMO = () =>  {                        //仮のユーザー用メインページ
+    const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+        
 
-        this.state = {
-            LoginModalIsOpen: false,                            //モーダルが開いているかの情報
-            SignUpModalIsOpen: false,                           //モーダルが開いているかの情報
-        }
-
-    }
     ///js//////js/////////js/////////js///////
                                                                 //モーダルを開いたり閉じたりする関数達
-    openLoginModal() {
-        this.setState({ LoginModalIsOpen: true });
-        
+    const openLoginModal = () => {
+        setLoginModalIsOpen(true)
     }
 
-    closeLoginModal() {
-        this.setState({ LoginModalIsOpen: false });
+    const closeLoginModal = () => {
+        setLoginModalIsOpen(false)
     }
     
-    openSignUpModal() {
-        this.setState({ SignUpModalIsOpen: true });
-        
+    const  openSignUpModal = () => {
+        setSignUpModalIsOpen(true)
     }
-
-    closeSignUpModal() {
-        this.setState({ SignUpModalIsOpen: false });
+    
+    const closeSignUpModal = () => {
+        setSignUpModalIsOpen(false)
     }
 
     ///js//////js/////////js/////////js///////
-    render() {
+    
         //////////css//////////css/////////css//////
         const containerCSS = {
             position: "relative",
@@ -82,20 +75,20 @@ class MainDEMO extends React.Component {                        //仮のユー�
                     <LeftSideBar />
                     <div style={mainPage}>
 
-                        <button type="submit" onClick={this.openLoginModal.bind(this)}>ログインする</button>
-                        <button type="submit" onClick={this.openSignUpModal.bind(this)}>会員登録する</button>
+                        <button type="submit" onClick={openLoginModal.bind(this)}>ログインする</button>
+                        <button type="submit" onClick={openSignUpModal.bind(this)}>会員登録する</button>
                         
                         {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
-                        <LoginModal LoginModalIsOpen={this.state.LoginModalIsOpen} closeLoginModal={this.closeLoginModal} THIS={this}/>　
+                        <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} THIS={this}/>　
                         {/* サインモーダル用に開くか閉じるかの処理を渡す */}
-                        <SignUpModal SignUpModalIsOpen={this.state.SignUpModalIsOpen} closeSignUpModal={this.closeSignUpModal} THIS={this} />
+                        <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} THIS={this} />
                     </div>
 
                 </div>
                 <Footer />
             </>
         );
-    }
+    
 }
 
 export default MainDEMO;
