@@ -4,7 +4,6 @@ import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
 
-import firebase from '../config/firebase'               //firebaseインポート
 
 import { AuthContext } from '../AuthService'            //ユーザー情報が入っている
 
@@ -13,17 +12,6 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
     const user = useContext(AuthContext);               //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
     ///js//////js/////////js/////////js///////
-    const LogOut = (user) => {                          //ログアウト処理
-        debugger
-        firebase.auth().onAuthStateChanged((user) => {
-            firebase.auth().signOut().then(() => {
-                console.log("ログアウトしました");
-            })
-                .catch((error) => {
-                    console.log(`ログアウト時にエラーが発生しました (${error})`);
-                });
-        });
-    }
 
     ///js//////js/////////js/////////js///////
 
@@ -37,12 +25,12 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
         margin: "10px 0",
         borderRadius: "10px",
         backgroundColor: "orange",
-        height: "100vh",
+        height: "100%",
         alignItems: "center",
         padding: "10px",
         color: "white",
     }
-                                                        //containerのcss
+    //containerのcss
 
     const mainPage = {
         display: "flex",
@@ -60,17 +48,65 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
         height: "100%",
         padding: "10px",
     }
-                                                        //真ん中のメインページのcss
+    //真ん中のメインページのcss
+    const HOTcontainerCSS = {
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        margin: "10px 0",
+        borderRadius: "10px",
+        backgroundColor: "orangered",
+        alignItems: "center",
+        padding: "10px",
+        color: "white",
+        width:"80%",
+    }
+    const LIKEcontainerCSS = {
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        margin: "10px 0",
+        borderRadius: "10px",
+        backgroundColor: "pink",
+        alignItems: "center",
+        padding: "10px",
+        color: "white",
+        width:"80%",
+    }
     /////////css/////////////css//////////css///////
     return (
         <>
-            <Header  LogOut={LogOut}/>
+            <Header />
             <div style={containerCSS} name="mainContainer">
                 <RightSideBar />
                 <LeftSideBar />
                 <div style={mainPage}>
-                    <p>ログインできました！</p>
-                    <button onClick={LogOut}>ログアウト</button>
+
+                    <div style={HOTcontainerCSS}>
+
+                        <h1>人気のカラオケ</h1>
+                        <p>【カラオケ】香水/瑛人</p>
+                        <iframe width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                        <button style={{ marginTop: "10px" }}><a href="" style={{ color: "black",  fontWeight: "bold" }}>もっと人気カラオケを見る</a></button>
+                    </div>
+                    <div style={LIKEcontainerCSS}>
+
+                        <h1>あなたのお気に入り</h1>
+                        <p>別の人の彼女になったよ / wacci</p>
+                        <iframe width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                        <button style={{ marginTop: "10px" }}><a href="" style={{ color: "black", fontWeight: "bold" }}>もっとお気に入りを見る</a></button>
+                    </div>
+
+                    <div><button><a href="" style={{ color: "black", fontWeight: "bold" }}>マイページへ行く</a></button></div>
+                    
                 </div>
             </div>
             <Footer />

@@ -22,20 +22,12 @@ const LeftSideBar = () => {
 
     return (
         <div style={leftSideBarCSS}>
-            <h1>左サイドバー</h1>
-            <p>詳細検索</p>
-            
-            <form>
-                <p >歌いやすい <input type="checkbox" /></p>
-                <p >難しい <input type="checkbox" /></p>
-                <p class="deepitem">歌われ回数　</p>
-                <input type="text" placeholder="以下" class="width40" />
-                <p>〜</p>
-                <input type="text" placeholder="以上" class="width40"/>
-                <p class="deepitem">いいね数</p><input type="text" placeholder="以上" class="width40"/>
-                <br/>
-                <button>検索</button>
-            </form>
+            <h1>人気カラオケ</h1>
+            <a href="">1米津玄師/Lemon</a>
+            <a href="">2米津玄師/LOSER</a>
+            <a href="">3あいみょん/マリーゴールド</a>
+            <a href="">4RADWIMPS/いいんですか？</a>
+            <a href="">5YPASOBI/夜に駆ける</a>
         </div>
     );
 }

@@ -77,7 +77,7 @@ class MainDEMO extends React.Component {                        //仮のユー�
         return (
             <>
                 <Header />
-                <div style={containerCSS} name="mainContainer">
+                <div style={containerCSS} name="mainContainerGuest">
                     <RightSideBar />
                     <LeftSideBar />
                     <div style={mainPage}>

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import {AuthContext} from './AuthService';
+import firebase from './config/firebase'               //firebaseインポート
 
-
-const Header = ({LogOut}) => {
+const Header = () => {
 
 /////////////////CSS//////////////////
     const headerTitle = {
@@ -42,6 +42,17 @@ const Header = ({LogOut}) => {
 /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
+    const LogOut = (user) => {                          //ログアウト処理
+        debugger
+        firebase.auth().onAuthStateChanged((user) => {
+            firebase.auth().signOut().then(() => {
+                console.log("ログアウトしました");
+            })
+                .catch((error) => {
+                    console.log(`ログアウト時にエラーが発生しました (${error})`);
+                });
+        });
+    }
 
     const renderHeader = (user) => {
         if(user){
@@ -55,7 +66,7 @@ const Header = ({LogOut}) => {
                     <nav>
                         <ul style={headerMenu}>
                             <li><a style={headerMenuItem} href="#">HOT</a></li>
-                            <li style={headerMenuItem}>NEW</li>
+                            <li style={headerMenuItem}>LIKE</li>
                             <li style={headerMenuItem}>MYPAGE</li>
                             <li style={headerMenuItem} onClick={LogOut}>LOGOUT</li>
                             
@@ -74,7 +85,6 @@ const Header = ({LogOut}) => {
                     <nav>
                         <ul style={headerMenu}>
                             <li><a style={headerMenuItem} href="#">HOT</a></li>
-                            <li style={headerMenuItem}>NEW</li>
                             <li style={headerMenuItem}>LOGIN</li>
                             
                         </ul>
