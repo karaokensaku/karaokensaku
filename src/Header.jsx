@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import {AuthContext} from './AuthService';
-import firebase from './config/firebase'               //firebaseインポート
+
+import {Link} from 'react-router-dom';
 
 const Header = () => {
 
@@ -42,17 +43,7 @@ const Header = () => {
 /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
-    const LogOut = (user) => {                          //ログアウト処理
-        debugger
-        firebase.auth().onAuthStateChanged((user) => {
-            firebase.auth().signOut().then(() => {
-                console.log("ログアウトしました");
-            })
-                .catch((error) => {
-                    console.log(`ログアウト時にエラーが発生しました (${error})`);
-                });
-        });
-    }
+    
 
     const renderHeader = (user) => {
         if(user){
@@ -62,13 +53,13 @@ const Header = () => {
                         <input type="search" placeholder="カラオケ動画を検索" />
                         <button>検索</button>
                     </form>
-                    <h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1>
+                    <Link to="/" style={{ textDecoration: 'inherit' }}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
                     <nav>
                         <ul style={headerMenu}>
-                            <li><a style={headerMenuItem} href="#">HOT</a></li>
+                            <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit'}}>HOT</Link> </li>
                             <li style={headerMenuItem}>LIKE</li>
                             <li style={headerMenuItem}>MYPAGE</li>
-                            <li style={headerMenuItem} onClick={LogOut}>LOGOUT</li>
+                            {/* <li style={headerMenuItem} onClick={LogOut}>LOGOUT</li> */}
                             
                         </ul>
                     </nav>

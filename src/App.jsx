@@ -4,7 +4,7 @@ import LoggedMainPage from './pages/LoggedMainPage';
 import {AuthProvider} from './AuthService';//ユーザー情報を持っているコンテキストオブジェクト
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './LoggedInRoute'
-
+import HOTPage from './pages/HOTPage'
 function App() {
 
   return (
@@ -18,6 +18,7 @@ function App() {
             {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
             <LoggedInRoute exact path='/' component={LoggedMainPage}/>
             <Route exact path='/maindemo' component={MainDEMO} />
+            <Route exact path='/HOTPage' component={HOTPage} />
           </Switch>
         </Router>
 

@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import RightSideBar from '../RightSideBar';
 import LeftSideBar from '../LeftSideBar';
+import {Link} from 'react-router-dom';
 
-
-import { AuthContext } from '../AuthService'            //ユーザー情報が入っている
 
 const LoggedainDEMO = () => {                           //仮のユーザー用メインページ
 
-    const user = useContext(AuthContext);               //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
     ///js//////js/////////js/////////js///////
 
@@ -50,7 +48,7 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
     }
     //真ん中のメインページのcss
     const HOTcontainerCSS = {
-        position: "relative",
+
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
@@ -60,10 +58,10 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
         alignItems: "center",
         padding: "10px",
         color: "white",
-        width:"80%",
+        width: "80%",
     }
     const LIKEcontainerCSS = {
-        position: "relative",
+
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
@@ -73,7 +71,7 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
         alignItems: "center",
         padding: "10px",
         color: "white",
-        width:"80%",
+        width: "80%",
     }
     /////////css/////////////css//////////css///////
     return (
@@ -85,14 +83,15 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
                 <div style={mainPage}>
 
                     <div style={HOTcontainerCSS}>
-
+                        {/* メインページから各ページへアクセスできる */}
                         <h1>人気のカラオケ</h1>
                         <p>【カラオケ】香水/瑛人</p>
                         <iframe width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
-                        <button style={{ marginTop: "10px" }}><a href="" style={{ color: "black",  fontWeight: "bold" }}>もっと人気カラオケを見る</a></button>
+                        <Link to="HOTPage"><button style={{ marginTop: "10px" }}><a href="" style={{ color: "black", fontWeight: "bold" }}>もっと人気カラオケを見る</a></button></Link>
+                        
                     </div>
                     <div style={LIKEcontainerCSS}>
 
@@ -106,7 +105,8 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
                     </div>
 
                     <div><button><a href="" style={{ color: "black", fontWeight: "bold" }}>マイページへ行く</a></button></div>
-                    
+                    {/* メインページから各ページへアクセスできる */}
+
                 </div>
             </div>
             <Footer />
