@@ -69,7 +69,8 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
 
     //////js////////js//////////js//////////js///
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('')
+    const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
     
     const handlesubmit = e => {
         e.preventDefault();
@@ -84,8 +85,6 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
             })
 
     }
-
-    
 
     const user = useContext(AuthContext)
 

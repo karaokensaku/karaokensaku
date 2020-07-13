@@ -8,8 +8,11 @@ import SignUpModal from '../SignUpModal'                        //サインア�
 
 
 const MainDEMO = () =>  {                        //仮のユーザー用メインページ
+
+
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+
         
 
     ///js//////js/////////js/////////js///////

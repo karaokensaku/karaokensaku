@@ -23,7 +23,7 @@ const LeftSideBar = () => {
     return (
         <div style={leftSideBarCSS}>
             <h1>人気カラオケ</h1>
-            <a href="">1【カラオケ】香水/瑛人</a>
+            <a href="">1</a>
             <a href="">2米津玄師/Lemon</a>
             <a href="">3あいみょん/マリーゴールド</a>
             <a href="">4RADWIMPS/いいんですか？</a>

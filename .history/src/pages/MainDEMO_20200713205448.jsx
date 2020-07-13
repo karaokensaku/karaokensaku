@@ -8,8 +8,12 @@ import SignUpModal from '../SignUpModal'                        //サインア�
 
 
 const MainDEMO = () =>  {                        //仮のユーザー用メインページ
+
+
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+            // LoginModalIsOpen: false,                            //モーダルが開いているかの情報
+            // SignUpModalIsOpen: false,                           //モーダルが開いているかの情報
         
 
     ///js//////js/////////js/////////js///////
@@ -76,7 +80,7 @@ const MainDEMO = () =>  {                        //仮のユーザー用メイ�
                     <div style={mainPage}>
 
                         <button type="submit" onClick={openLoginModal.bind(this)}>ログインする</button>
-                        <button type="submit" onClick={openSignUpModal.bind(this)}>会員登録する</button>
+                        <button type="submit" onClick={this.openSignUpModal.bind(this)}>会員登録する</button>
                         
                         {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
                         <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} THIS={this}/>　

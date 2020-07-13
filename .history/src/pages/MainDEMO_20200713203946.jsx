@@ -8,27 +8,32 @@ import SignUpModal from '../SignUpModal'                        //サインア�
 
 
 const MainDEMO = () =>  {                        //仮のユーザー用メインページ
+
+
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
-    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+    const [SignUpModalIsOpen, setSignUpModalIsOpen] =useState(false);
+            // LoginModalIsOpen: false,                            //モーダルが開いているかの情報
+            // SignUpModalIsOpen: false,                           //モーダルが開いているかの情報
         
 
     ///js//////js/////////js/////////js///////
                                                                 //モーダルを開いたり閉じたりする関数達
-    const openLoginModal = () => {
-        setLoginModalIsOpen(true)
+    const openLoginModal = {
+        set
     }
 
-    const closeLoginModal = () => {
-        setLoginModalIsOpen(false)
-    }
+    // const closeLoginModal() {
+    //     this.setState({ LoginModalIsOpen: false });
     
-    const  openSignUpModal = () => {
-        setSignUpModalIsOpen(true)
-    }
     
-    const closeSignUpModal = () => {
-        setSignUpModalIsOpen(false)
-    }
+    // const  openSignUpModal() {
+    //     this.setState({ SignUpModalIsOpen: true });
+        
+    // }
+
+    // const closeSignUpModal() {
+    //     this.setState({ SignUpModalIsOpen: false });
+    // }
 
     ///js//////js/////////js/////////js///////
     
@@ -75,13 +80,13 @@ const MainDEMO = () =>  {                        //仮のユーザー用メイ�
                     <LeftSideBar />
                     <div style={mainPage}>
 
-                        <button type="submit" onClick={openLoginModal.bind(this)}>ログインする</button>
-                        <button type="submit" onClick={openSignUpModal.bind(this)}>会員登録する</button>
+                        <button type="submit" onClick={this.openLoginModal.bind(this)}>ログインする</button>
+                        <button type="submit" onClick={this.openSignUpModal.bind(this)}>会員登録する</button>
                         
                         {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
-                        <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} THIS={this}/>　
+                        <LoginModal LoginModalIsOpen={this.state.LoginModalIsOpen} closeLoginModal={this.closeLoginModal} THIS={this}/>　
                         {/* サインモーダル用に開くか閉じるかの処理を渡す */}
-                        <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} THIS={this} />
+                        <SignUpModal SignUpModalIsOpen={this.state.SignUpModalIsOpen} closeSignUpModal={this.closeSignUpModal} THIS={this} />
                     </div>
 
                 </div>
