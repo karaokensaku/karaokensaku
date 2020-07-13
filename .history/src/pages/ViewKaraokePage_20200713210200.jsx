@@ -19,7 +19,7 @@ const ViewKaraokePage = () => {
 
     return(
         <div style={containerCSS}>
-            
+            aaa
         </div>
     );
 }

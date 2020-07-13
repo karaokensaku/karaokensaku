@@ -18,8 +18,8 @@ const ViewKaraokePage = () => {
     }
 
     return(
-        <div style={containerCSS}>
-            
+        <div style={cona}>
+
         </div>
     );
 }

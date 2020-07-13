@@ -16,12 +16,6 @@ const ViewKaraokePage = () => {
         padding: "10px",
         color: "white",
     }
-
-    return(
-        <div style={containerCSS}>
-            
-        </div>
-    );
 }
 
 export default ViewKaraokePage
