@@ -28,7 +28,8 @@ const LeftSideBar = () => {
             <a href="">3あいみょん/マリーゴールド</a>
             <a href="">4RADWIMPS/いいんですか？</a>
             <a href="">5YPASOBI/夜に駆ける</a>
-        
+            <a href="">1【カラオケ】香水/瑛人</a>
+            <a href="">2米津玄師/Lemon</a>
         </div>
     );
 }
