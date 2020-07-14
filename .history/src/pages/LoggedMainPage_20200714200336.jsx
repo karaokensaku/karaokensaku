@@ -79,10 +79,9 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
                 <LeftSideBar />
                 <div style={mainPage}>
 
-                    <input type="search" placeholder="カラオケ動画を検索" />
-                    <button>検索</button>
                     <div style={HOTcontainerCSS}>
                         {/* メインページから各ページへアクセスできる */}
+                        <i
                         <h1>人気のカラオケ</h1>
                         <p>【カラオケ】香水/瑛人</p>
                         <iframe width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
