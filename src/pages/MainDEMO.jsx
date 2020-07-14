@@ -118,14 +118,14 @@ const MainDEMO = () => {                        //仮のユーザー用メイン
                         
                     </div>
                     <p>↓↓今すぐサインアップ&ログイン↓↓</p>
-                    <button type="submit" onClick={openLoginModal.bind(this)}>ログインする</button>
+                    <button type="submit" onClick={openLoginModal}>ログインする</button>
                     <br/>
-                    <button type="submit" onClick={openSignUpModal.bind(this)}>会員登録する</button>
+                    <button type="submit" onClick={openSignUpModal}>会員登録する</button>
 
                     {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
-                    <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} THIS={this} />
+                    <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal}  />
                     {/* サインモーダル用に開くか閉じるかの処理を渡す */}
-                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} THIS={this} />
+                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal}  />
                 </div>
             </div>
             <Footer />

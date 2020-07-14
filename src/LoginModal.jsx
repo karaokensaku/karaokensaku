@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
-const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
+const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history }) => {
     //仮メインページからstate([LoginModalIsOpen] 初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
@@ -97,7 +97,7 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
     return (
         <Modal
             isOpen={LoginModalIsOpen}
-            onRequestClose={closeLoginModal.bind(THIS)}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
+            onRequestClose={closeLoginModal}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
             style={customStyles}
             contentLabel="Example Modal"
         >

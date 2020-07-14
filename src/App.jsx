@@ -8,6 +8,7 @@ import HOTPage from './pages/HOTPage'
 import LIKEPage from './pages/LIKEPage'
 import MyPage from './pages/MyPage'
 import SearchKaraokeView from './pages/SearchKaraokeView'
+import ViewKaraokePage from './pages/ViewKaraokePage'
 function App() {
 
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route exact path='/LIKEPage' component={LIKEPage} />
             <Route exact path='/MyPage' component={MyPage} />
             <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
+            <Route exact path='/ViewKaraokePage' component={ViewKaraokePage} />
           </Switch>
         </Router>
 

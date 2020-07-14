@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import {AuthContext} from './AuthService';
 
 import {Link} from 'react-router-dom';
 
+
+import LoginModal from './LoginModal'                          //ログイン用モーダル
+import SignUpModal from './SignUpModal'                        //サインアウト用モーダル
 const Header = () => {
 
 /////////////////CSS//////////////////
@@ -43,7 +46,28 @@ const Header = () => {
 /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
-    
+    //グローバルで管理できるのかな？↓
+    const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+
+
+    ///js//////js/////////js/////////js///////
+    //モーダルを開いたり閉じたりする関数達
+    const openLoginModal = () => {
+        setLoginModalIsOpen(true)
+    }
+
+    const closeLoginModal = () => {
+        setLoginModalIsOpen(false)
+    }
+
+    const openSignUpModal = () => {
+        setSignUpModalIsOpen(true)
+    }
+
+    const closeSignUpModal = () => {
+        setSignUpModalIsOpen(false)
+    }
 
     const renderHeader = (user) => {
         if(user){
@@ -74,10 +98,13 @@ const Header = () => {
                     <nav>
                         <ul style={headerMenu}>
                             <li><a style={headerMenuItem} href="#">HOT</a></li>
-                            <li style={headerMenuItem}>LOGIN</li>
-                            
+                            <li style={headerMenuItem} onClick={openLoginModal}>LOGIN</li>
                         </ul>
                     </nav>
+                    {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
+                    <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} />
+                    {/* サインモーダル用に開くか閉じるかの処理を渡す */}
+                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} />
                 </header>
             );
         }

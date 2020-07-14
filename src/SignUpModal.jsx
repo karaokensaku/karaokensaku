@@ -4,7 +4,7 @@ import firebase from './config/firebase';
 
 Modal.setAppElement('#loginmodal')
 
-const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
+const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
 
     ////////css///////////css///////////css///////
     const modalContainer = {
@@ -73,7 +73,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, THIS }) => {
     return (
         <Modal
             isOpen={SignUpModalIsOpen}                      //trueなら表示
-            onRequestClose={closeSignUpModal.bind(THIS)}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
+            onRequestClose={closeSignUpModal}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
             style={customStyles}
             contentLabel="SignUp Modal"
         >
