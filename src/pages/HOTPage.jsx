@@ -20,6 +20,7 @@ const HOTPage = () => {
         padding: "10px",
         color: "white",
     }
+
     const centerContainer = {
         display: "flex",
         justifyontent: "center",
@@ -36,6 +37,7 @@ const HOTPage = () => {
         height: "100%",
         padding: "10px",
     }
+    
     return (
         <>
             <Header />

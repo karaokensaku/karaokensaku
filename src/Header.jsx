@@ -57,10 +57,8 @@ const Header = () => {
                     <nav>
                         <ul style={headerMenu}>
                             <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit'}}>HOT</Link> </li>
-                            <li style={headerMenuItem}>LIKE</li>
-                            <li style={headerMenuItem}>MYPAGE</li>
-                            {/* <li style={headerMenuItem} onClick={LogOut}>LOGOUT</li> */}
-                            
+                            <li style={headerMenuItem}><Link to="/LIKEPage" style={{ color: "white", textDecoration: 'inherit' }}>LIKE</Link></li>
+                            <li style={headerMenuItem}><Link to="/MyPage" style={{ color: "white", textDecoration: 'inherit' }}>MYPAGE</Link></li>
                         </ul>
                     </nav>
                 </header>

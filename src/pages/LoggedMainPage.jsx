@@ -9,9 +9,6 @@ import {Link} from 'react-router-dom';
 const LoggedainDEMO = () => {                           //仮のユーザー用メインページ
 
 
-    ///js//////js/////////js/////////js///////
-
-    ///js//////js/////////js/////////js///////
 
     //////////css//////////css/////////css//////
     const containerCSS = {
@@ -101,7 +98,7 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
-                        <button style={{ marginTop: "10px" }}><a href="" style={{ color: "black", fontWeight: "bold" }}>もっとお気に入りを見る</a></button>
+                        <Link to="/LIKEPage"><button style={{ marginTop: "10px" }}><a href="" style={{ color: "black", fontWeight: "bold" }}>もっとお気に入りを見る</a></button></Link>
                     </div>
 
                     <div><button><a href="" style={{ color: "black", fontWeight: "bold" }}>マイページへ行く</a></button></div>
