@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import RightSideBar from '../RightSideBar';
-import LeftSideBar from '../LeftSideBar';
-import LoginModal from '../LoginModal'                          //ログイン用モーダル
-import SignUpModal from '../SignUpModal'                        //サインアウト用モーダル
+import Header from '../commonComponents/Header';
+import Footer from '../commonComponents/Footer';
+import RightSideBar from '../commonComponents/RightSideBar';
+import LeftSideBar from '../commonComponents/LeftSideBar';
+import LoginModal from '../commonComponents/LoginModal'                          //ログイン用モーダル
+import SignUpModal from '../commonComponents/SignUpModal'                        //サインアウト用モーダル
 
 
 const MainDEMO = () => {                        //仮のユーザー用メインページ

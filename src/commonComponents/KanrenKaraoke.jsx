@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from './AuthService';
-import firebase from './config/firebase'               //firebaseインポート
-const RightSideBar = () => {
+import firebase from '../config/firebase'               //firebaseインポート
+const KanrenKaraoke = () => {
 
     ////////////css/////////css////////css////////
     const rightSideBarCSS = {
@@ -9,8 +9,8 @@ const RightSideBar = () => {
         top: "20px",
         padding: "10px",
 
-        right: "25px",
-        width: "20%",
+        left: "25px",
+        width: "15%",
 
         display: "flex",
         alignItems: "center",
@@ -42,8 +42,26 @@ const RightSideBar = () => {
         //ログイン状態ならユーザー情報を表示
         return (
             <div style={rightSideBarCSS}>
-                <i class="fas fa-user-circle"></i>
-                <button onClick={LogOut}>ログアウト</button>
+                <p>【カラオケ】香水/瑛人</p>
+                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <p>【カラオケ】香水/瑛人</p>
+                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <p>【カラオケ】香水/瑛人</p>
+                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <p>【カラオケ】香水/瑛人</p>
+                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
         )
 
@@ -63,4 +81,4 @@ const RightSideBar = () => {
     // );
 }
 
-export default RightSideBar;
+export default KanrenKaraoke;

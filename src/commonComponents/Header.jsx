@@ -1,5 +1,5 @@
 import React, { useContext,useState } from 'react';
-import {AuthContext} from './AuthService';
+import {AuthContext} from '../store/AuthService';
 
 import {Link} from 'react-router-dom';
 

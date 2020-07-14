@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { AuthContext } from './AuthService';
-import firebase from './config/firebase'               //firebaseインポート
-const KanrenKaraoke = () => {
+import { AuthContext } from '../store/AuthService';
+import firebase from '../config/firebase'               //firebaseインポート
+const RightSideBar = () => {
 
     ////////////css/////////css////////css////////
     const rightSideBarCSS = {
@@ -9,8 +9,8 @@ const KanrenKaraoke = () => {
         top: "20px",
         padding: "10px",
 
-        left: "25px",
-        width: "15%",
+        right: "25px",
+        width: "20%",
 
         display: "flex",
         alignItems: "center",
@@ -42,26 +42,8 @@ const KanrenKaraoke = () => {
         //ログイン状態ならユーザー情報を表示
         return (
             <div style={rightSideBarCSS}>
-                <p>【カラオケ】香水/瑛人</p>
-                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                <p>【カラオケ】香水/瑛人</p>
-                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                <p>【カラオケ】香水/瑛人</p>
-                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                <p>【カラオケ】香水/瑛人</p>
-                <iframe width="200" height="100" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
+                <i class="fas fa-user-circle"></i>
+                <button onClick={LogOut}>ログアウト</button>
             </div>
         )
 
@@ -81,4 +63,4 @@ const KanrenKaraoke = () => {
     // );
 }
 
-export default KanrenKaraoke;
+export default RightSideBar;

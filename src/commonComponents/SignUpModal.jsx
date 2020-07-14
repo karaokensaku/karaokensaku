@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import firebase from './config/firebase';
+import firebase from '../config/firebase';
 
 Modal.setAppElement('#loginmodal')
 

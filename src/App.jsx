@@ -1,14 +1,14 @@
 import React from 'react';
-import MainDEMO from './pages/MainDEMO';
-import LoggedMainPage from './pages/LoggedMainPage';
-import {AuthProvider} from './AuthService';//ユーザー情報を持っているコンテキストオブジェクト
+import MainDEMO from './components/MainPage';
+import LoggedMainPage from './components/LoggedMainPage';
+import {AuthProvider} from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LoggedInRoute from './LoggedInRoute'
-import HOTPage from './pages/HOTPage'
-import LIKEPage from './pages/LIKEPage'
-import MyPage from './pages/MyPage'
-import SearchKaraokeView from './pages/SearchKaraokeView'
-import ViewKaraokePage from './pages/ViewKaraokePage'
+import LoggedInRoute from './router/LoggedInRoute'
+import HOTPage from './components/HOTPage'
+import LIKEPage from './components/LIKEPage'
+import MyPage from './components/MyPage'
+import SearchKaraokeView from './components/SearchKaraokePage'
+
 function App() {
 
   return (
@@ -26,7 +26,6 @@ function App() {
             <Route exact path='/LIKEPage' component={LIKEPage} />
             <Route exact path='/MyPage' component={MyPage} />
             <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
-            <Route exact path='/ViewKaraokePage' component={ViewKaraokePage} />
           </Switch>
         </Router>
 

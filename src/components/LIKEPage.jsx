@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import RightSideBar from '../RightSideBar';
-import LeftSideBar from '../LeftSideBar';
-import { AuthContext } from '../AuthService';
+import Header from '../commonComponents/Header';
+import Footer from '../commonComponents/Footer';
+import RightSideBar from '../commonComponents/RightSideBar';
+import LeftSideBar from '../commonComponents/LeftSideBar';
+import { AuthContext } from '../store/AuthService';
 import { Redirect } from 'react-router-dom';
 
 
