@@ -79,6 +79,8 @@ const LoggedainDEMO = () => {                           //仮のユーザー用�
                 <LeftSideBar />
                 <div style={mainPage}>
 
+                    <input type="search" placeholder="カラオケ動画を検索" />
+                    <button>検索</button>
                     <div style={HOTcontainerCSS}>
                         {/* メインページから各ページへアクセスできる */}
                         <h1>人気のカラオケ</h1>
