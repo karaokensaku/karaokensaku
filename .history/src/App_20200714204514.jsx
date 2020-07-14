@@ -26,6 +26,7 @@ function App() {
             <Route exact path='/LIKEPage' component={LIKEPage} />
             <Route exact path='/MyPage' component={MyPage} />
             <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
+            <Route exact path='/ViewKaraokePage' component={ViewKaraokePage} />
           </Switch>
         </Router>
 
