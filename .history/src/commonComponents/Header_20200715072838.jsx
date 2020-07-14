@@ -23,7 +23,7 @@ const Header = () => {
     const headerCSS = {
         position: "relative",
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         backgroundColor: "orange",
         alignItems: "center",
         padding: "5px",
@@ -43,13 +43,9 @@ const Header = () => {
         textDecoration: "none",
     }
 
-    const titlelinkCSS = {
+    const linkCSS = {
         position: "absolute",
-        width: "225px",
-        left: 0,
-        right: 0,
-        margin: "auto", 
-        textDecoration: 'inherit'
+        width: ""
     }
 //////////////////CSS/////////////////
 
@@ -76,7 +72,7 @@ const Header = () => {
             return(
                 <header style={headerCSS}>
                     
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
+                    <Link to="/" style={{ textDecoration: 'inherit',}}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
                     <nav>
                         <ul style={headerMenu}>
                             <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit'}}>HOT</Link> </li>
@@ -90,10 +86,10 @@ const Header = () => {
             return(
                 <header style={headerCSS}>
                     
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
+                    <Link to="/" style={{ textDecoration: 'inherit' }}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
                     <nav>
                         <ul style={headerMenu}>
-                            {/* <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit' }}>HOT</Link> </li> */}
+                            <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit' }}>HOT</Link> </li>
                             <li style={headerMenuItem} onClick={openLoginModal}>LOGIN</li>
                         </ul>
                     </nav>

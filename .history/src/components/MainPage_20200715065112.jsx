@@ -6,7 +6,7 @@ import LeftSideBar from '../commonComponents/LeftSideBar';
 import LoginModal from '../commonComponents/LoginModal'                          //ログイン用モーダル
 import SignUpModal from '../commonComponents/SignUpModal'                        //サインアウト用モーダル
 import { AuthContext } from '../store/AuthService';
-import { Link } from 'react-router-dom';
+
 
 const MainDEMO = () => {                        //仮のユーザー用メインページ
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
@@ -136,7 +136,6 @@ const MainDEMO = () => {                        //仮のユーザー用メイン
             </>
         );
     } else {
-        console.log("aaaaa")
         return (
             <>
                 <Header />

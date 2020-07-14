@@ -21,9 +21,8 @@ const Header = () => {
     }
 
     const headerCSS = {
-        position: "relative",
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         backgroundColor: "orange",
         alignItems: "center",
         padding: "5px",
@@ -41,15 +40,6 @@ const Header = () => {
         marginRight: "15px",
         color: "snow",
         textDecoration: "none",
-    }
-
-    const titlelinkCSS = {
-        position: "absolute",
-        width: "225px",
-        left: 0,
-        right: 0,
-        margin: "auto", 
-        textDecoration: 'inherit'
     }
 //////////////////CSS/////////////////
 
@@ -75,8 +65,11 @@ const Header = () => {
         if(user){
             return(
                 <header style={headerCSS}>
-                    
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
+                    <form >
+                        <input type="search" placeholder="カラオケ動画を検索" />
+                        <button>検索</button>
+                    </form>
+                    <Link to="/" style={{ textDecoration: 'inherit' }}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
                     <nav>
                         <ul style={headerMenu}>
                             <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit'}}>HOT</Link> </li>
@@ -89,16 +82,21 @@ const Header = () => {
         }else{
             return(
                 <header style={headerCSS}>
-                    
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
+                    <form >
+                        <input type="search" placeholder="カラオケ動画を検索" />
+                        <button>検索</button>
+                    </form>
+                    <h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1>
                     <nav>
                         <ul style={headerMenu}>
-                            {/* <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit' }}>HOT</Link> </li> */}
+                            <li><a style={headerMenuItem} href="#">HOT</a></li>
                             <li style={headerMenuItem} onClick={openLoginModal}>LOGIN</li>
                         </ul>
                     </nav>
                     {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
                     <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} />
+                    {/* サインモーダル用に開くか閉じるかの処理を渡す */}
+                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} />
                 </header>
             );
         }

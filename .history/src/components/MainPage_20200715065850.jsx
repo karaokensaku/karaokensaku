@@ -136,7 +136,7 @@ const MainDEMO = () => {                        //仮のユーザー用メイン
             </>
         );
     } else {
-        console.log("aaaaa")
+        console
         return (
             <>
                 <Header />

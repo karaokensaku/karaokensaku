@@ -20,8 +20,8 @@ function App() {
         <Router>
           <Switch>
             {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-            <LoggedInRoute exact path='/' component={MainPage}/>
-            <Route exact path='/main' component={MainPage} />
+            {/* <LoggedInRoute exact path='/' component={MainPage}/> */}
+            {/* <Route exact path='/' component={} /> */}
             <Route exact path='/HOTPage' component={HOTPage} />
             <Route exact path='/LIKEPage' component={LIKEPage} />
             <Route exact path='/MyPage' component={MyPage} />

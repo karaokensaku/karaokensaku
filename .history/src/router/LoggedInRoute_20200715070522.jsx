@@ -12,13 +12,10 @@ const LoggedInRoute = ({ component: Component, ...rest }) => {  //下でJSXで�
                                                                 
             {...rest}                                           //残りのpropsを...restでRouteコンポーネントに与える　　＊何のために？？propsとして渡している？＊
             render={props =>　                                  //Routeのrenderプロパティーを使用することでhistory等のデフォルトpropsを使える
-                user ? (       
+                if(user  {}       
                     console.log(props),
                     <Component {...props} />                    //ログインしてuserに情報が入っているならComponent(LoggedMainPage)にデフォルトのpropsを展開
-                ) : (
-                        <Redirect to={'/main'} />           //未ログイン状態(user=null)ならゲスト用メインページにリダイレクトしてログイン、サインアップを促す
-                        // console.log("eee")
-                    )
+            }
             }
         />
     )

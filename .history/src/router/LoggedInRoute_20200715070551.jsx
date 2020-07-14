@@ -16,8 +16,8 @@ const LoggedInRoute = ({ component: Component, ...rest }) => {  //下でJSXで�
                     console.log(props),
                     <Component {...props} />                    //ログインしてuserに情報が入っているならComponent(LoggedMainPage)にデフォルトのpropsを展開
                 ) : (
-                        <Redirect to={'/main'} />           //未ログイン状態(user=null)ならゲスト用メインページにリダイレクトしてログイン、サインアップを促す
-                        // console.log("eee")
+                        // <Redirect to={'/'} />           //未ログイン状態(user=null)ならゲスト用メインページにリダイレクトしてログイン、サインアップを促す
+                        console.log("eee")
                     )
             }
         />

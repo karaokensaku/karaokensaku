@@ -1,5 +1,5 @@
 import React from 'react';
-import MainPage from './components/MainPage';
+import MainDEMO from './components/MainPage';
 // import LoggedMainPage from './components/LoggedMainPage';
 import {AuthProvider} from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -20,8 +20,8 @@ function App() {
         <Router>
           <Switch>
             {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-            <LoggedInRoute exact path='/' component={MainPage}/>
-            <Route exact path='/main' component={MainPage} />
+            {/* <LoggedInRoute exact path='/' component={LoggedMainPage}/> */}
+            <Route exact path='/' component={MainDEMO} />
             <Route exact path='/HOTPage' component={HOTPage} />
             <Route exact path='/LIKEPage' component={LIKEPage} />
             <Route exact path='/MyPage' component={MyPage} />
