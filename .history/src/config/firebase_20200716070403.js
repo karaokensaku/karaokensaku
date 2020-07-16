@@ -17,5 +17,5 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 //firebaseAppの初期化
-export const storage = firebase.storage();
+export const
 export default firebase;

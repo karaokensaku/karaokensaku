@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 
 import LoginModal from './LoginModal'                          //ログイン用モーダル
+
 const Header = () => {
 
 /////////////////CSS//////////////////
@@ -57,6 +58,7 @@ const Header = () => {
 
     //グローバルで管理できるのかな？↓
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
 
 
     ///js//////js/////////js/////////js///////

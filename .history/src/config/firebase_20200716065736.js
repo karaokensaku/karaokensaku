@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app';
 //必ず一番上に置いておくインポート
 import 'firebase/auth';
 //Firebase Authenticationを使用するためインポート
-import 'firebase/storage';
+import
 
 const firebaseConfig = {
     // 各人の認証情報を記述
@@ -17,5 +17,5 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 //firebaseAppの初期化
-export const storage = firebase.storage();
+
 export default firebase;

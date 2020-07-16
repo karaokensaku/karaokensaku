@@ -64,8 +64,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [image, setImage] = useState('');
-    const [imageUrl, setImageUrl] = useState("");
-
     const handleImage = event => {
         const image = event.target.files[0];
         setImage(image);
@@ -106,7 +104,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                 setImageUrl(fireBaseUrl);
             });
     };
-    
     const handlesubmit = e => {
         e.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)}) //サインアップの処理
@@ -148,7 +145,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                             <h1>画像アップロード</h1>
                             <form onSubmit={onSubmit}>
                                 <input type="file" onChange={handleImage} />
-                                
+                                <button>Upload</button>
                             </form>
                             <img src={imageUrl} alt="uploaded" />
                         </div>

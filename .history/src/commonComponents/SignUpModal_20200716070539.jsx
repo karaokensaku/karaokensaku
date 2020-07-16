@@ -64,8 +64,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [image, setImage] = useState('');
-    const [imageUrl, setImageUrl] = useState("");
-
     const handleImage = event => {
         const image = event.target.files[0];
         setImage(image);
@@ -83,28 +81,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
             error,
             complete
         );
-    };
-    const next = snapshot => {
-        // 進行中のsnapshotを得る
-        // アップロードの進行度を表示
-        const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(percent + "% done");
-        console.log(snapshot);
-    };
-    const error = error => {
-        // エラーハンドリング
-        console.log(error);
-    };
-    const complete = () => {
-        // 完了後の処理
-        // 画像表示のため、アップロードした画像のURLを取得
-        storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then(fireBaseUrl => {
-                setImageUrl(fireBaseUrl);
-            });
     };
     
     const handlesubmit = e => {
@@ -148,7 +124,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                             <h1>画像アップロード</h1>
                             <form onSubmit={onSubmit}>
                                 <input type="file" onChange={handleImage} />
-                                
+                                <button>Upload</button>
                             </form>
                             <img src={imageUrl} alt="uploaded" />
                         </div>
