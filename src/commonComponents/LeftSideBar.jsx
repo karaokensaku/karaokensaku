@@ -22,7 +22,7 @@ export default function FileSystemNavigator() {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      <TreeItem nodeId="1" label="Applications">
+      <TreeItem nodeId="1" label="My カラオケリスト">
         <TreeItem nodeId="2" label="Calendar" />
         <TreeItem nodeId="3" label="Chrome" />
         <TreeItem nodeId="4" label="Webstorm" />

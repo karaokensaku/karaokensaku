@@ -1,6 +1,16 @@
 import { atom } from "recoil";
 
 export const myPageState = atom({
-  key: "myList",
-  default: []
+  key: "myPage",
+  default: [
+    {
+      myPageName: 'アニソン',
+    },
+    {
+      myPageName: '感動する曲',
+    },
+    {
+      myPageName: '盛り上がる曲',
+    },
+  ]
 });
