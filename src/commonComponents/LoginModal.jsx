@@ -4,10 +4,11 @@ import firebase from '../config/firebase';
 import { AuthContext } from '../store/AuthService';
 import { Redirect } from 'react-router-dom';
 
+
 Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
-const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history }) => {
+const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history, setLoginModalIsOpen}) => {
     //仮メインページからstate([LoginModalIsOpen] 初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
@@ -70,7 +71,9 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history }) => {
     //////js////////js//////////js//////////js///
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+
+
+
     const handlesubmit = e => {
         e.preventDefault();
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -132,7 +135,7 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history }) => {
                         />
                         <br />
                         <button type="submit">ログイン</button>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </Modal>

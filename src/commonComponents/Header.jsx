@@ -1,110 +1,142 @@
-import React, { useContext,useState } from 'react';
-import {AuthContext} from '../store/AuthService';
-
-import {Link} from 'react-router-dom';
-
-
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../store/AuthService';
+import firebase from '../config/firebase';
+import { Link } from 'react-router-dom';
+import SignUpModal from './SignUpModal';
 import LoginModal from './LoginModal'                          //ログイン用モーダル
 const Header = () => {
 
-/////////////////CSS//////////////////
+    /////////////////CSS//////////////////
     const headerTitle = {
-        color: "blue",
+        color: "white",
         fontSize: "40px",
-        margin: "0 0 0 10px",
-        backgroundColor:"white",
-        lineHeight:"40px",
-        padding:"5px",
-        borderRadius:"10px",
-        border:"red 2px solid"
+        left: "10px",
+        marginLeft: "100px",
     }
 
     const headerCSS = {
-        position: "relative",
         display: "flex",
-        justifyContent: "flex-end",
-        backgroundColor: "orange",
+        justifyContent: "space-between",
+        backgroundColor: "white",
         alignItems: "center",
-        padding: "5px",
-        borderRadius: "20px",
-        border: "red 5px solid",
-        height: "52px",
-    }
-
-    const headerMenu = {
-        display: "flex",
-        listStyle: "none",
-    }
-
-    const headerMenuItem = {
-        marginRight: "15px",
-        color: "snow",
-        textDecoration: "none",
     }
 
     const titlelinkCSS = {
-        position: "absolute",
         width: "225px",
-        left: 0,
-        right: 0,
-        margin: "auto", 
-        textDecoration: 'inherit'
+        margin: "auto",
+        textDecoration: 'inherit',
     }
-//////////////////CSS/////////////////
 
-/////js///////js////////////js////////
+    const leftdiv = {
+        backgroundColor: "#C50D1A",
+        position: "relative",
+        width: "70%"
+    }
+
+    const rightdiv = {
+        backgroundColor: "white",
+        width: "30%",
+        position: "relative",
+        height: "113.5px"
+    }
+
+    const loginButton = {
+        position: "absolute",
+        right: "15px",
+        bottom: "10px",
+        height: "30px",
+        width: "85px",
+        backgroundColor: "#C50D1A",
+        border: "none",
+        borderRadius: "5px",
+        color: "white",
+    }
+    const signUpButton = {
+        position: "absolute",
+        fontSize: "11px",
+        right: "15px",
+        top: "20px",
+        height: "30px",
+        width: "85px",
+        backgroundColor: "#C50D1A",
+        border: "none",
+        borderRadius: "5px",
+        color: "white",
+    }
+    //////////////////CSS/////////////////
+
+    /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
     //グローバルで管理できるのかな？↓
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
 
-
+    const LogOut = (user) => {                          //ログアウト処理
+        debugger
+        firebase.auth().onAuthStateChanged((user) => {
+            firebase.auth().signOut().then(() => {
+                console.log("ログアウトしました");
+            })
+                .catch((error) => {
+                    console.log(`ログアウト時にエラーが発生しました (${error})`);
+                });
+        });
+    }
     ///js//////js/////////js/////////js///////
     //モーダルを開いたり閉じたりする関数達
     const openLoginModal = () => {
         setLoginModalIsOpen(true)
     }
-
+    
     const closeLoginModal = () => {
         setLoginModalIsOpen(false)
     }
+    
+    const openSignUpModal = () => {
+        setSignUpModalIsOpen(true)
+    }
 
+    const closeSignUpModal = () => {
+        setSignUpModalIsOpen(false)
+    }
+
+    //モーダルを開いたり閉じたりする関数達
     const renderHeader = (user) => {
-        if(user){
-            return(
+        if (user) {
+            return (
                 <header style={headerCSS}>
-                    
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
-                    <nav>
-                        <ul style={headerMenu}>
-                            <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit'}}>HOT</Link> </li>
-                            <li style={headerMenuItem}><Link to="/LIKEPage" style={{ color: "white", textDecoration: 'inherit' }}>LIKE</Link></li>
-                            <li style={headerMenuItem}><Link to="/MyPage" style={{ color: "white", textDecoration: 'inherit' }}>MYPAGE</Link></li>
-                        </ul>
-                    </nav>
+                    <div style={leftdiv}>
+                        <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
+                    </div>
+
+                    <div style={rightdiv}>
+                        <button onClick={LogOut} style={loginButton}>ログアウト</button>
+                    </div>
                 </header>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <header style={headerCSS}>
-                    
-                    <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ<span style={{ color: "red" }}>検索</span></h1></Link>
-                    <nav>
-                        <ul style={headerMenu}>
-                            {/* <li style={headerMenuItem}><Link to="/HOTPage" style={{ color: "white", textDecoration: 'inherit' }}>HOT</Link> </li> */}
-                            <li style={headerMenuItem} onClick={openLoginModal}>LOGIN</li>
-                        </ul>
-                    </nav>
+                    <div style={leftdiv}>
+                        <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
+                    </div>
+                    <div style={rightdiv}>
+                        <button style={loginButton} onClick={openLoginModal}>ログイン</button>
+                        <button style={signUpButton} onClick={openSignUpModal}>サインアップ</button>
+                    </div>
+
                     {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
                     <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} />
+                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} />
                 </header>
             );
         }
     }
-/////js///////js////////////js////////
+    /////js///////js////////////js////////
     return (
         <>
-        {renderHeader(user)}
+            {renderHeader(user)}
         </>
     );
 
