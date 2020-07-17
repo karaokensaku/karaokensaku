@@ -48,7 +48,6 @@ const MainPage = () => {                        //仮のユーザー用メイン
             </>
         );
     } else {
-        console.log("aaaaa")
         return (
             <>
                 <Header />
