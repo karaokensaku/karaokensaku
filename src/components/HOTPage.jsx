@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
-import RightSideBar from '../commonComponents/RightSideBar';
 import LeftSideBar from '../commonComponents/LeftSideBar';
 
 const HOTPage = () => {
@@ -43,7 +42,6 @@ const HOTPage = () => {
             <Header />
             <div style={containerCSS}>
                 <LeftSideBar />
-                <RightSideBar />
                 <div style={centerContainer}>
                     {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     <h1>人気のカラオケ動画</h1>
