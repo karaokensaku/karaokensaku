@@ -1,0 +1,35 @@
+import React from 'react';
+
+const LeftSideBar = () => {
+
+    const leftSideBarCSS = {
+        position: "absolute",
+        top: "20px",
+        padding: "10px",
+
+        left: "25px",
+        width: "20%",
+        
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        border: "red 5px solid",
+        borderRadius: "10px",
+
+        backgroundColor: "white",
+        color: "black",
+    }//左サイドバーのスタイル
+
+    return (
+        <div style={leftSideBarCSS}>
+            <h1>人気カラオケ</h1>
+            <a href=""></a>
+            <a href="">２米津玄師/Lemon</a>
+            <a href="">3あいみょん/マリーゴールド</a>
+            <a href="">4RADWIMPS/いいんですか？</a>
+            <a href="">5YPASOBI/夜に駆ける</a>
+        </div>
+    );
+}
+
+export default LeftSideBar;
