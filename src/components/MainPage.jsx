@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
 import LeftSideBar from '../commonComponents/LeftSideBar';
 import { AuthContext } from '../store/AuthService';
-import { Link } from 'react-router-dom';
 
 const MainPage = () => {                        //仮のユーザー用メインページ
     const user = useContext(AuthContext);

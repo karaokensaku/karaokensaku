@@ -25,13 +25,12 @@ function App() {
               <Route exact path='/main' component={MainPage} />
               <Route exact path='/HOTPage' component={HOTPage} />
               <Route exact path='/LIKEPage' component={LIKEPage} />
-              <Route exact path='/MyPage' component={MyPage} />
+              <Route exact path='/mypages/:id' component={MyPage} />
               <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
             </Switch>
           </Router>
         </RecoilRoot>
       </AuthProvider>
-
     </div>
   );
 }
