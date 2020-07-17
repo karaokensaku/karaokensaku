@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react'
 import Modal from 'react-modal';
-import firebase from './config/firebase';
-import { AuthContext } from './AuthService';
+import firebase from '../config/firebase';
+import { AuthContext } from '../store/AuthService';
 import { Redirect } from 'react-router-dom';
+
 
 Modal.setAppElement('#loginmodal')
 
 //ログイン処理を行うモーダル
-const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
+const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history, setLoginModalIsOpen}) => {
     //仮メインページからstate([LoginModalIsOpen] 初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
     //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
     //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
@@ -69,7 +70,9 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
 
     //////js////////js//////////js//////////js///
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+
+
 
     const handlesubmit = e => {
         e.preventDefault();
@@ -85,6 +88,8 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
 
     }
 
+    
+
     const user = useContext(AuthContext)
 
     if (user) {
@@ -95,7 +100,7 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
     return (
         <Modal
             isOpen={LoginModalIsOpen}
-            onRequestClose={closeLoginModal.bind(THIS)}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
+            onRequestClose={closeLoginModal}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
             style={customStyles}
             contentLabel="Example Modal"
         >
@@ -130,7 +135,7 @@ const LoginModal = ({ LoginModalIsOpen, closeLoginModal, THIS, history }) => {
                         />
                         <br />
                         <button type="submit">ログイン</button>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </Modal>
