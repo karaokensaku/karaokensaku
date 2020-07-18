@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
 import LeftSideBar from '../commonComponents/LeftSideBar';
-import { Box, makeStyles, Typography, Accordion, AccordionSummary, Button } from '@material-ui/core';
+import { Box, makeStyles, Typography, Accordion, AccordionSummary } from '@material-ui/core';
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -96,9 +96,6 @@ const MyPage = (props) => {
                       sit amet blandit leo lobortis eget.
                     </Typography>
                   </AccordionDetails>
-                  <Button variant="contained" color="secondary" onClick={() => onRemoveSongClick(song)} >
-                    -リスト削除
-                  </Button>
                   <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
                 </Accordion>
               );

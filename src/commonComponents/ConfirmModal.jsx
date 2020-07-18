@@ -60,7 +60,7 @@ export default function SimpleModal( {onRemoveClick, song} ) {
 
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={handleOpen}>削除</Button>
+      {song === undefined ? <Button variant="contained" color="secondary" onClick={handleOpen}>削除</Button>: <Button variant="contained" color="secondary" onClick={handleOpen}>-リスト削除</Button>}
       <Modal
         open={open}
         onClose={handleClose}
