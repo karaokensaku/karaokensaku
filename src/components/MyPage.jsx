@@ -6,11 +6,12 @@ import { Box, makeStyles, Typography, Accordion, AccordionSummary, Button } from
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Redirect } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { Redirect, useHistory } from 'react-router-dom';
 import { fireStore } from '../config/firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../store/AuthService';
+import { useRecoilState } from 'recoil'; 
+import ConfirmModal from '../commonComponents/ConfirmModal'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   main: {
-    width: '80%',
+    width: '79%',
     backgroundColor: '#F2F2F2'
   },
   heading: {
@@ -30,9 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const removeSongtitle = (myPage, song) => {
+const removeSong = (myPage, song) => {
   const num = song.id
-  console.log(num);
   const selectedSongs = myPage.songs.filter(element => {
     return element.id !== num.toString();
   });
@@ -42,16 +42,33 @@ const removeSongtitle = (myPage, song) => {
   }
 };
 
+const removeMyPage = (myPages, id) => {
+  console.log(id);
+  return myPages.filter(myPage => {
+    console.log(id);
+    return myPage.id !== id
+  });
+};
+
 const MyPage = (props) => {
   const classes = useStyles();
-  const [myPages, setMypages] = useRecoilState(myPageState);
+  const [myPages, setMyPages] = useRecoilState(myPageState);
   const [myPage, setMyPage] = useState(myPages.find(element => element.id === props.match.params.id)) ;
   const user = useContext(AuthContext);
-
-  const onRemoveClick = (myPage, song) => {
-    const newMyPage = removeSongtitle(myPage, song);
+  const history = useHistory();
+  
+  const onRemoveSongClick = (song) => {
+    const newMyPage = removeSong(myPage, song);
     setMyPage(newMyPage);
     fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).update(newMyPage);
+  };
+
+  const onRemoveMyPageClick = () => {
+    const newMyPages = removeMyPage(myPages, myPage.id);
+    setMyPages(newMyPages);
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).delete().then(() => {
+      history.push('/main');
+    });
   };
 
   if(myPage !== undefined) {
@@ -62,9 +79,10 @@ const MyPage = (props) => {
           <LeftSideBar />
           <Box className={classes.main}>
             <Typography align='center' variant='h4' >{myPage.title}</Typography>
-            {myPage.songs.map((song, index) => {
+            <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
+            {myPage.songs ? myPage.songs.map((song, index) => {
               return (
-                <Accordion>
+                <Accordion key={song.id}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -78,12 +96,16 @@ const MyPage = (props) => {
                       sit amet blandit leo lobortis eget.
                     </Typography>
                   </AccordionDetails>
-                  <Button variant="contained" color="secondary" onClick={() => onRemoveClick(myPage, song)} >
+                  <Button variant="contained" color="secondary" onClick={() => onRemoveSongClick(song)} >
                     -リスト削除
                   </Button>
+                  <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
                 </Accordion>
-              )
-            })}
+              );
+            }) : 
+              <p>まだ歌がありません。</p>
+            }
+            {}
           </Box>
         </Box>
         <Footer />
