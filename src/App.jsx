@@ -11,7 +11,6 @@ import SearchKaraokeView from './components/SearchKaraokePage'
 import { RecoilRoot } from 'recoil';
 
 function App() {
-
   return (
     <div className="App">
       <AuthProvider>
