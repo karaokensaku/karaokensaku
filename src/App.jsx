@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage'
 import LIKEPage from './components/LIKEPage'
-import MyPage from './components/MyPage'
+import UserSettingPage from './components/UserSettingPage'
 import SearchKaraokeView from './components/SearchKaraokePage'
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
             <Route exact path='/main' component={MainPage} />
             <Route exact path='/HOTPage' component={HOTPage} />
             <Route exact path='/LIKEPage' component={LIKEPage} />
-            <Route exact path='/MyPage' component={MyPage} />
+            <Route exact path='/UserSettingPage' component={UserSettingPage} />
             <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
           </Switch>
         </Router>

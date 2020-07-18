@@ -15,9 +15,9 @@ const Footer = () => {
     }
 
     return (
-        <foter style={FoterCSS}>
+        <footer style={FoterCSS}>
             <small>KARAOKENSAKU</small>
-        </foter>
+        </footer>
     );
 }
 

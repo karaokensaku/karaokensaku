@@ -108,7 +108,7 @@ const Header = () => {
                     </div>
 
                     <div style={rightdiv}>
-                        <i class="fas fa-user-circle" style={{fontSize:"80px"}}></i>
+                        <i className="fas fa-user-circle" style={{fontSize:"80px"}}></i>
                         <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
                     </div>
                 </header>

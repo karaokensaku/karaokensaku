@@ -4,6 +4,8 @@ import firebase, { storage } from '../config/firebase';
 
 Modal.setAppElement('#loginmodal')
 
+
+
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
 
     ////////css///////////css///////////css///////
@@ -64,7 +66,8 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [image, setImage] = useState('');
-    const [imageUrl, setImageUrl] = useState("");
+    const [imageUrl, setImageUrl] = useState('');
+    const [userName, setUserName] = useState('')
 
     const handleImage = event => {
         const image = event.target.files[0];
@@ -109,7 +112,16 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
     
     const handlesubmit = e => {
         e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)}) //サインアップの処理
+        firebase.auth().createUserWithEmailAndPassword(email,password)
+            .then(({ user }) => {
+                var currentUser = firebase.auth().currentUser;
+                currentUser.updateProfile({
+                    displayName: userName
+                })
+                console.log(user)
+            })
+
+        .catch(err => {console.log(err)}) //サインアップの処理
         
     }
     //////js////////js//////////js//////////js///
@@ -124,6 +136,18 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                 <div style={modalText}>
                     <form onSubmit={handlesubmit}>
                         <h1>仮サインアップ画面</h1>
+
+                        <label htmlFor='username'>UserName</label>
+                        <input
+                            name='username'
+                            type='username'
+                            id='username'
+                            placeholder='username'
+                            onChange={e => {
+                                setUserName(e.target.value)
+                            }}
+                        /><br />
+
                         <label htmlFor='email'>E-mail</label>
                         <input
                             name='email'
@@ -134,6 +158,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                                 setEmail(e.target.value)
                             }}
                         /><br/>
+
                         <label htmlFor='password'>Password</label>
                         <input
                             name='password'
