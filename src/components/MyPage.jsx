@@ -64,7 +64,7 @@ const MyPage = (props) => {
             <Typography align='center' variant='h4' >{myPage.title}</Typography>
             {myPage.songs.map((song, index) => {
               return (
-                <Accordion>
+                <Accordion key={song.id}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
