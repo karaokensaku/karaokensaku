@@ -109,15 +109,15 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
             .then(fireBaseUrl => {
                 // setImageUrl(fireBaseUrl);
 
-                user.updateProfile({
-                    photoURL: "fireBaseUrl"
-                }).then(function () {
-                    // Update successful.
-                    console.log(fireBaseUrl)
-                }).catch(function (error) {
-                    // An error happened.
-                    console.log("失敗")
-                });
+                // user.updateProfile({
+                //     photoURL: "fireBaseUrl"
+                // }).then(function () {
+                //     // Update successful.
+                //     console.log(fireBaseUrl)
+                // }).catch(function (error) {
+                //     // An error happened.
+                //     console.log("失敗")
+                // });
                 
             });
 
