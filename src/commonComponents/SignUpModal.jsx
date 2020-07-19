@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext } from 'react';
 import Modal from 'react-modal';
 import firebase, { storage } from '../config/firebase';
-
+import { AuthContext } from '../store/AuthService'
 Modal.setAppElement('#loginmodal')
 
-
-
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
-
+    const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
     ////////css///////////css///////////css///////
     const modalContainer = {
         backgroundColor: "red",
@@ -93,11 +91,14 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(percent + "% done");
         console.log(snapshot);
+        
     };
     const error = error => {
         // エラーハンドリング
         console.log(error);
+        
     };
+    
     const complete = () => {
         // 完了後の処理
         // 画像表示のため、アップロードした画像のURLを取得
@@ -106,8 +107,21 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
             .child(image.name)
             .getDownloadURL()
             .then(fireBaseUrl => {
-                setImageUrl(fireBaseUrl);
+                // setImageUrl(fireBaseUrl);
+
+                user.updateProfile({
+                    photoURL: "fireBaseUrl"
+                }).then(function () {
+                    // Update successful.
+                    console.log(fireBaseUrl)
+                }).catch(function (error) {
+                    // An error happened.
+                    console.log("失敗")
+                });
+                
             });
+
+            
     };
     
     const handlesubmit = e => {
@@ -174,11 +188,11 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                             <form onSubmit={onSubmit}>
                                 <input type="file" onChange={handleImage} />
                                 
+                                <button type="submit">登録</button>
                             </form>
                             <img src={imageUrl} alt="uploaded" />
                         </div>
                         <br />
-                        <button type="submit">登録</button>
                     </form>
                 </div>
             </div>
