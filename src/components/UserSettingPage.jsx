@@ -10,6 +10,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useState } from 'react';
+import { useEffect } from 'react';
 //material UI
 
 const MyPage = () => {
@@ -41,7 +42,7 @@ const MyPage = () => {
 
     const settingContainer = {
         backgroundColor: "white",
-        height: "70%",
+        height: "290px",
         width: "80%",
         display: "flex",
     }
@@ -88,8 +89,8 @@ const MyPage = () => {
     const [openNameModal, setOpenNameModal] = React.useState(false);
     const [openEmailModal, setOpenEmailModal] = React.useState(false);
     const [openPassModal, setOpenPassModal] = React.useState(false);
-    var name = user && user.displayName;
-    var email = user && user.email;
+    // var name = user && user.displayName;
+    // var email = user && user.email;
 
 
     const handleOpenImg = () => {
@@ -104,32 +105,91 @@ const MyPage = () => {
     const handleOpenPass = () => {
         setOpenPassModal(true);
     };
-
-
     const handleClose = () => {
         setOpenNameModal(false);
         setOpenEmailModal(false);
         setOpenPassModal(false);
         setOpenUserImgModal(false);
     };
+
     /////////////モーダル関連
-    const [usersRef] = useState(firebase.firestore().collection('users'));
+    // const [usersRef] = useState(firebase.firestore().collection('users'));
 
     const [changeImg, setChangeImg] = useState('');
     const [changeName, setChangeName] = useState(user && user.displayName);
     const [changeEmail, setChangeEmail] = useState(user && user.email);
     const [changePass, setChangePass] = useState('');
-    // console.log(storage.ref("images").child(changeImg.name))
-
-
-    console.log(user && user.email);
-
 
     const handlechangename = () => {
-        console.log(changeName)
-        //ここでメアド変更処理を書きたい
-        // firebase.auth().updateCurrentUser()//???????
+        user.updateProfile({
+            displayName: changeName,
+        })
+        handleClose()
     }
+
+    const handleChangeEmail = (e) => {
+        e.preventDefault()
+        user.updateEmail("user@example.com").then(function () {
+            // Update successful.
+        }).catch(function (error) {
+            // An error happened.
+        });
+        handleClose()
+    }
+
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+
+    const handleImage = event => {
+        const image = event.target.files[0];
+        setChangeImg(image);
+    };
+
+    const handlechangeImg = (e) => {
+        e.preventDefault();
+        if (changeImg === "") {
+            console.log("ファイルが選択されていません");
+        } else {
+
+            // アップロード処理
+            const uploadTask = storage.ref(`/images/${changeImg.name}`).put(changeImg);
+            uploadTask.on(
+                firebase.storage.TaskEvent.STATE_CHANGED,
+                next,
+                error,
+                complete
+            );
+        }
+    }
+    const next = snapshot => {
+        // 進行中のsnapshotを得る
+        // アップロードの進行度を表示
+        const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(percent + "% done");
+        console.log(snapshot);
+
+    };
+    const error = error => {
+        // エラーハンドリング
+        console.log(error);
+
+    };
+    const complete = () => {
+        // 完了後の処理
+        // 画像表示のため、アップロードした画像のURLを取得
+
+        storage
+            .ref("images")
+            .child(changeImg.name)
+            .getDownloadURL()
+            .then(fireBaseUrl => {
+                user.updateProfile({
+                    photoURL: fireBaseUrl,
+                })
+            });
+
+    };
     if (user) {
         return (
             <>
@@ -149,8 +209,16 @@ const MyPage = () => {
                     >
                         <Fade in={openUserImgModal}>
                             <div className={classes.paper}>
-                                <h2 id="transition-modal-title">アカウント画像</h2>
+                                <h2 id="transition-modal-title">アカウント画像の変更</h2>
+                                <form onSubmit={handlechangeImg}>
+                                    <div>
+                                        <h1>画像アップロード</h1>
 
+                                        <input type="file" onChange={handleImage} />
+                                        <button type="submit">登録</button>
+
+                                    </div>
+                                </form>
                             </div>
                         </Fade>
                     </Modal>
@@ -171,16 +239,18 @@ const MyPage = () => {
                             <div className={classes.paper}>
                                 <h2 id="transition-modal-title">ユーザーネーム</h2>
                                 <p>新しいユーザーネームを入力してください</p>
-                                <input type="text" onChange={(e) => { setChangeName(e.target.value) }} />
-                                <button onClick={handlechangename}>変更</button>
-                                <img src={changeUserImg} />
+
+                                <form onSubmit={handlechangename}>
+                                    <input type="text" onChange={(e) => { setChangeName(e.target.value) }} />
+                                    <button type="submit">変更</button>
+
+                                </form>
                             </div>
                         </Fade>
                     </Modal>
 
                     <Modal
                         aria-labelledby="transition-modal-title"
-                        // aria-describedby="transition-modal-description"
                         className={classes.modal}
                         open={openEmailModal}
                         onClose={handleClose}
@@ -193,7 +263,10 @@ const MyPage = () => {
                         <Fade in={openEmailModal}>
                             <div className={classes.paper}>
                                 <h2 id="transition-modal-title">メールアドレス</h2>
-
+                                <form onSubmit={handleChangeEmail}>
+                                    <input type="email" onChange={(e) => { setChangeEmail(e.target.value) }} />
+                                    <button type="submit">変更</button>
+                                </form>
                             </div>
                         </Fade>
                     </Modal>
@@ -223,8 +296,8 @@ const MyPage = () => {
                         <h1>アカウント情報</h1>
                         <div style={settingContainer}>
                             <div style={changeUserImg}>
-                                {/* <i className="fas fa-user-circle" style={{ fontSize: "15pc" }}></i> */}
-                                <img src={changeUserImg} />
+
+                                <img src={user.photoURL} height="230px" width="230px" />
                                 <button type="button" onClick={handleOpenImg}>
                                     アカウント画像を変更する
                                 </button>
@@ -234,13 +307,13 @@ const MyPage = () => {
 
                             <div style={changeUerInformation}>
                                 <form>
-                                    <p>ユーザーネーム：　{name}</p>
+                                    <p>ユーザーネーム：　{user.displayName}</p>
                                     <button type="button" onClick={handleOpenName}>
                                         ユーザネームを変更する
                                     </button>
 
 
-                                    <p>メールアドレス：　{email}</p>
+                                    <p>メールアドレス：　{user.email}</p>
                                     <button type="button" onClick={handleOpenEmail}>
                                         メールアドレスを変更する
                                     </button>

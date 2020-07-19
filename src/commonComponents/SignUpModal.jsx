@@ -1,11 +1,11 @@
-import React, { useState ,useContext } from 'react';
+import React, { useState  } from 'react';
 import Modal from 'react-modal';
 import firebase, { storage } from '../config/firebase';
-import { AuthContext } from '../store/AuthService'
+// import { AuthContext } from '../store/AuthService'
 Modal.setAppElement('#loginmodal')
 
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
-    const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
+    // const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
     ////////css///////////css///////////css///////
     const modalContainer = {
         backgroundColor: "red",
@@ -71,6 +71,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         const image = event.target.files[0];
         setImage(image);
     };
+
     const onSubmit = event => {
         event.preventDefault();
         if (image === "") {
@@ -98,7 +99,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         console.log(error);
         
     };
-    
     const complete = () => {
         // 完了後の処理
         // 画像表示のため、アップロードした画像のURLを取得
@@ -107,37 +107,22 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
             .child(image.name)
             .getDownloadURL()
             .then(fireBaseUrl => {
-                // setImageUrl(fireBaseUrl);
+                setImageUrl(fireBaseUrl);
 
-                // user.updateProfile({
-                //     photoURL: "fireBaseUrl"
-                // }).then(function () {
-                //     // Update successful.
-                //     console.log(fireBaseUrl)
-                // }).catch(function (error) {
-                //     // An error happened.
-                //     console.log("失敗")
-                // });
-                
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(({ user }) => {
+                        var currentUser = firebase.auth().currentUser;
+                        currentUser.updateProfile({
+                            displayName: userName,
+                            photoURL: fireBaseUrl,
+
+                        })
+                        console.log(user)
+                    })
+                    .catch(err => { console.log(err) }) //サインアップの処理
             });
-
-            
     };
-    
-    const handlesubmit = e => {
-        e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(email,password)
-            .then(({ user }) => {
-                var currentUser = firebase.auth().currentUser;
-                currentUser.updateProfile({
-                    displayName: userName
-                })
-                console.log(user)
-            })
 
-        .catch(err => {console.log(err)}) //サインアップの処理
-        
-    }
     //////js////////js//////////js//////////js///
     return (
         <Modal
@@ -148,7 +133,7 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         >
             <div style={modalContainer}>
                 <div style={modalText}>
-                    <form onSubmit={handlesubmit}>
+                    <form onSubmit={onSubmit}>
                         <h1>仮サインアップ画面</h1>
 
                         <label htmlFor='username'>UserName</label>
@@ -185,11 +170,10 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                         />
                         <div className="App">
                             <h1>画像アップロード</h1>
-                            <form onSubmit={onSubmit}>
+                            
                                 <input type="file" onChange={handleImage} />
-                                
                                 <button type="submit">登録</button>
-                            </form>
+                       
                             <img src={imageUrl} alt="uploaded" />
                         </div>
                         <br />

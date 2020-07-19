@@ -108,7 +108,7 @@ const Header = () => {
                     </div>
 
                     <div style={rightdiv}>
-                        <i className="fas fa-user-circle" style={{fontSize:"80px"}}></i>
+                        <img src={user.photoURL} height="100px" width="100px" alt="アカウント画像"/>
                         <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
                     </div>
                 </header>
