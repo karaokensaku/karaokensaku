@@ -6,12 +6,13 @@ import { Box, makeStyles, Typography, Accordion, AccordionSummary } from '@mater
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { fireStore } from '../config/firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../store/AuthService';
 import { useRecoilState } from 'recoil'; 
 import ConfirmModal from '../commonComponents/ConfirmModal'
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,74 +44,75 @@ const removeSong = (myPage, song) => {
 };
 
 const removeMyPage = (myPages, id) => {
-  console.log(id);
   return myPages.filter(myPage => {
-    console.log(id);
     return myPage.id !== id
   });
 };
 
 const MyPage = (props) => {
+  const {id: getId} = useParams();
   const classes = useStyles();
   const [myPages, setMyPages] = useRecoilState(myPageState);
-  const [myPage, setMyPage] = useState(myPages.find(element => element.id === props.match.params.id)) ;
+  const [selectedMyPage, setSelectedMyPage] = useState(myPages.find(element => element.id === getId)) ;
   const user = useContext(AuthContext);
   const history = useHistory();
+
+  useEffect(() => {
+    setSelectedMyPage(myPages.find(element => element.id === getId))
+  }, [myPages, getId]) //切り替わるタイミングはuseEffectで管理する
   
   const onRemoveSongClick = (song) => {
-    const newMyPage = removeSong(myPage, song);
-    setMyPage(newMyPage);
-    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).update(newMyPage);
+    const newMyPage = removeSong(selectedMyPage, song);
+    setSelectedMyPage(newMyPage);
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).update(newMyPage);
   };
 
   const onRemoveMyPageClick = () => {
-    const newMyPages = removeMyPage(myPages, myPage.id);
+    const newMyPages = removeMyPage(myPages, selectedMyPage.id);
     setMyPages(newMyPages);
-    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).delete().then(() => {
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).delete().then(() => {
       history.push('/main');
     });
   };
 
-  if(myPage !== undefined) {
     return(
       <>
         <Header />
-        <Box className={classes.container}>
-          <LeftSideBar />
-          <Box className={classes.main}>
-            <Typography align='center' variant='h4' >{myPage.title}</Typography>
-            <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-            {myPage.songs ? myPage.songs.map((song, index) => {
-              return (
-                <Accordion key={song.id}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>{index + 1} {song.songTitle}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                      sit amet blandit leo lobortis eget.
-                    </Typography>
-                  </AccordionDetails>
-                  <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
-                </Accordion>
-              );
-            }) : 
-              <p>まだ歌がありません。</p>
-            }
-            {}
+        {selectedMyPage && (
+          <Box className={classes.container}>
+            <LeftSideBar />
+            <Box className={classes.main}>
+              <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
+              <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
+              {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
+                return (
+                  <Accordion key={song.id}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.heading}>{index + 1} {song.songTitle}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                        sit amet blandit leo lobortis eget.
+                      </Typography>
+                    </AccordionDetails>
+                    <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
+                  </Accordion>
+                );
+              }) : 
+                <p>まだ歌がありません。</p>
+              }
+              {}
+            </Box>
           </Box>
-        </Box>
+        )}
         <Footer />
       </>
     );
-  } else {
-    return <Redirect to="/main" />
-  }
 }
 
 export default MyPage

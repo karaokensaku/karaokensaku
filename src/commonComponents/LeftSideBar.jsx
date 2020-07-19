@@ -8,9 +8,8 @@ import { useRecoilState } from 'recoil';
 import { myPageState } from '../atoms/myPage';
 import { Link } from 'react-router-dom';
 import { Box, IconButton} from '@material-ui/core';
-import { useEffect } from 'react';
 import { AuthContext } from '../store/AuthService';
-import firebase, { fireStore } from '../config/firebase';
+import { fireStore } from '../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
@@ -30,7 +29,6 @@ export default function FileSystemNavigator() {
   const classes = useStyles();
   const user = useContext(AuthContext);
   const [myPages, setMyPages] = useRecoilState(myPageState);
-  console.log(myPages);
   const [plus, setPlus] = useState(false);
   const [title, setTitle] = useState('');
 
@@ -48,23 +46,6 @@ export default function FileSystemNavigator() {
       });
     };
   };
-
-  useEffect(() => {
-    let getMypages = [];
-    firebase.auth().onAuthStateChanged((user) => {
-      const uid = user.uid;
-      fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
-        snapshot.forEach(myPage => {
-          getMypages.push({
-            id: myPage.id,
-            ...myPage.data()
-          });
-        });
-      }).then(() => {
-        setMyPages(getMypages);
-      });
-    });
-  }, [user]);
 
   const onPlusClick = () => {
     setPlus(!plus);
