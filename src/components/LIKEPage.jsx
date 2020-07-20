@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
-import RightSideBar from '../commonComponents/RightSideBar';
 import LeftSideBar from '../commonComponents/LeftSideBar';
 import { AuthContext } from '../store/AuthService';
 import { Redirect } from 'react-router-dom';
@@ -47,27 +46,26 @@ const LIKEPage = () => {
                 <Header />
                 <div style={containerCSS}>
                     <LeftSideBar />
-                    <RightSideBar />
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                         <h1>あなたのお気に入りカラオケ動画</h1>
                         <p>【カラオケ】香水/瑛人</p>
-                        <iframe width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                        <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                         <p>別の人の彼女になったよ / wacci</p>
-                        <iframe width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
+                        <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                         <p>【カラオケ】香水/瑛人</p>
-                        <iframe width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                        <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                         <p>別の人の彼女になったよ / wacci</p>
-                        <iframe width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
+                        <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>

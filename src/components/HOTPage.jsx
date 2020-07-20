@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
-import RightSideBar from '../commonComponents/RightSideBar';
 import LeftSideBar from '../commonComponents/LeftSideBar';
 // APIデータ取得に使うやつ
 import axios from 'axios';
@@ -18,6 +17,7 @@ class HOTPage extends React.Component {
         // リソースの種類 https://developers.google.com/youtube/v3/getting-started?hl=ja#resources
         // 取得されたパラメータ https://developers.google.com/youtube/v3/docs/activities?hl=ja#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E8%A1%A8%E7%8F%BE
 
+<<<<<<< HEAD
         //  検索で,チャンネルID,再生回数,で取得.表示数はデフォで5
         const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&channelId=UC1tk9F5-MGXEq4LWnjmrtpA&key=AIzaSyA8tNpyBZw1H4HYxOmB8qdFO-ooPwxH1t4`;
 
@@ -107,6 +107,48 @@ class HOTPage extends React.Component {
                         </iframe>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
+=======
+        borderRadius: "10px",
+        border: "red 5px solid",
+        backgroundColor: "white",
+        color: "black",
+        minHeight: "100vh",
+        width: "49%",
+        margin: "10px 20px",
+        height: "100%",
+        padding: "10px",
+    }
+    
+    return (
+        <>
+            <Header />
+            <div style={containerCSS}>
+                <LeftSideBar />
+                <div style={centerContainer}>
+                    {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
+                    <h1>人気のカラオケ動画</h1>
+                    <p>【カラオケ】香水/瑛人</p>
+                    <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    <p>別の人の彼女になったよ / wacci</p>
+                    <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    <p>【カラオケ】香水/瑛人</p>
+                    <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/Z8K_8jbzmiY" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    <p>別の人の彼女になったよ / wacci</p>
+                    <iframe title="karaoke" width="525" height="380" src="https://www.youtube.com/embed/ekeC7sLBlOM" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
+>>>>>>> 668155855f72ab8d0523fa2cccdb46fdeccca439
                 </div>
                 <Footer />
             </>
