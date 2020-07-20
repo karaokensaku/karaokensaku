@@ -11,6 +11,9 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useState } from 'react';
 import { useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
+
+// import AvatarEditor from 'react-avatar-editor';
 //material UI
 
 const MyPage = () => {
@@ -49,7 +52,7 @@ const MyPage = () => {
         borderLeft: "5px solid rgb(197, 13, 26)",
         borderRight: "5px solid rgb(197, 13, 26)",
         borderBottom: "5px solid rgb(197, 13, 26)",
-        borderRadius:"10px"
+        borderRadius: "10px"
     }
 
     const changeUserImg = {
@@ -205,6 +208,9 @@ const MyPage = () => {
             // An error happened.
         });
     }
+
+
+
     if (user) {
         return (
             <>
@@ -350,6 +356,7 @@ const MyPage = () => {
                                 <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "200px", width: "200px", overflow: "hidden", margin: "20px" }}>{/* インラインcss */}
                                     <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
                                 </div>
+                                
                                 <button type="button" onClick={handleOpenImg}>
                                     アカウント画像を変更する
                                 </button>
@@ -388,12 +395,12 @@ const MyPage = () => {
         );
     } else {
         // return <Redirect to={'/'} />   //ログイン状態でもメインページに飛ばされてしまう???????
-        return (
-            <>
-                <Header />
-                <p>ログインしてね</p>
-            </>
-        );
+            return (
+                <>
+                    <Header />
+                    <p>ログインしてね</p>
+                </>
+            );
     }
 }
 
