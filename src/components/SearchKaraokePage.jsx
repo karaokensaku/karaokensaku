@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
-import RightSideBar from '../commonComponents/RightSideBar';
 import LeftSideBar from '../commonComponents/LeftSideBar';
 
 const SearchKaraokeView = () => {
@@ -42,16 +41,15 @@ const SearchKaraokeView = () => {
             <Header />
             <div style={containerCSS}>
                 <LeftSideBar />
-                <RightSideBar />
                 <h1>【世界に一つだけの花】</h1>
                 <p>の検索結果</p>
                 <div style={centerContainer}>
                     <p>カラオケ　世界に一つだけの花</p>
-                <iframe width="90%" height="450" src="https://www.youtube.com/embed/pPmMaWpAjOw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/pPmMaWpAjOw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p>世界に一つだけの花カラオケ</p>
-                <iframe width="90%" height="450" src="https://www.youtube.com/embed/IlIIBvN-EMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/IlIIBvN-EMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p>世界に一つだけの花 -SMAP</p>
-                <iframe width="90%" height="450" src="https://www.youtube.com/embed/qZq-q75KeMw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/qZq-q75KeMw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
             <Footer />

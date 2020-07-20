@@ -8,29 +8,28 @@ import HOTPage from './components/HOTPage'
 import LIKEPage from './components/LIKEPage'
 import MyPage from './components/MyPage'
 import SearchKaraokeView from './components/SearchKaraokePage'
+import { RecoilRoot } from 'recoil';
 
 function App() {
-
   return (
     <div className="App">
       <AuthProvider>
           {/* AuthProviderでラップすることで、 */}
           {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
-
-        <Router>
-          <Switch>
-            {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-            <LoggedInRoute exact path='/' component={MainPage}/>
-            <Route exact path='/main' component={MainPage} />
-            <Route exact path='/HOTPage' component={HOTPage} />
-            <Route exact path='/LIKEPage' component={LIKEPage} />
-            <Route exact path='/MyPage' component={MyPage} />
-            <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
-          </Switch>
-        </Router>
-
+        <RecoilRoot>
+          <Router>
+            <Switch>
+              {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
+              <LoggedInRoute exact path='/' component={MainPage}/>
+              <Route exact path='/main' component={MainPage} />
+              <Route exact path='/HOTPage' component={HOTPage} />
+              <Route exact path='/LIKEPage' component={LIKEPage} />
+              <Route exact path='/mypages/:id' component={MyPage} />
+              <Route exact path='/SearchKaraokeView' component={SearchKaraokeView} />
+            </Switch>
+          </Router>
+        </RecoilRoot>
       </AuthProvider>
-
     </div>
   );
 }
