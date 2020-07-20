@@ -42,9 +42,14 @@ const MyPage = () => {
 
     const settingContainer = {
         backgroundColor: "white",
-        height: "290px",
-        width: "80%",
+        height: "350px",
+        width: "63%",
         display: "flex",
+        borderTop: "40px solid rgb(197, 13, 26)",
+        borderLeft: "5px solid rgb(197, 13, 26)",
+        borderRight: "5px solid rgb(197, 13, 26)",
+        borderBottom: "5px solid rgb(197, 13, 26)",
+        borderRadius:"10px"
     }
 
     const changeUserImg = {
@@ -52,7 +57,7 @@ const MyPage = () => {
         flexDirection: "column",
         justifyontent: "center",
         alignItems: "center",
-        backgroundColor: "blue",
+        // backgroundColor: "blue",
         height: "100%",
         width: "40%",
 
@@ -63,7 +68,7 @@ const MyPage = () => {
         flexDirection: "column",
         justifyontent: "center",
         alignItems: "center",
-        backgroundColor: "gray",
+        // backgroundColor: "gray",
         height: "100%",
         width: "60%",
     }
@@ -191,7 +196,7 @@ const MyPage = () => {
 
     };
 
-    const handleChangePass = (e) =>{
+    const handleChangePass = (e) => {
         e.preventDefault()
         user.updatePassword(changePass).then(function () {
             // Update successful.
@@ -251,7 +256,7 @@ const MyPage = () => {
                                 <p>新しいユーザーネームを入力してください</p>
 
                                 <form onSubmit={handlechangename}>
-                                   
+
                                     <label htmlFor='username'>UserName</label>
                                     <input
                                         name='username'
@@ -284,7 +289,7 @@ const MyPage = () => {
                             <div className={classes.paper}>
                                 <h2 id="transition-modal-title">メールアドレス</h2>
                                 <form onSubmit={handleChangeEmail}>
-                                 
+
                                     <label htmlFor='email'>E-mail</label>
                                     <input
                                         name='email'
@@ -342,7 +347,9 @@ const MyPage = () => {
                         <div style={settingContainer}>
                             <div style={changeUserImg}>
 
-                                <img src={user.photoURL} height="230px" width="230px" />
+                                <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "200px", width: "200px", overflow: "hidden", margin: "20px" }}>{/* インラインcss */}
+                                    <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+                                </div>
                                 <button type="button" onClick={handleOpenImg}>
                                     アカウント画像を変更する
                                 </button>

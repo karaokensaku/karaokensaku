@@ -43,14 +43,14 @@ const Header = () => {
         height: "113.5px",
         display: "flex",
         alignItems: "flex-end",
-        justifyContent:"space-around"
+        justifyContent: "space-around"
     }
     //////////////////CSS/////////////////
 
     /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
-    
+
 
     //グローバルで管理できるのかな？↓
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
@@ -72,11 +72,11 @@ const Header = () => {
     const openLoginModal = () => {
         setLoginModalIsOpen(true)
     }
-    
+
     const closeLoginModal = () => {
         setLoginModalIsOpen(false)
     }
-    
+
     const openSignUpModal = () => {
         setSignUpModalIsOpen(true)
     }
@@ -90,8 +90,8 @@ const Header = () => {
 
         const useStyles = makeStyles((theme) => ({ //マテリアル　UIスタイル
             button: {
-                backgroundColor:"#C50D1A",
-                color:"white",
+                backgroundColor: "#C50D1A",
+                color: "white",
                 height: "40px"
             },
         }));
@@ -107,10 +107,14 @@ const Header = () => {
                         <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
                     </div>
 
-                    <div style={rightdiv}>
-                        <img src={user.photoURL} height="100px" width="100px" alt="アカウント画像"/>
+                        <div style={rightdiv}>
+                    <Link to="/UserSettingPage" >
+                            <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "70px", width: "70px", overflow: "hidden" }}>{/* インラインcss */}
+                                <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+                            </div>
+                    </Link>
                         <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
-                    </div>
+                        </div>
                 </header>
             )
         } else {
