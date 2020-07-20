@@ -73,6 +73,10 @@ export default function FileSystemNavigator() {
   return (
     <Box className={classes.root}>
       <Link to='/'>Home</Link>
+      <Link to='/hotpage'>HOT</Link>
+      <Link to='/'>Home</Link>
+      <Link to='/'>Home</Link>
+      
       <TreeView
         
         defaultCollapseIcon={<ExpandMoreIcon />}
