@@ -129,7 +129,7 @@ const MyPage = () => {
 
     const handleChangeEmail = (e) => {
         e.preventDefault()
-        user.updateEmail("user@example.com").then(function () {
+        user.updateEmail(changeEmail).then(function () {
             // Update successful.
         }).catch(function (error) {
             // An error happened.
@@ -190,6 +190,16 @@ const MyPage = () => {
             });
 
     };
+
+    const handleChangePass = (e) =>{
+        e.preventDefault()
+        user.updatePassword(changePass).then(function () {
+            // Update successful.
+            console.log(changePass);
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }
     if (user) {
         return (
             <>
@@ -214,8 +224,8 @@ const MyPage = () => {
                                     <div>
                                         <h1>画像アップロード</h1>
 
-                                        <input type="file" onChange={handleImage} />
-                                        <button type="submit">登録</button>
+                                        <input type="file" accept="image/*" onChange={handleImage} />
+                                        <button type="submit">変更</button>
 
                                     </div>
                                 </form>
@@ -241,7 +251,17 @@ const MyPage = () => {
                                 <p>新しいユーザーネームを入力してください</p>
 
                                 <form onSubmit={handlechangename}>
-                                    <input type="text" onChange={(e) => { setChangeName(e.target.value) }} />
+                                   
+                                    <label htmlFor='username'>UserName</label>
+                                    <input
+                                        name='username'
+                                        type='username'
+                                        id='username'
+                                        placeholder='username'
+                                        onChange={e => {
+                                            setChangeName(e.target.value)
+                                        }}
+                                    />
                                     <button type="submit">変更</button>
 
                                 </form>
@@ -264,7 +284,17 @@ const MyPage = () => {
                             <div className={classes.paper}>
                                 <h2 id="transition-modal-title">メールアドレス</h2>
                                 <form onSubmit={handleChangeEmail}>
-                                    <input type="email" onChange={(e) => { setChangeEmail(e.target.value) }} />
+                                 
+                                    <label htmlFor='email'>E-mail</label>
+                                    <input
+                                        name='email'
+                                        type='email'
+                                        id='email'
+                                        placeholder='Email'
+                                        onChange={e => {
+                                            setChangeEmail(e.target.value)
+                                        }}
+                                    />
                                     <button type="submit">変更</button>
                                 </form>
                             </div>
@@ -285,11 +315,26 @@ const MyPage = () => {
                     >
                         <Fade in={openPassModal}>
                             <div className={classes.paper}>
-                                <h2 id="transition-modal-title">パスワード</h2>
-
+                                <h2 id="transition-modal-title">パスワードの変更</h2>
+                                <form onSubmit={handleChangePass}>
+                                    <label htmlFor='password'>Password</label>
+                                    <input
+                                        name='password'
+                                        type='password'
+                                        id='password'
+                                        placeholder='Password'
+                                        onChange={e => {
+                                            setChangePass(e.target.value)
+                                        }}
+                                    />
+                                    <button type="submit">変更</button>
+                                </form>
                             </div>
                         </Fade>
                     </Modal>
+
+
+
 
                     <LeftSideBar />
                     <div style={mainPage}>
