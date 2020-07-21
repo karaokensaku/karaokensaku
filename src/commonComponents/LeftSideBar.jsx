@@ -19,7 +19,7 @@ const LeftSideBar = () => {
 
     return (
         <div style={leftSideBarCSS}>
-            aaaa
+           
         </div>
     );
 }

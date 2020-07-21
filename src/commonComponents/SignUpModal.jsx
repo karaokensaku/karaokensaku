@@ -172,7 +172,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                                 setEmail(e.target.value)
                             }}
                         /><br/>
-
                         <label htmlFor='password'>Password</label>
                         <input
                             name='password'
