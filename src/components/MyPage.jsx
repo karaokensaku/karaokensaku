@@ -3,7 +3,7 @@ import Header from '../commonComponents/Header';
 import Footer from '../commonComponents/Footer';
 
 
-const MyPage = () => {
+const MyPage = (props) => {
 
     const containerCSS = {
         position: "relative",
