@@ -51,7 +51,6 @@ const onSearchYoutube = (keyword) => {
         </RecoilRoot>
 
       </AuthProvider>
-
     </div>
   );
 }

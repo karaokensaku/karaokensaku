@@ -3,7 +3,9 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 //Firebase Authenticationを使用するためインポート
 import 'firebase/storage';
-import 'firebase/firestore'
+
+import 'firebase/firestore';
+
 const firebaseConfig = {
     // 各人の認証情報を記述
     apiKey: "AIzaSyDV3eMgYaAE76dwSJXpQyRdUMiBR8Ml5Us",
@@ -17,6 +19,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 //firebaseAppの初期化
-
 export const storage = firebase.storage();
+
+export const fireStore = firebase.firestore();
+
+// export const storage = firebase.storage();
 export default firebase;
