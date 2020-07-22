@@ -1,6 +1,6 @@
 // AuthService.js
 import React, { useState, useEffect, createContext } from 'react'
-import firebase from './config/firebase'
+import firebase from '../config/firebase'
 
 const AuthContext = createContext()     //Contextオブジェクトを作成
 

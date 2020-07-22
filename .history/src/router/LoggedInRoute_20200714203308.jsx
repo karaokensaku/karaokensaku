@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { AuthContext } from './AuthService'
+import { AuthContext } from '../store/AuthService'
+
 
 
 const LoggedInRoute = ({ component: Component, ...rest }) => {  //下でJSXで使用するため最初の文字を大文字にする（中身はLoggedMainPage）、　残りのpropsを...restで受け取る ＊残りとは何なのか...????＊
@@ -16,7 +17,8 @@ const LoggedInRoute = ({ component: Component, ...rest }) => {  //下でJSXで�
                     console.log(props),
                     <Component {...props} />                    //ログインしてuserに情報が入っているならComponent(LoggedMainPage)にデフォルトのpropsを展開
                 ) : (
-                        <Redirect to={'/maindemo'} />           //未ログイン状態(user=null)ならゲスト用メインページにリダイレクトしてログイン、サインアップを促す
+                        <Redirect to={'/main'} />           //未ログイン状態(user=null)ならゲスト用メインページにリダイレクトしてログイン、サインアップを促す
+                        // console.log("eee")
                     )
             }
         />

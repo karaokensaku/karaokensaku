@@ -16,7 +16,7 @@ const Footer = () => {
 
     return (
         <footer style={FoterCSS}>
-            <p><span>&copy;</span>KARAOKENSAKU</p>
+            <small>KARAOKENSAKU</small>
         </footer>
     );
 }
