@@ -353,19 +353,12 @@ const MyPage = () => {
                         <div style={settingContainer}>
                             <div style={changeUserImg}>
 
-                                {/* <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "200px", width: "200px", overflow: "hidden", margin: "20px" }}>インラインcss */}
-                                    {/* <img src={user.photoURL} height="100%" width="100%" alt="userImg" /> */}
-                                {/* </div> */}
+                                <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "200px", width: "200px", overflow: "hidden", margin: "20px" }}>
+                                    <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+                                </div>
                                 
-                                {/* <AvatarEditor
-                                    
-                                    image={user.photoURL}
-                                    width={200}
-                                    height={200}
-                                    border={20}
-                                    scale={1.1}
-                                /> */}
-                                <AvatarEditor />
+                                
+                                {/* <AvatarEditor /> */}
                                 <button type="button" onClick={handleOpenImg}>
                                     アカウント画像を変更する
                                 </button>
