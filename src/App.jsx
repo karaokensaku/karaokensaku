@@ -43,9 +43,9 @@ const onSearchYoutube = (keyword) => {
               {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
               <LoggedInRoute exact path='/' component={MainPage}/>
               <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos ={video} />} />
-              <Route exact path='/HOTPage' component={HOTPage} />
-              <Route exact path='/LIKEPage' component={LIKEPage} />
-              <Route exact path='/UserSettingPage' component={UserSettingPage} />
+              <Route exact path='/hotPage' component={HOTPage} />
+              <Route exact path='/likePage' component={LIKEPage} />
+              <Route exact path='/userSettingPage' component={UserSettingPage} />
             </Switch>
           </Router>
         </RecoilRoot>

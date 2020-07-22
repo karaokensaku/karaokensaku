@@ -93,10 +93,10 @@ export default function FileSystemNavigator() {
 
   return (
     <Box className={classes.root} style={leftSideBarCSS}>
-      <Link to='/'>Home</Link>
-      <Link to='/hotpage'>HOT</Link>
-      <Link to='/UserSettingPage'>UserSettingPage</Link>
-      <Link to='/'>Home</Link>
+      <Link to='/main'>Home</Link><br/>
+      <Link to='/hotpage'>HOT</Link><br />
+      <Link to='/userSettingPage'>UserSettingPage</Link>
+      {/* <Link to='/'>Home</Link> */}
       
       <TreeView
         
