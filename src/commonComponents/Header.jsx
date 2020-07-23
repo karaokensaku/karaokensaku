@@ -6,6 +6,8 @@ import SignUpModal from './SignUpModal';
 import LoginModal from './LoginModal'                          //ログイン用モーダル
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../atoms/myPage';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 const Header = () => {
 
     /////////////////CSS//////////////////
@@ -39,31 +41,10 @@ const Header = () => {
         backgroundColor: "white",
         width: "30%",
         position: "relative",
-        height: "113.5px"
-    }
-
-    const loginButton = {
-        position: "absolute",
-        right: "15px",
-        bottom: "10px",
-        height: "30px",
-        width: "85px",
-        backgroundColor: "#C50D1A",
-        border: "none",
-        borderRadius: "5px",
-        color: "white",
-    }
-    const signUpButton = {
-        position: "absolute",
-        fontSize: "11px",
-        right: "15px",
-        top: "20px",
-        height: "30px",
-        width: "85px",
-        backgroundColor: "#C50D1A",
-        border: "none",
-        borderRadius: "5px",
-        color: "white",
+        height: "113.5px",
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "space-around"
     }
     //////////////////CSS/////////////////
 
@@ -93,10 +74,10 @@ const Header = () => {
       }, [user]);
 
     const LogOut = (user) => {                          //ログアウト処理
-        debugger
         firebase.auth().onAuthStateChanged((user) => {
             firebase.auth().signOut().then(() => {
                 console.log("ログアウトしました");
+                setLoginModalIsOpen(false);
             })
                 .catch((error) => {
                     console.log(`ログアウト時にエラーが発生しました (${error})`);
@@ -108,11 +89,11 @@ const Header = () => {
     const openLoginModal = () => {
         setLoginModalIsOpen(true)
     }
-    
+
     const closeLoginModal = () => {
         setLoginModalIsOpen(false)
     }
-    
+
     const openSignUpModal = () => {
         setSignUpModalIsOpen(true)
     }
@@ -122,7 +103,20 @@ const Header = () => {
     }
 
     //モーダルを開いたり閉じたりする関数達
-    const renderHeader = (user) => {
+    const RenderHeader = (user) => {
+
+        const useStyles = makeStyles((theme) => ({ //マテリアル　UIスタイル
+            button: {
+                backgroundColor: "#C50D1A",
+                color: "white",
+                height: "40px"
+            },
+        }));
+
+        const classes = useStyles();
+
+
+
         if (user) {
             return (
                 <header style={headerCSS}>
@@ -130,9 +124,14 @@ const Header = () => {
                         <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
                     </div>
 
-                    <div style={rightdiv}>
-                        <button onClick={LogOut} style={loginButton}>ログアウト</button>
-                    </div>
+                        <div style={rightdiv}>
+                    <Link to="/UserSettingPage" >
+                            <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "70px", width: "70px", overflow: "hidden" }}>{/* インラインcss */}
+                                <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+                            </div>
+                    </Link>
+                        <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
+                        </div>
                 </header>
             )
         } else {
@@ -142,8 +141,8 @@ const Header = () => {
                         <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
                     </div>
                     <div style={rightdiv}>
-                        <button style={loginButton} onClick={openLoginModal}>ログイン</button>
-                        <button style={signUpButton} onClick={openSignUpModal}>サインアップ</button>
+                        <Button className={classes.button} variant="contained" onClick={openSignUpModal}>サインアップ</Button>
+                        <Button className={classes.button} variant="contained" onClick={openLoginModal}>ログイン</Button>
                     </div>
 
                     {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
@@ -156,7 +155,7 @@ const Header = () => {
     /////js///////js////////////js////////
     return (
         <>
-            {renderHeader(user)}
+            {RenderHeader(user)}
         </>
     );
 

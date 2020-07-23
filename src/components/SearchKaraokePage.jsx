@@ -20,37 +20,29 @@ const SearchKaraokeView = () => {
         color: "white",
     }
 
-    const centerContainer = {
-        display: "flex",
-        justifyontent: "center",
-        alignItems: "center",
-        flexDirection: "column",
+    // const centerContainer = {
+    //     display: "flex",
+    //     justifyontent: "center",
+    //     alignItems: "center",
+    //     flexDirection: "column",
 
-        borderRadius: "10px",
-        border: "red 5px solid",
-        backgroundColor: "white",
-        color: "black",
-        minHeight: "100vh",
-        width: "45%",
-        margin: "10px 20px",
-        height: "100%",
-        padding: "30px",
-    }
+    //     borderRadius: "10px",
+    //     border: "red 5px solid",
+    //     backgroundColor: "white",
+    //     color: "black",
+    //     minHeight: "100vh",
+    //     width: "45%",
+    //     margin: "10px 20px",
+    //     height: "100%",
+    //     padding: "30px",
+    // }
     return(
         <>
             <Header />
             <div style={containerCSS}>
                 <LeftSideBar />
                 <h1>【世界に一つだけの花】</h1>
-                <p>の検索結果</p>
-                <div style={centerContainer}>
-                    <p>カラオケ　世界に一つだけの花</p>
-                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/pPmMaWpAjOw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>世界に一つだけの花カラオケ</p>
-                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/IlIIBvN-EMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>世界に一つだけの花 -SMAP</p>
-                <iframe title="karaoke" width="90%" height="450" src="https://www.youtube.com/embed/qZq-q75KeMw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                
             </div>
             <Footer />
         </>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React,{ useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -11,6 +11,16 @@ import { Box, IconButton} from '@material-ui/core';
 import { AuthContext } from '../store/AuthService';
 import { fireStore } from '../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
+
+const leftSideBarCSS = {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom:0,
+    right: "82%",
+    backgroundColor: "white",
+    color: "black",
+}//左サイドバーのスタイル
 
 const useStyles = makeStyles({
   root: {
@@ -52,8 +62,12 @@ export default function FileSystemNavigator() {
   };
 
   return (
-    <Box className={classes.root}>
-      <Link to='/'>Home</Link>
+    <Box className={classes.root} style={leftSideBarCSS}>
+      <Link to='/main'>Home</Link><br/>
+      <Link to='/hotpage'>HOT</Link><br />
+      <Link to='/userSettingPage'>UserSettingPage</Link>
+      {/* <Link to='/'>Home</Link> */}
+      
       <TreeView
         
         defaultCollapseIcon={<ExpandMoreIcon />}

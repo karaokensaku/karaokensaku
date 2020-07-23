@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState  } from 'react';
 import Modal from 'react-modal';
 import firebase, { storage } from '../config/firebase';
-
+// import { AuthContext } from '../store/AuthService'
 Modal.setAppElement('#loginmodal')
 
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
-
+    // const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
     ////////css///////////css///////////css///////
     const modalContainer = {
         backgroundColor: "red",
@@ -64,12 +64,14 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [image, setImage] = useState('');
-    const [imageUrl, setImageUrl] = useState("");
+    const [imageUrl, setImageUrl] = useState('');
+    const [userName, setUserName] = useState('')
 
     const handleImage = event => {
         const image = event.target.files[0];
         setImage(image);
     };
+
     const onSubmit = event => {
         event.preventDefault();
         if (image === "") {
@@ -90,10 +92,12 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(percent + "% done");
         console.log(snapshot);
+        
     };
     const error = error => {
         // エラーハンドリング
         console.log(error);
+        
     };
     const complete = () => {
         // 完了後の処理
@@ -104,14 +108,21 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
             .getDownloadURL()
             .then(fireBaseUrl => {
                 setImageUrl(fireBaseUrl);
+
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(({ user }) => {
+                        var currentUser = firebase.auth().currentUser;
+                        currentUser.updateProfile({
+                            displayName: userName,
+                            photoURL: fireBaseUrl,
+
+                        })
+                        console.log(user)
+                    })
+                    .catch(err => { console.log(err) }) //サインアップの処理
             });
     };
-    
-    const handlesubmit = e => {
-        e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(email,password).catch(err => {console.log(err)}) //サインアップの処理
-        
-    }
+
     //////js////////js//////////js//////////js///
     return (
         <Modal
@@ -122,8 +133,20 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         >
             <div style={modalContainer}>
                 <div style={modalText}>
-                    <form onSubmit={handlesubmit}>
+                    <form onSubmit={onSubmit}>
                         <h1>仮サインアップ画面</h1>
+
+                        <label htmlFor='username'>UserName</label>
+                        <input
+                            name='username'
+                            type='username'
+                            id='username'
+                            placeholder='username'
+                            onChange={e => {
+                                setUserName(e.target.value)
+                            }}
+                        /><br />
+
                         <label htmlFor='email'>E-mail</label>
                         <input
                             name='email'
@@ -146,14 +169,13 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                         />
                         <div className="App">
                             <h1>画像アップロード</h1>
-                            <form onSubmit={onSubmit}>
+                            
                                 <input type="file" onChange={handleImage} />
-                                
-                            </form>
+                                <button type="submit">登録</button>
+                       
                             <img src={imageUrl} alt="uploaded" />
                         </div>
                         <br />
-                        <button type="submit">登録</button>
                     </form>
                 </div>
             </div>
