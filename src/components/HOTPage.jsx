@@ -69,9 +69,9 @@ class HOTPage extends React.Component {
 
         return (
             <>
-                <Header />
+                {/* <Header /> */}
                 <div style={containerCSS}>
-                    <LeftSideBar />
+                    {/* <LeftSideBar /> */}
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                         <h1>人気のカラオケ動画</h1>
@@ -91,7 +91,7 @@ class HOTPage extends React.Component {
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </>
         );
     }
