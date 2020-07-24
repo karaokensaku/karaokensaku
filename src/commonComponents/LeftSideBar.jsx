@@ -12,19 +12,9 @@ import { AuthContext } from '../store/AuthService';
 import { fireStore } from '../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
 
-const leftSideBarCSS = {
-    position: "absolute",
-    left: 0,
-    top: 0,
-    bottom:0,
-    right: "82%",
-    backgroundColor: "white",
-    color: "black",
-}//左サイドバーのスタイル
-
 const useStyles = makeStyles({
   root: {
-    width: '21%',
+    width: '26%',
   },
 });
 
@@ -49,8 +39,8 @@ export default function FileSystemNavigator() {
   const onSubmit = (e) => {
     e.preventDefault();
     if(title.trim() !== '') {
-      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title}).then((docRef) => {
-        const newMyPages = addMyPage(myPages, {title, id: docRef.id});
+      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title, songs: []}).then((docRef) => {
+        const newMyPages = addMyPage(myPages, {title, id: docRef.id, songs: []});
         setMyPages(newMyPages)
         setTitle('');
       });
@@ -62,7 +52,7 @@ export default function FileSystemNavigator() {
   };
 
   return (
-    <Box className={classes.root} style={leftSideBarCSS}>
+    <Box className={classes.root}>
       <Link to='/main'>Home</Link><br/>
       <Link to='/hotpage'>HOT</Link><br />
       <Link to='/userSettingPage'>UserSettingPage</Link>
@@ -77,11 +67,9 @@ export default function FileSystemNavigator() {
           {myPages.map((myPage, index) => {
             const number = index + 2
             return (
-              <>
-                <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
-                  <TreeItem nodeId={number.valueOf()} label={myPage.title} />
-                </Link>
-              </>
+              <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
+                <TreeItem nodeId={number.valueOf()} label={myPage.title} />
+              </Link>
             )
           })}
           <TreeItem 

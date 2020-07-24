@@ -12,6 +12,7 @@ const Footer = () => {
         // border: "red 5px solid",
         height: "30px",
         color: "white",
+        width: "100%",
     }
 
     return (

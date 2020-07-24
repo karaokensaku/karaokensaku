@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
 import { Box, makeStyles, Typography, Accordion, AccordionSummary } from '@material-ui/core';
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -23,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   main: {
-    width: '79%',
-    backgroundColor: '#F2F2F2'
+    width: '74%',
+    backgroundColor: '#F2F2F2',
+    textAlign: 'center',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -33,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const removeSong = (myPage, song) => {
-  const num = song.id
+  const num = song.videoId
   const selectedSongs = myPage.songs.filter(element => {
-    return element.id !== num.toString();
+    return element.videoId !== num;
   });
   return {
     ...myPage,
@@ -49,7 +47,7 @@ const removeMyPage = (myPages, id) => {
   });
 };
 
-const MyPage = (props) => {
+const MyPage = () => {
   const {id: getId} = useParams();
   const classes = useStyles();
   const [myPages, setMyPages] = useRecoilState(myPageState);
@@ -64,7 +62,7 @@ const MyPage = (props) => {
   const onRemoveSongClick = (song) => {
     const newMyPage = removeSong(selectedMyPage, song);
     setSelectedMyPage(newMyPage);
-    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).update(newMyPage);
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).update({title: newMyPage.title, songs: newMyPage.songs});
   };
 
   const onRemoveMyPageClick = () => {
@@ -77,40 +75,41 @@ const MyPage = (props) => {
 
     return(
       <>
-        <Header />
         {selectedMyPage && (
-          <Box className={classes.container}>
-            <LeftSideBar />
-            <Box className={classes.main}>
-              <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
-              <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-              {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
-                return (
-                  <Accordion key={song.id}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>{index + 1} {song.songTitle}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                      </Typography>
-                    </AccordionDetails>
-                    <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
-                  </Accordion>
-                );
-              }) : 
-                <p>まだ歌がありません。</p>
-              }
-              {}
-            </Box>
-          </Box>
+          <div className={classes.main}> 
+            <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
+            <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
+            {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
+              const url = "https://www.youtube.com/embed/" + song.videoId;
+              return (
+                <Accordion key={song.videoId}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <iframe
+                      id="ytplayer"
+                      type="ytplayer"
+                      width="480"
+                      height="270"
+                      src={url}
+                      frameborder="0"
+                      title={song.title}
+                    />
+                  </AccordionDetails>
+                  <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
+                </Accordion>
+              );
+            }) : 
+              <p>まだ歌がありません。</p>
+            }
+            {}
+          </div>
         )}
-        <Footer />
       </>
     );
 }
