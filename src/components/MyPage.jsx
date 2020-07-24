@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
 import { Box, makeStyles, Typography, Accordion, AccordionSummary } from '@material-ui/core';
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { fireStore } from '../config/firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../store/AuthService';
 import { useRecoilState } from 'recoil'; 
 import ConfirmModal from '../commonComponents/ConfirmModal'
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   main: {
-    width: '79%',
-    backgroundColor: '#F2F2F2'
+    width: '74%',
+    backgroundColor: '#F2F2F2',
+    textAlign: 'center',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -32,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const removeSong = (myPage, song) => {
-  const num = song.id
+  const num = song.videoId
   const selectedSongs = myPage.songs.filter(element => {
-    return element.id !== num.toString();
+    return element.videoId !== num;
   });
   return {
     ...myPage,
@@ -43,58 +42,64 @@ const removeSong = (myPage, song) => {
 };
 
 const removeMyPage = (myPages, id) => {
-  console.log(id);
   return myPages.filter(myPage => {
-    console.log(id);
     return myPage.id !== id
   });
 };
 
-const MyPage = (props) => {
+const MyPage = () => {
+  const {id: getId} = useParams();
   const classes = useStyles();
   const [myPages, setMyPages] = useRecoilState(myPageState);
-  const [myPage, setMyPage] = useState(myPages.find(element => element.id === props.match.params.id)) ;
+  const [selectedMyPage, setSelectedMyPage] = useState(myPages.find(element => element.id === getId)) ;
   const user = useContext(AuthContext);
   const history = useHistory();
+
+  useEffect(() => {
+    setSelectedMyPage(myPages.find(element => element.id === getId))
+  }, [myPages, getId]) //切り替わるタイミングはuseEffectで管理する
   
   const onRemoveSongClick = (song) => {
-    const newMyPage = removeSong(myPage, song);
-    setMyPage(newMyPage);
-    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).update(newMyPage);
+    const newMyPage = removeSong(selectedMyPage, song);
+    setSelectedMyPage(newMyPage);
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).update({title: newMyPage.title, songs: newMyPage.songs});
   };
 
   const onRemoveMyPageClick = () => {
-    const newMyPages = removeMyPage(myPages, myPage.id);
+    const newMyPages = removeMyPage(myPages, selectedMyPage.id);
     setMyPages(newMyPages);
-    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${myPage.id}`).delete().then(() => {
+    fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).delete().then(() => {
       history.push('/main');
     });
   };
 
-  if(myPage !== undefined) {
     return(
       <>
-        <Header />
-        <Box className={classes.container}>
-          <LeftSideBar />
-          <Box className={classes.main}>
-            <Typography align='center' variant='h4' >{myPage.title}</Typography>
+        {selectedMyPage && (
+          <div className={classes.main}> 
+            <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
             <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-            {myPage.songs ? myPage.songs.map((song, index) => {
+            {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
+              const url = "https://www.youtube.com/embed/" + song.videoId;
               return (
-                <Accordion key={song.id}>
+                <Accordion key={song.videoId}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className={classes.heading}>{index + 1} {song.songTitle}</Typography>
+                    <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                      sit amet blandit leo lobortis eget.
-                    </Typography>
+                    <iframe
+                      id="ytplayer"
+                      type="ytplayer"
+                      width="480"
+                      height="270"
+                      src={url}
+                      frameborder="0"
+                      title={song.title}
+                    />
                   </AccordionDetails>
                   <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
                 </Accordion>
@@ -103,14 +108,10 @@ const MyPage = (props) => {
               <p>まだ歌がありません。</p>
             }
             {}
-          </Box>
-        </Box>
-        <Footer />
+          </div>
+        )}
       </>
     );
-  } else {
-    return <Redirect to="/main" />
-  }
 }
 
 export default MyPage

@@ -7,36 +7,14 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../atoms/myPage';
 import { Link } from 'react-router-dom';
-import { Box, IconButton } from '@material-ui/core';
-import { useEffect } from 'react';
+import { Box, IconButton} from '@material-ui/core';
 import { AuthContext } from '../store/AuthService';
-import firebase, { fireStore } from '../config/firebase';
+import { fireStore } from '../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
-
-const leftSideBarCSS = {
-    position: "absolute",
-    left: 0,
-    top: 0,
-    bottom:0,
-    right: "82%",
-    backgroundColor: "white",
-    color: "black",
-}//左サイドバーのスタイル
-const LeftSideBar = () => {
-
-
-    return (
-        <div style={leftSideBarCSS}>
-            aaaa
-        </div>
-    );
-}
-
-
 
 const useStyles = makeStyles({
   root: {
-    width: '21%',
+    width: '26%',
   },
 });
 
@@ -51,7 +29,6 @@ export default function FileSystemNavigator() {
   const classes = useStyles();
   const user = useContext(AuthContext);
   const [myPages, setMyPages] = useRecoilState(myPageState);
-  console.log(myPages);
   const [plus, setPlus] = useState(false);
   const [title, setTitle] = useState('');
 
@@ -62,37 +39,20 @@ export default function FileSystemNavigator() {
   const onSubmit = (e) => {
     e.preventDefault();
     if(title.trim() !== '') {
-      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title}).then((docRef) => {
-        const newMyPages = addMyPage(myPages, {title, id: docRef.id});
+      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title, songs: []}).then((docRef) => {
+        const newMyPages = addMyPage(myPages, {title, id: docRef.id, songs: []});
         setMyPages(newMyPages)
         setTitle('');
       });
     };
   };
 
-  useEffect(() => {
-    let getMypages = [];
-    firebase.auth().onAuthStateChanged((user) => {
-      const uid = user.uid;
-      fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
-        snapshot.forEach(myPage => {
-          getMypages.push({
-            id: myPage.id,
-            ...myPage.data()
-          });
-        });
-      }).then(() => {
-        setMyPages(getMypages);
-      });
-    });
-  }, [user]);
-
   const onPlusClick = () => {
     setPlus(!plus);
   };
 
   return (
-    <Box className={classes.root} style={leftSideBarCSS}>
+    <Box className={classes.root}>
       <Link to='/main'>Home</Link><br/>
       <Link to='/hotpage'>HOT</Link><br />
       <Link to='/userSettingPage'>UserSettingPage</Link>
@@ -107,11 +67,9 @@ export default function FileSystemNavigator() {
           {myPages.map((myPage, index) => {
             const number = index + 2
             return (
-              <>
-                <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
-                  <TreeItem nodeId={number.valueOf()} label={myPage.title} />
-                </Link>
-              </>
+              <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
+                <TreeItem nodeId={number.valueOf()} label={myPage.title} />
+              </Link>
             )
           })}
           <TreeItem 

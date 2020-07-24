@@ -7,14 +7,34 @@ import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage'
 import LIKEPage from './components/LIKEPage'
 import UserSettingPage from './components/UserSettingPage'
-import SearchKaraokeView from './components/SearchKaraokePage'
-import MyPage from './components/MyPage'
 import { RecoilRoot } from "recoil";
 import axios from "axios";
 import Youtube from './components/MainPage';
+import MyPage from './components/MyPage';
+import Header from './commonComponents/Header';
+import LeftSideBar from './commonComponents/LeftSideBar';
+import { makeStyles } from '@material-ui/core';
+import Footer from './commonComponents/Footer';
+
+const useStyles = makeStyles((theme) => ({
+  app: {
+    width: '100%',
+    margin: (0, 'auto'),
+    display: 'flex',
+    flexWrap: 'wrap',
+    minHeight: "100vh",
+  },
+  main: {
+    backgroundColor: '#F2F2F2'
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 function App() {
-
+const classes = useStyles();
 const [video, setVideos] = useState([]);
 
 const onSearchYoutube = (keyword) => {
@@ -32,21 +52,26 @@ const onSearchYoutube = (keyword) => {
 };
 
   return (
-    <div className="App">
+    <div>
       <AuthProvider>
         <RecoilRoot>
             {/* AuthProviderでラップすることで、 */}
             {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
-
           <Router>
-            <Switch>
-              {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-              <LoggedInRoute exact path='/' component={MainPage}/>
-              <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos ={video} />} />
-              <Route exact path='/hotPage' component={HOTPage} />
-              <Route exact path='/likePage' component={LIKEPage} />
-              <Route exact path='/userSettingPage' component={UserSettingPage} />
-            </Switch>
+            <Header />
+            <div className={classes.app}>
+              <LeftSideBar />
+              <Switch>
+                {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
+                <LoggedInRoute exact path='/' component={MainPage}/>
+                <LoggedInRoute exact path='/myPages/:id' component={MyPage}/>
+                <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos ={video} />} />
+                <Route exact path='/hotPage' component={HOTPage} />
+                <Route exact path='/likePage' component={LIKEPage} />
+                <Route exact path='/userSettingPage' component={UserSettingPage} />
+              </Switch>
+            </div>
+            <Footer />
           </Router>
         </RecoilRoot>
 

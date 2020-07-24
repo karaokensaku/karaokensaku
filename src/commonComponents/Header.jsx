@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../store/AuthService';
-import firebase from '../config/firebase';
+import firebase, { fireStore } from '../config/firebase';
 import { Link } from 'react-router-dom';
 import SignUpModal from './SignUpModal';
 import LoginModal from './LoginModal'                          //ログイン用モーダル
-
+import { useRecoilState } from 'recoil';
+import { myPageState } from '../atoms/myPage';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 const Header = () => {
@@ -50,11 +51,27 @@ const Header = () => {
     /////js///////js////////////js////////
     const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
-
-
     //グローバルで管理できるのかな？↓
     const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+    const [myPages, setMyPages] = useRecoilState(myPageState);
+
+    useEffect(() => {
+        let getMypages = [];
+        firebase.auth().onAuthStateChanged((user) => {
+          const uid = user.uid;
+          fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
+            snapshot.forEach(myPage => {
+              getMypages.push({
+                id: myPage.id,
+                ...myPage.data()
+              });
+            });
+          }).then(() => {
+            setMyPages(getMypages);
+          });
+        });
+      }, [user]);
 
     const LogOut = (user) => {                          //ログアウト処理
         firebase.auth().onAuthStateChanged((user) => {
