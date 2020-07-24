@@ -396,7 +396,7 @@ const MyPage = () => {
             </>
         );
     } else {
-        // return <Redirect to={'/'} />   //ログイン状態でもメインページに飛ばされてしまう???????
+        // return <Redirect to={'/'} />   //ログイン状態でもメインページに飛ばされてしまう??????
             return (
                 <>
                     <Header />
