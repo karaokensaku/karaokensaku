@@ -44,21 +44,22 @@ class HOTPage extends React.Component {
         const containerCSS = {
             position: "relative",
             backgroundColor: "orange",
-            minHeight: "100vh",
+            height: "100%",
+            // minHeight: "100vh",
             alignItems: "center",
             color: "white",
         }
 
         const centerContainer = {
             display: "flex",
-            justifyontent: "center",
+            justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            left: "18%",
+            // position: "absolute",
+            // right: 0,
+            // top: 0,
+            // bottom: 0,
+            // left: "18%",
             backgroundColor: "#F2F2F2",
             color: "black",
             padding: "20px",
@@ -77,7 +78,7 @@ class HOTPage extends React.Component {
                         <h1>人気のカラオケ動画</h1>
                         {this.state.videos.map((video) => {
                             const ttl = video.snippet.title;
-                            const url = `https://www.youtube.com./watch?v=${video.id.videoId}`;
+                            const url = `https://www.youtube.com./embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
                                 <div>
