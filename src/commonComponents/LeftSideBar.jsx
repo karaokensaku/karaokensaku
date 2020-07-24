@@ -22,16 +22,6 @@ const leftSideBarCSS = {
     backgroundColor: "white",
     color: "black",
 }//左サイドバーのスタイル
-const LeftSideBar = () => {
-
-
-    return (
-        <div style={leftSideBarCSS}>
-            aaaa
-        </div>
-    );
-}
-
 
 
 const useStyles = makeStyles({

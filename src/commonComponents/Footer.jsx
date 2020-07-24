@@ -8,8 +8,6 @@ const Footer = () => {
         backgroundColor: "#C50D1A",
         alignItems: "center",
         padding: "5px",
-        // borderRadius: "20px",
-        // border: "red 5px solid",
         height: "30px",
         color: "white",
     }

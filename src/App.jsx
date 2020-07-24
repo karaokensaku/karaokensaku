@@ -7,7 +7,6 @@ import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage'
 import LIKEPage from './components/LIKEPage'
 import UserSettingPage from './components/UserSettingPage'
-import SearchKaraokeView from './components/SearchKaraokePage'
 import MyPage from './components/MyPage'
 import { RecoilRoot } from "recoil";
 import axios from "axios";
@@ -46,6 +45,7 @@ const onSearchYoutube = (keyword) => {
               <Route exact path='/hotPage' component={HOTPage} />
               <Route exact path='/likePage' component={LIKEPage} />
               <Route exact path='/userSettingPage' component={UserSettingPage} />
+              <Route exact path='/my' component={MyPage} />
             </Switch>
           </Router>
         </RecoilRoot>
