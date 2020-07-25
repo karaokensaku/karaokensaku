@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 // import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Avatar } from '@material-ui/core';
 
 const Header = () => {
 
@@ -19,29 +20,29 @@ const Header = () => {
 
   useEffect(() => {
     let getMypages = [];
-    firebase.auth().onAuthStateChanged((user) => {
-      const uid = user.uid;
-      fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
-        snapshot.forEach(myPage => {
-          getMypages.push({
-            id: myPage.id,
-            ...myPage.data()
+    {user &&
+      firebase.auth().onAuthStateChanged((user) => {
+        const uid = user.uid;
+        fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
+          snapshot.forEach(myPage => {
+            getMypages.push({
+              id: myPage.id,
+              ...myPage.data()
+            });
           });
+        }).then(() => {
+          setMyPages(getMypages);
         });
-      }).then(() => {
-        setMyPages(getMypages);
       });
-    });
+    }
   }, [user]);
-
-  const LogOut = (user) => {                          //ログアウト処理
-    firebase.auth().onAuthStateChanged((user) => {
+  const LogOut = () => {                          //ログアウト処理
+    firebase.auth().onAuthStateChanged(() => {
       firebase.auth().signOut().then(() => {
         console.log("ログアウトしました");
-      })
-        .catch((error) => {
-          console.log(`ログアウト時にエラーが発生しました (${error})`);
-        });
+      }).catch((err) => {
+        console.log(err);
+      });
     });
   }
   return (
@@ -53,7 +54,7 @@ const Header = () => {
         </div>
         <div className="headerMenu">
           <Link to="/UserSettingPage" >
-              <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+            <Avatar>{user.displayName.slice(0,2)}</Avatar>
             <h3>User Setting</h3>
           </Link>
           <Button  variant="contained" onClick={LogOut}>ログアウト</Button>
