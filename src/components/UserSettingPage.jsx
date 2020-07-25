@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
+import Header from './Header';
+import Footer from './Footer';
+import LeftSideBar from './LeftSideBar';
 import { AuthContext } from '../store/AuthService'
 import firebase, { storage } from '../config/firebase'
 //material UI
@@ -20,7 +20,7 @@ const MyPage = () => {
     const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
 
     const containerCSS = {
-        position: "relative",
+        // position: "relative",
         backgroundColor: "orange",
         minHeight: "100vh",
         alignItems: "center",
@@ -33,11 +33,11 @@ const MyPage = () => {
         justifyontent: "center",
         alignItems: "center",
         flexDirection: "column",
-        position: "absolute",
-        right: 0,
-        top: 0,
-        bottom: 0,
-        left: "18%",
+        // position: "absolute",
+        // right: 0,
+        // top: 0,
+        // bottom: 0,
+        // left: "18%",
         backgroundColor: "#F2F2F2",
         color: "black",
         padding: "20px",
@@ -45,8 +45,8 @@ const MyPage = () => {
 
     const settingContainer = {
         backgroundColor: "white",
-        height: "350px",
-        width: "63%",
+        // height: "350px",
+        // width: "63%",
         display: "flex",
         borderTop: "40px solid rgb(197, 13, 26)",
         borderLeft: "5px solid rgb(197, 13, 26)",
@@ -99,7 +99,6 @@ const MyPage = () => {
     const [openPassModal, setOpenPassModal] = React.useState(false);
     // var name = user && user.displayName;
     // var email = user && user.email;
-
 
     const handleOpenImg = () => {
         setOpenUserImgModal(true);
@@ -214,12 +213,11 @@ const MyPage = () => {
     if (user) {
         return (
             <>
-                <Header />
                 <div style={containerCSS}>
                     <Modal
                         aria-labelledby="transition-modal-title"
                         // aria-describedby="transition-modal-description"
-                        className={classes.modal}
+                        // className={classes.modal}
                         open={openUserImgModal}
                         onClose={handleClose}
                         closeAfterTransition
@@ -274,7 +272,6 @@ const MyPage = () => {
                                         }}
                                     />
                                     <button type="submit">変更</button>
-
                                 </form>
                             </div>
                         </Fade>
@@ -344,10 +341,6 @@ const MyPage = () => {
                         </Fade>
                     </Modal>
 
-
-
-
-                    <LeftSideBar />
                     <div style={mainPage}>
                         <h1>アカウント情報</h1>
                         <div style={settingContainer}>
@@ -392,15 +385,13 @@ const MyPage = () => {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </>
         );
     } else {
         // return <Redirect to={'/'} />   //ログイン状態でもメインページに飛ばされてしまう??????
             return (
                 <>
-                    <Header />
-                    <p>ログインしてね</p>
+                    <p>ログインしてね♡</p>
                 </>
             );
     }

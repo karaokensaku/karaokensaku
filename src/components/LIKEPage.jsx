@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
+import Header from './Header';
+import Footer from './Footer';
+import LeftSideBar from './LeftSideBar';
 import { AuthContext } from '../store/AuthService';
 import { Redirect } from 'react-router-dom';
 
@@ -53,7 +53,7 @@ const LIKEPage = () => {
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </>
         );
     }else{

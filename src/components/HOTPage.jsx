@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
+import Header from './Header';
+import Footer from './Footer';
+import LeftSideBar from './LeftSideBar';
 // APIデータ取得に使うやつ
 import axios from 'axios';
 

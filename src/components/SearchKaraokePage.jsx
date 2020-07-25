@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
+import Header from './Header';
+import Footer from './Footer';
+import LeftSideBar from './LeftSideBar';
 
 const SearchKaraokeView = () => {
 
@@ -40,7 +40,7 @@ const SearchKaraokeView = () => {
         <>
             <Header />
             <div style={containerCSS}>
-                <LeftSideBar />
+                {/* <LeftSideBar /> */}
                 <h1>【世界に一つだけの花】</h1>
                 
             </div>
