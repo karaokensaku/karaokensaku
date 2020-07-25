@@ -11,10 +11,7 @@ import { RecoilRoot } from "recoil";
 import axios from "axios";
 import Youtube from './components/MainPage';
 import MyPage from './components/MyPage';
-import Header from './components/Header';
-import LeftSideBar from './components/LeftSideBar/LeftSideBar';
 import { makeStyles } from '@material-ui/core';
-import Footer from './components/Footer';
 import Layout from "./components/Layout"
 
 const useStyles = makeStyles((theme) => ({
