@@ -1,22 +1,17 @@
-import React,{ useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import { useRecoilState } from 'recoil';
-import { myPageState } from '../atoms/myPage';
+import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
-import { Box, IconButton} from '@material-ui/core';
-import { AuthContext } from '../store/AuthService';
-import { fireStore } from '../config/firebase';
+import { IconButton } from '@material-ui/core';
+import { AuthContext } from '../../store/AuthService';
+import { fireStore } from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
-
-const useStyles = makeStyles({
-  root: {
-    width: '26%',
-  },
-});
+import { StyledComponent } from './LeftSideBar.styled'
 
 const addMyPage = (myPages, data) => {
   return [
@@ -26,7 +21,6 @@ const addMyPage = (myPages, data) => {
 };
 
 export default function FileSystemNavigator() {
-  const classes = useStyles();
   const user = useContext(AuthContext);
   const [myPages, setMyPages] = useRecoilState(myPageState);
   const [plus, setPlus] = useState(false);
@@ -38,9 +32,9 @@ export default function FileSystemNavigator() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if(title.trim() !== '') {
-      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title, songs: []}).then((docRef) => {
-        const newMyPages = addMyPage(myPages, {title, id: docRef.id, songs: []});
+    if (title.trim() !== '') {
+      fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({ title, songs: [] }).then((docRef) => {
+        const newMyPages = addMyPage(myPages, { title, id: docRef.id, songs: [] });
         setMyPages(newMyPages)
       });
     };
@@ -52,14 +46,17 @@ export default function FileSystemNavigator() {
   };
 
   return (
-    <Box className={classes.root}>
-      <Link to='/main'>Home</Link><br/>
-      <Link to='/hotpage'>HOT</Link><br />
-      <Link to='/userSettingPage'>UserSettingPage</Link>
+    <StyledComponent className="left">
+      <ul>
+        <h2>MENU</h2>
+        <li><Link to='/main'>Home</Link></li>
+        <li><Link to='/hotpage'>HOT</Link><br /></li>
+        <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
+      </ul>
       {/* <Link to='/'>Home</Link> */}
-      
+
       <TreeView
-        
+        className="myList"
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
       >
@@ -72,13 +69,13 @@ export default function FileSystemNavigator() {
               </Link>
             )
           })}
-          <TreeItem 
-            nodeId={myPages.length + 2} 
+          <TreeItem
+            nodeId={myPages.length + 2}
             label={
               <div>
-                {plus && 
+                {plus &&
                   <form onSubmit={onSubmit}>
-                    <input name="title" value={title} onChange={onTitleChange}/>
+                    <input name="title" value={title} onChange={onTitleChange} />
                     <button type="submit">追加</button>
                   </form>
                 }
@@ -86,10 +83,10 @@ export default function FileSystemNavigator() {
                   <AddIcon />
                 </IconButton>
               </div>
-            } 
+            }
           />
         </TreeItem>
       </TreeView>
-    </Box>
+    </StyledComponent>
   );
 };

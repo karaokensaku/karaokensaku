@@ -1,7 +1,13 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
-import firebase, { storage } from '../config/firebase';
+import firebase, { storage } from '../../../config/firebase';
+import { StyledComponent } from './SinUpModal.styled';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+
 // import { AuthContext } from '../store/AuthService'
+
 Modal.setAppElement('#loginmodal')
 
 const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
@@ -92,12 +98,12 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
         const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(percent + "% done");
         console.log(snapshot);
-        
+
     };
     const error = error => {
         // エラーハンドリング
         console.log(error);
-        
+
     };
     const complete = () => {
         // 完了後の処理
@@ -125,18 +131,16 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
 
     //////js////////js//////////js//////////js///
     return (
-        <Modal
-            isOpen={SignUpModalIsOpen}                      //trueなら表示
-            onRequestClose={closeSignUpModal}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
-            style={customStyles}
-            contentLabel="SignUp Modal"
-        >
-            <div style={modalContainer}>
-                <div style={modalText}>
-                    <form onSubmit={onSubmit}>
-                        <h1>仮サインアップ画面</h1>
-
-                        <label htmlFor='username'>UserName</label>
+        <StyledComponent>
+            <Modal
+                isOpen={SignUpModalIsOpen}                      //trueなら表示
+                onRequestClose={closeSignUpModal}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
+                style={customStyles}
+                contentLabel="SignUp Modal"
+            >
+                <form onSubmit={onSubmit}>
+                    <h2>SIGNUP</h2>
+                    <label htmlFor='username'>UserName</label>
                         <input
                             name='username'
                             type='username'
@@ -146,7 +150,6 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                                 setUserName(e.target.value)
                             }}
                         /><br />
-
                         <label htmlFor='email'>E-mail</label>
                         <input
                             name='email'
@@ -167,19 +170,48 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                                 setPassword(e.target.value)
                             }}
                         />
-                        <div className="App">
-                            <h1>画像アップロード</h1>
-                            
-                                <input type="file" onChange={handleImage} />
-                                <button type="submit">登録</button>
-                       
-                            <img src={imageUrl} alt="uploaded" />
-                        </div>
-                        <br />
-                    </form>
-                </div>
-            </div>
-        </Modal>
+                        {/* material-uiにしたい */}
+                    {/* <TextField label="Username"
+                        variant="outlined"
+                        name='username'
+                        type='username'
+                        id='username'
+                        placeholder='username'
+                        onChange={e => {
+                            setUserName(e.target.value)
+                        }} />
+                    <TextField label="E-mail"
+                        variant="outlined"
+                        name='email'
+                        type='email'
+                        id='email'
+                        placeholder='Email'
+                        onChange={e => {
+                            setEmail(e.target.value)
+                        }}
+                    />
+                    <TextField label="Password"
+                        variant="outlined"
+                        name='password'
+                        type='password'
+                        id='password'
+                        placeholder='Password'
+                        onChange={e => {
+                            setPassword(e.target.value)
+                        }}
+                    /> */}
+                    <div>
+                        <h2>Profile Image</h2>
+                        <p>※You can choose later</p>
+                        <input type="file" onChange={handleImage} />
+                        {/* <button type="submit">登録</button> */}
+                        <img src={imageUrl} alt="uploaded" />
+                    </div>
+                    <Button variant="contained" type="submit">登録</Button>
+                </form>
+            </Modal>
+        </StyledComponent>
+
     );
 }
 

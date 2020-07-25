@@ -12,9 +12,11 @@ import { AuthContext } from '../store/AuthService';
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    width: '74%',
+    width: '100%',
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
+    border: "3px solid #C50D1A",
+    borderRadius: "10px",
   },
   paper: {
     position: 'absolute',

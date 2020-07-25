@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
 import Modal from 'react-modal';
-import firebase from '../config/firebase';
-import { AuthContext } from '../store/AuthService';
+import firebase from '../../../config/firebase';
+import { AuthContext } from '../../../store/AuthService';
 import { Redirect } from 'react-router-dom';
-
+import { StyledComponent } from './LoginModal.styled';
 
 Modal.setAppElement('#loginmodal')
 
