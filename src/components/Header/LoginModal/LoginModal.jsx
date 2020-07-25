@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import { Modal } from '@material-ui/core';
 import { StyledComponent } from './LoginModal.styled';
 import { red } from '@material-ui/core/colors';
+import { useForm } from "react-hook-form";
+import firebase from '../../../config/firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +47,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const [logInErr, setLogInErr] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,7 +56,20 @@ export default function SignIn() {
 
   const handleClose = () => {
     setOpen(false);
+    setLogInErr('');
   };
+
+  const onSubmit = ({email, password}) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => { 
+      console.log('log in!');
+      setOpen(false);
+    })
+    .catch(err => {
+      console.log(err)
+      setLogInErr('メールアドレスかパスワードが間違っています。')
+    })
+  }
 
   return (
     <StyledComponent className="div">
@@ -72,7 +89,8 @@ export default function SignIn() {
             <Typography component="h1" variant="h5">
               ログイン
             </Typography>
-            <form className={classes.form} noValidate>
+            {logInErr && <Typography component="p" variant="h7">{logInErr}</Typography>}
+            <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -83,6 +101,7 @@ export default function SignIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                inputRef={register} 
               />
               <TextField
                 variant="outlined"
@@ -94,6 +113,7 @@ export default function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                inputRef={register} 
               />
               <Button
                 type="submit"
@@ -106,7 +126,7 @@ export default function SignIn() {
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    パスワードを忘れましたか？
                   </Link>
                 </Grid>
               </Grid>

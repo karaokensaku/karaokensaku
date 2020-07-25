@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +10,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Modal } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import { useForm } from 'react-hook-form';
+import firebase from '../../../config/firebase';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [signUpErr, setSignUpErr] = useState('');
+  const { register, handleSubmit } = useForm();
 
   const handleOpen = () => {
     setOpen(true);
@@ -51,6 +55,23 @@ export default function SignUp() {
 
   const handleClose = () => {
     setOpen(false);
+    setSignUpErr('');
+  };
+
+  const onSubmit = ({name, email, password}) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+      firebase.auth().currentUser.updateProfile({ displayName: name });
+    }).then(() => {
+      setOpen(false);
+      console.log('sign up!');
+    }).catch((error) => {
+      console.log(error);
+      if(error.message === 'The email address is already in use by another account.') {
+        setSignUpErr('このメールアドレスは既に登録されています。')
+      } else {
+        setSignUpErr('必要な情報を入力して下さい。');
+      };
+    });
   };
 
   return (
@@ -71,17 +92,19 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               登録
             </Typography>
-            <form className={classes.form} noValidate>
+            {signUpErr && <Typography component="p" variant="h7">{signUpErr}</Typography>}
+            <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
                     variant="outlined"
                     required
                     fullWidth
-                    id="lastName"
+                    id="name"
                     label="名前"
-                    name="lastName"
+                    name="name"
                     autoComplete="lname"
+                    inputRef={register} 
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -93,6 +116,7 @@ export default function SignUp() {
                     label="メールアドレス"
                     name="email"
                     autoComplete="email"
+                    inputRef={register} 
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,6 +129,7 @@ export default function SignUp() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    inputRef={register} 
                   />
                 </Grid>
               </Grid>
