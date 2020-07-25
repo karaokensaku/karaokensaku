@@ -1,145 +1,137 @@
-import React, { useState, useContext } from 'react'
-import Modal from 'react-modal';
-import firebase from '../config/firebase';
-import { AuthContext } from '../store/AuthService';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { Modal } from '@material-ui/core';
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-Modal.setAppElement('#loginmodal')
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
-//ログイン処理を行うモーダル
-const LoginModal = ({ LoginModalIsOpen, closeLoginModal, history, setLoginModalIsOpen}) => {
-    //仮メインページからstate([LoginModalIsOpen] 初期値はfalseで非表示になる）を受け取り、ログインするボタンクリックでtrueを渡される
-    //closeLoginModalでIsmodalOpenをfalseにする関数を受け取る。
-    //MainDemoコンポーネントクラスコンポーネントのthisを受け取るため名前をthisと区別するため大文字にする
+export default function SignIn() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-    ////////css///////////css///////////css///////
-    const modalContainer = {
-        backgroundColor: "blue",
-        height: "460px",
-        width: "500px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const modalText = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        backgroundColor: "white",
-
-        height: "360px",
-        width: "400px",
-    }
-
-    const customStyles = {                                                 //modalのスタイリングの書き方は以下
-        overlay: {                                                         //クリックするとモーダルを閉じる部分（画面外灰色の部分）のスタイル
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(200, 200, 200, 0.75)',
-        },
-        content: {
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-
-            //モーダルを真ん中に寄せる
-            top: "17%",
-            left: "30%",
-            right: "30%",
-            bottom: "17%",
-            //モーダルを真ん中に寄せる
-
-            position: 'absolute',
-            border: '1px solid #ccc',
-            background: 'gray',
-            overflow: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            borderRadius: '4px',
-            outline: 'none',
-            padding: '20px',
-        },
-    }
-    ////////css///////////css///////////css///////
-
-    //////js////////js//////////js//////////js///
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-
-
-    const handlesubmit = e => {
-        e.preventDefault();
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => {
-
-                history.push("/")                                          //成功したら/にリダイレクトして初回のページ遷移をする
-                
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
-    }
-
-    
-
-    const user = useContext(AuthContext)
-
-    if (user) {
-        return <Redirect to="/" />                                         //ログイン状態ならLoggedMainPageに遷移
-    }
-
-    //////js////////js//////////js//////////js///
-    return (
-        <Modal
-            isOpen={LoginModalIsOpen}
-            onRequestClose={closeLoginModal}                   //mainDEMOのclassのthisを指定してcloseLoginModalを実行　LoginModalIsOpenがfalseになってモーダルが閉じられる
-            style={customStyles}
-            contentLabel="Example Modal"
-        >
-            <div style={modalContainer}>
-                <div style={modalText}>
-                    <form onSubmit={handlesubmit}>
-                        <h1>仮ログイン画面</h1>
-
-                        <label htmlFor='email'>E-mail</label>
-                        <br />
-                        <input
-                            type='email'
-                            id='email'
-                            name='email'
-                            placeholder='Email'
-                            onChange={e => {
-                                setEmail(e.target.value)
-                            }}
-                        />
-
-                        <br />
-                        <label htmlFor='password'>Password</label>
-                        <br />
-                        <input
-                            type='password'
-                            id='password'
-                            name='password'
-                            placeholder='password'
-                            onChange={e => {
-                                setPassword(e.target.value)
-                            }}
-                        />
-                        <br />
-                        <button type="submit">ログイン</button>
-                    </form>                    
-                </div>
-            </div>
-        </Modal>
-    );
-};
-
-export default LoginModal;
+  return (
+    <>
+      <Button onClick={handleOpen}>ログイン</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+            Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+            />
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+            />
+            <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+            />
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Sign In
+            </Button>
+            <Grid container>
+                <Grid item xs>
+                <Link href="#" variant="body2">
+                    Forgot password?
+                </Link>
+                </Grid>
+                <Grid item>
+                <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                </Link>
+                </Grid>
+            </Grid>
+            </form>
+        </div>
+        <Box mt={8}>
+            <Copyright />
+        </Box>
+        </Container>
+      </Modal>
+    </>
+  );
+}

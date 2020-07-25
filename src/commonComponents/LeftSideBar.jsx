@@ -42,9 +42,9 @@ export default function FileSystemNavigator() {
       fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({title, songs: []}).then((docRef) => {
         const newMyPages = addMyPage(myPages, {title, id: docRef.id, songs: []});
         setMyPages(newMyPages)
-        setTitle('');
       });
     };
+    setPlus(false);
   };
 
   const onPlusClick = () => {

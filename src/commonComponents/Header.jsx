@@ -9,8 +9,6 @@ import { myPageState } from '../atoms/myPage';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 const Header = () => {
-
-    /////////////////CSS//////////////////
     const headerTitle = {
         color: "white",
         fontSize: "40px",
@@ -46,14 +44,9 @@ const Header = () => {
         alignItems: "flex-end",
         justifyContent: "space-around"
     }
-    //////////////////CSS/////////////////
-
-    /////js///////js////////////js////////
-    const user = useContext(AuthContext);                    //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
+    const user = useContext(AuthContext);                   
 
     //グローバルで管理できるのかな？↓
-    const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
-    const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
     const [myPages, setMyPages] = useRecoilState(myPageState);
 
     useEffect(() => {
@@ -77,85 +70,48 @@ const Header = () => {
         firebase.auth().onAuthStateChanged((user) => {
             firebase.auth().signOut().then(() => {
                 console.log("ログアウトしました");
-                setLoginModalIsOpen(false);
             })
                 .catch((error) => {
                     console.log(`ログアウト時にエラーが発生しました (${error})`);
                 });
         });
     }
-    ///js//////js/////////js/////////js///////
-    //モーダルを開いたり閉じたりする関数達
-    const openLoginModal = () => {
-        setLoginModalIsOpen(true)
-    }
+    const useStyles = makeStyles((theme) => ({ //マテリアル　UIスタイル
+        button: {
+            backgroundColor: "#C50D1A",
+            color: "white",
+            height: "40px"
+        },
+    }));
 
-    const closeLoginModal = () => {
-        setLoginModalIsOpen(false)
-    }
+    const classes = useStyles();
 
-    const openSignUpModal = () => {
-        setSignUpModalIsOpen(true)
-    }
-
-    const closeSignUpModal = () => {
-        setSignUpModalIsOpen(false)
-    }
-
-    //モーダルを開いたり閉じたりする関数達
-    const RenderHeader = (user) => {
-
-        const useStyles = makeStyles((theme) => ({ //マテリアル　UIスタイル
-            button: {
-                backgroundColor: "#C50D1A",
-                color: "white",
-                height: "40px"
-            },
-        }));
-
-        const classes = useStyles();
-
-
-
-        if (user) {
-            return (
-                <header style={headerCSS}>
-                    <div style={leftdiv}>
-                        <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
-                    </div>
-
-                        <div style={rightdiv}>
-                    <Link to="/UserSettingPage" >
-                            <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "70px", width: "70px", overflow: "hidden" }}>{/* インラインcss */}
-                                <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
-                            </div>
-                    </Link>
-                        <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
-                        </div>
-                </header>
-            )
-        } else {
-            return (
-                <header style={headerCSS}>
-                    <div style={leftdiv}>
-                        <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
-                    </div>
-                    <div style={rightdiv}>
-                        <Button className={classes.button} variant="contained" onClick={openSignUpModal}>サインアップ</Button>
-                        <Button className={classes.button} variant="contained" onClick={openLoginModal}>ログイン</Button>
-                    </div>
-
-                    {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
-                    <LoginModal LoginModalIsOpen={LoginModalIsOpen} closeLoginModal={closeLoginModal} />
-                    <SignUpModal SignUpModalIsOpen={SignUpModalIsOpen} closeSignUpModal={closeSignUpModal} />
-                </header>
-            );
-        }
-    }
-    /////js///////js////////////js////////
     return (
         <>
-            {RenderHeader(user)}
+          {user ? 
+            <header style={headerCSS}>
+              <div style={leftdiv}>
+                  <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
+              </div>
+              <div style={rightdiv}>
+              <Link to="/UserSettingPage" >
+                      <div style={{ borderRadius: "200px", backgroundColor: "#F2F2F2", height: "70px", width: "70px", overflow: "hidden" }}>{/* インラインcss */}
+                          <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+                      </div>
+              </Link>
+                  <Button className={classes.button} variant="contained" onClick={LogOut}>ログアウト</Button>
+                  </div>
+            </header> : 
+            <header style={headerCSS}>
+            <div style={leftdiv}>
+                <Link to="/" style={titlelinkCSS}><h1 style={headerTitle}>カラオ検索</h1></Link>
+            </div>
+            <div style={rightdiv}>
+                <SignUpModal />
+                <LoginModal />
+            </div>
+            </header>
+          }
         </>
     );
 

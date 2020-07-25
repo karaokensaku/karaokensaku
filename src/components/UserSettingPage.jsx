@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
 import { AuthContext } from '../store/AuthService'
 import firebase, { storage } from '../config/firebase'
 //material UI
@@ -15,6 +12,14 @@ import { useEffect } from 'react';
 import AvatarEditor from '../commonComponents/AvatarEditor'
 // import AvatarEditor from 'react-avatar-editor';
 //material UI
+
+const useStyle = makeStyles((theme) => ({
+    main: {
+        width: '74%',
+        backgroundColor: '#F2F2F2',
+        textAlign: 'center',
+      },
+}));
 
 const MyPage = () => {
     const user = useContext(AuthContext);   //Contextオブジェクト(AuthContext)のproviderに指定したValueプロパティーのuserを受け取る
@@ -214,8 +219,7 @@ const MyPage = () => {
     if (user) {
         return (
             <>
-                <Header />
-                <div style={containerCSS}>
+                <div className={classes.main}>
                     <Modal
                         aria-labelledby="transition-modal-title"
                         // aria-describedby="transition-modal-description"
@@ -344,10 +348,6 @@ const MyPage = () => {
                         </Fade>
                     </Modal>
 
-
-
-
-                    <LeftSideBar />
                     <div style={mainPage}>
                         <h1>アカウント情報</h1>
                         <div style={settingContainer}>
@@ -392,16 +392,14 @@ const MyPage = () => {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </>
         );
     } else {
         // return <Redirect to={'/'} />   //ログイン状態でもメインページに飛ばされてしまう???????
             return (
-                <>
-                    <Header />
+                <div className={classes.main}>
                     <p>ログインしてね</p>
-                </>
+                </div>
             );
     }
 }
