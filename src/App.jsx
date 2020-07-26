@@ -17,10 +17,8 @@ import Layout from "./components/Layout"
 const useStyles = makeStyles((theme) => ({
   app: {
     width: '100%',
-    margin: (0, 'auto'),
-    display: 'flex',
-    flexWrap: 'wrap',
     minHeight: "100vh",
+    backgroundColor: '#F2F2F2'
   },
   main: {
     backgroundColor: '#F2F2F2'

@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../store/AuthService';
 import firebase, { fireStore } from '../../config/firebase';
 import { Link } from 'react-router-dom';
-import SignUpModal from './SignUpModal';
-import LoginModal from './LoginModal'                          //ログイン用モーダル
+import SignUpModal from '../SignUpModal';
+import LoginModal from '../LoginModal'                          //ログイン用モーダル
 import { StyledComponent } from "./Header.styled"
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
@@ -15,7 +15,6 @@ const Header = () => {
 
   const user = useContext(AuthContext);                    
 
-  //グローバルで管理できるのかな？↓
   const [myPages, setMyPages] = useRecoilState(myPageState);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "../../LoginModal/node_modules/styled-components";
 
 export const StyledComponent = styled.div`
     display: flex;

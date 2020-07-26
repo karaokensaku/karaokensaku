@@ -13,7 +13,7 @@ import { Modal } from '@material-ui/core';
 import { StyledComponent } from './LoginModal.styled';
 import { red } from '@material-ui/core/colors';
 import { useForm } from "react-hook-form";
-import firebase from '../../../config/firebase';
+import firebase from '../../config/firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

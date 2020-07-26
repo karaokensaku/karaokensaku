@@ -85,7 +85,8 @@ class HOTPage extends React.Component {
                                     <h3>{ttl}</h3>
                                     <iframe id="ytplayer" type="text/html" width="640" height="360"
                                         src={url}
-                                        frameborder="0"></iframe>
+                                        frameborder="0">
+                                    </iframe>
                                 </div>
                             );
                         })}
