@@ -16,9 +16,13 @@ import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
 import { IconButton, Hidden } from '@material-ui/core';
 
+import firebase, { fireStore } from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import SignUpModal from '../SignUpModal';
+import LoginModal from '../LoginModal'                          //ログイン用モーダル
+import { AuthContext } from '../../store/AuthService';
+import { StyledComponent } from "./Header.styled"
 
 const useStyles = makeStyles({
   list: {
@@ -44,7 +48,10 @@ export default function TemporaryDrawer() {
   };
 
   const [plus, setPlus] = useState(false);
-  const myPages = useRecoilValue(myPageState)
+  // const myPages = useRecoilValue(myPageState)
+  const [LoginModalIsOpen, setLoginModalIsOpen] = useState(false);
+  const [SignUpModalIsOpen, setSignUpModalIsOpen] = useState(false);
+  const [myPages, setMyPages] = useRecoilState(myPageState);
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -116,6 +123,80 @@ export default function TemporaryDrawer() {
   const closeSignUpModal = () => {
     setSignUpModalIsOpen(false)
   }    
+
+  const LogOut = (user) => {                          //ログアウト処理
+    firebase.auth().onAuthStateChanged((user) => {
+      firebase.auth().signOut().then(() => {
+        console.log("ログアウトしました");
+        setLoginModalIsOpen(false);
+      })
+        .catch((error) => {
+          console.log(`ログアウト時にエラーが発生しました (${error})`);
+        });
+    });
+  }
+  const user = useContext(AuthContext); 
+
+  useEffect(() => {
+    let getMypages = [];
+    firebase.auth().onAuthStateChanged((user) => {
+      const uid = user.uid;
+      fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
+        snapshot.forEach(myPage => {
+          getMypages.push({
+            id: myPage.id,
+            ...myPage.data()
+          });
+        });
+      }).then(() => {
+        setMyPages(getMypages);
+      });
+    });
+  }, [user]);
+  
+  const RenderHeader = (user) => {
+
+    if (user) {
+      // ログイン時
+      return (
+        <StyledComponent className="header">
+          <div className="title">
+            <Link to="/"><h1>カラオ検索</h1></Link>
+          </div>
+          <div className="headerMenu">
+            <Link to="/UserSettingPage" >
+              <img src={user.photoURL} height="100%" width="100%" alt="userImg" />
+              <h3>User Setting</h3>
+            </Link>
+            <Button variant="contained" onClick={LogOut}>ログアウト</Button>
+          </div>
+        </StyledComponent>
+      )
+    } else {
+      // 非ログイン時
+      return (
+        <StyledComponent className="header">
+          <div className="title">
+            <Link to="/"><h1>カラオ検索</h1></Link>
+          </div>
+          <div className="headerMenu">
+            <Button variant="contained" onClick={openSignUpModal}>サインアップ</Button>
+            <Button variant="contained" onClick={openLoginModal}>ログイン</Button>
+          </div>
+
+          {/* ログインモーダル用に開くか閉じるかの処理を渡す */}
+          <LoginModal
+            LoginModalIsOpen={LoginModalIsOpen}
+            closeLoginModal={closeLoginModal}
+          />
+          <SignUpModal
+            SignUpModalIsOpen={SignUpModalIsOpen}
+            closeSignUpModal={closeSignUpModal}
+          />
+        </StyledComponent>
+      );
+    }
+  }
 
   return (
     <>
