@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer() {
+export default function Header() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -58,7 +58,7 @@ export default function TemporaryDrawer() {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}　消しとけばマイリストクリックしても消えない
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
@@ -68,7 +68,6 @@ export default function TemporaryDrawer() {
           <li><Link to='/hotpage'>HOT</Link><br /></li>
           <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
         </ul>
-        {/* <Link to='/'>Home</Link> */}
 
         <TreeView
           className="myList"
@@ -201,8 +200,7 @@ export default function TemporaryDrawer() {
   return (
     <>
       <Hidden mdUp>
-
-        <div>
+        <StyledComponent className="header">
           {['left',].map((anchor) => (
             <React.Fragment key={anchor}>
               <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
@@ -211,7 +209,7 @@ export default function TemporaryDrawer() {
               </Drawer>
             </React.Fragment>
           ))}
-        </div>
+        </StyledComponent>
       </Hidden>
 
       {RenderHeader(user)}

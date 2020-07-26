@@ -48,15 +48,13 @@ export default function FileSystemNavigator() {
   return (
     <StyledComponent className="left">
       <Hidden smDown>
-
-
         <ul>
           <h2>MENU</h2>
           <li><Link to='/main'>Home</Link></li>
           <li><Link to='/hotpage'>HOT</Link><br /></li>
           <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
         </ul>
-        {/* <Link to='/'>Home</Link> */}
+ 
 
         <TreeView
           className="myList"
