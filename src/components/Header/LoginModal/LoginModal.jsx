@@ -38,10 +38,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: red[600],
     },
   },
-  modal: {
-    backgroundColor: '#fff',
-    paddingBottom: '40px',
-  }
 }));
 
 export default function SignIn() {
@@ -68,72 +64,75 @@ export default function SignIn() {
     .catch(err => {
       console.log(err)
       setLogInErr('メールアドレスかパスワードが間違っています。')
-    })
-  }
+    });
+  };
 
   return (
-    <StyledComponent className="div">
+    <>
       <Button onClick={handleOpen}>ログイン</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        <Container component="main" maxWidth="xs" className={classes.modal}>
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              ログイン
-            </Typography>
-            {logInErr && <Typography component="p" variant="h7">{logInErr}</Typography>}
-            <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="メールアドレス"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                inputRef={register} 
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="パスワード"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                inputRef={register} 
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-              >
-                ログイン
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    パスワードを忘れましたか？
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Container>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          contentLabel
+        >
+          <StyledComponent>
+            <Container component="main" maxWidth="xs" className="LogIn_Moadl">
+              <CssBaseline />
+              <div className="paper">
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  ログイン
+                </Typography>
+                {logInErr && <Typography component="p" variant="h7">{logInErr}</Typography>}
+                <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="メールアドレス"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    inputRef={register} 
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="パスワード"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    inputRef={register} 
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                  >
+                    ログイン
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="#" variant="body2">
+                        パスワードを忘れましたか？
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </form>
+              </div>
+            </Container>
+          </StyledComponent>
       </Modal>
-    </StyledComponent>
+    </>
   );
-}
+};

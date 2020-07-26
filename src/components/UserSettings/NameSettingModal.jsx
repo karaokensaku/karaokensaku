@@ -54,7 +54,7 @@ export default function SimpleModal() {
       displayName: name
     }).then(() => {
       window.location.reload();
-    }).cathc((err) => {
+    }).catch((err) => {
       console.log(err);
     });
   };

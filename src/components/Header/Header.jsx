@@ -54,8 +54,11 @@ const Header = () => {
         </div>
         <div className="headerMenu">
           <Link to="/UserSettingPage" >
-            <Avatar>{user.displayName.slice(0,2)}</Avatar>
-            <h3>User Setting</h3>
+            {user.photoURL ? 
+                <Avatar className="avatarImg" src={user.photoURL} />
+                : 
+                <Avatar className="avatarImg">{user.displayName.slice(0,2)}</Avatar>
+              }
           </Link>
           <Button  variant="contained" onClick={LogOut}>ログアウト</Button>
         </div>

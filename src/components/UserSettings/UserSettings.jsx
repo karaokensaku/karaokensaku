@@ -4,6 +4,7 @@ import { AuthContext } from '../../store/AuthService';
 import NameSettingModal from './NameSettingModal';
 import EmailSettingModal from './EmailSettingModal';
 import PasswordSettingModal from './PasswordSettingModal';
+import ImageSettingModal from './ImageSettingModal';
 
 const useStyles = makeStyles((theme) => ({
   avatarImg: {
@@ -24,11 +25,13 @@ export default () => {
           <div>
             <div>
                 <div>
-                  <Avatar className={classes.avatarImg}>{user.displayName.slice(0,2)}</Avatar>
+                  {user.photoURL ? 
+                    <Avatar className={classes.avatarImg} src={user.photoURL} />
+                    : 
+                    <Avatar className={classes.avatarImg}>{user.displayName.slice(0,2)}</Avatar>
+                  }
                 </div>
-                <button type="button">
-                    アカウント画像を変更する
-                </button>
+                <ImageSettingModal />
             </div>
             <div>
               <form>
