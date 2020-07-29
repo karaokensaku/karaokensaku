@@ -10,7 +10,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
 import { IconButton, Hidden } from '@material-ui/core';
@@ -120,7 +120,7 @@ export default function Header() {
 
   const closeSignUpModal = () => {
     setSignUpModalIsOpen(false)
-  }    
+  }
 
   const LogOut = (user) => {                          //ログアウト処理
     firebase.auth().onAuthStateChanged((user) => {
@@ -133,25 +133,28 @@ export default function Header() {
         });
     });
   }
-  const user = useContext(AuthContext); 
+  const user = useContext(AuthContext);
 
   useEffect(() => {
     let getMypages = [];
-    firebase.auth().onAuthStateChanged((user) => {
-      const uid = user.uid;
-      fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
-        snapshot.forEach(myPage => {
-          getMypages.push({
-            id: myPage.id,
-            ...myPage.data()
+    {
+      user &&
+      firebase.auth().onAuthStateChanged((user) => {
+        const uid = user.uid;
+        fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
+          snapshot.forEach(myPage => {
+            getMypages.push({
+              id: myPage.id,
+              ...myPage.data()
+            });
           });
+        }).then(() => {
+          setMyPages(getMypages);
         });
-      }).then(() => {
-        setMyPages(getMypages);
       });
-    });
+    }
   }, [user]);
-  
+
   const RenderHeader = (user) => {
 
     if (user) {
@@ -198,7 +201,7 @@ export default function Header() {
 
   return (
     <>
-      <Hidden mdUp>
+      <Hidden smUp>
         <StyledComponent className="header">
           {['left',].map((anchor) => (
             <React.Fragment key={anchor}>

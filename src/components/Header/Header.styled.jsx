@@ -31,7 +31,7 @@ export const StyledComponent = styled.header`
         justify-content:flex-start;
         align-items:center;
         flex-direction:column;
-        img {
+        .avatarImg {
           width:100px;
           height:100px;
           margin:20px;

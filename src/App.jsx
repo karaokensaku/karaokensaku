@@ -1,37 +1,29 @@
 import React, { useState } from 'react';
 import MainPage from './components/MainPage';
-// import LoggedMainPage from './components/LoggedMainPage';
 import { AuthProvider } from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage'
-import LIKEPage from './components/LIKEPage'
-import UserSettingPage from './components/UserSettingPage'
+import UserSettingPage from './components/UserSettings';
 import { RecoilRoot } from "recoil";
 import axios from "axios";
 import Youtube from './components/MainPage';
 import MyPage from './components/MyPage';
-import Header from './components/Header';
-import LeftSideBar from './components/LeftSideBar/LeftSideBar';
 import { makeStyles } from '@material-ui/core';
-import Footer from './components/Footer';
 import Layout from "./components/Layout"
-import styled, { css } from 'styled-components';
+// import  { css } from 'styled-components';
 import { GlobalStyle } from "./GlobalStyle"
 
-// const styled =
-const mixinColor = css`
-  color: white;
-  background: blue;
-`;
+
+// const mixinColor = css`
+//   color: white;
+//   background: blue;
+// `;
 
 const useStyles = makeStyles((theme) => ({
   app: {
     width: '100%',
-    margin: (0, 'auto'),
-    display: 'flex',
-    flexWrap: 'wrap',
     minHeight: "100vh",
+    backgroundColor: '#F2F2F2'
   },
   main: {
     backgroundColor: '#F2F2F2'
@@ -72,11 +64,11 @@ function App() {
               <div className={classes.app}>
                 <Switch>
                   {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-                  <LoggedInRoute exact path='/' component={MainPage} />
-                  <LoggedInRoute exact path='/myPages/:id' component={MyPage} />
+                  <Route exact path='/' component={MainPage} />
+                  <Route exact path='/myPages/:id' component={MyPage} />
                   <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
                   <Route exact path='/hotPage' component={HOTPage} />
-                  <Route exact path='/likePage' component={LIKEPage} />
+                  {/* <Route exact path='/likePage' component={LIKEPage} /> */}
                   <Route exact path='/userSettingPage' component={UserSettingPage} />
                 </Switch>
               </div>

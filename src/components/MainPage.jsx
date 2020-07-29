@@ -160,6 +160,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
             type="ytplayer"
             width="480"
             height="270"
+            title={url.title}
             src={url}
             frameborder="0"
           />

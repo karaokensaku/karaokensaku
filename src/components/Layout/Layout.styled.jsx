@@ -31,7 +31,7 @@ export const StyledComponent = styled.div`
       grid-area: main;
     }
     .left {
-      grid-area:left;
+      grid-area: left;
     }
     .footer {
       grid-area: footer;

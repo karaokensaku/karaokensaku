@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -36,9 +35,9 @@ export default function FileSystemNavigator() {
       fireStore.collection('user').doc(`${user.uid}`).collection('myPages').add({ title, songs: [] }).then((docRef) => {
         const newMyPages = addMyPage(myPages, { title, id: docRef.id, songs: [] });
         setMyPages(newMyPages)
-        setTitle('');
       });
     };
+    setPlus(false);
   };
 
   const onPlusClick = () => {
@@ -47,7 +46,7 @@ export default function FileSystemNavigator() {
 
   return (
     <StyledComponent className="left">
-      <Hidden smDown>
+      <Hidden xsDown>
         <ul>
           <h2>MENU</h2>
           <li><Link to='/main'>Home</Link></li>
