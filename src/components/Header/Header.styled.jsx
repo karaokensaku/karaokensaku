@@ -1,33 +1,31 @@
 import styled from "styled-components";
 
+const mq = "@media (max-width:600px)";
+
 export const StyledComponent = styled.header`
     display: flex;
     justify-content:space-between;
-    padding:20px;
-    background-color:#eee;
-    border: 3px solid #C50D1A;
-    border-radius:10px;
     .title {
       display: flex;
-      margin-left:80px;
+      justify-content:center;
+      flex: 1;
+      background-color:#C50D1A;
       a {
         display: flex;
         align-items:center;
         color: white;
-        font-size: 32px;
-        background-color:#C50D1A;
+        font-size: 20px;
         text-decoration: inherit;
         padding:0 60px;
+      ${mq}{
+          font-size:14px;
+        }
       }
     }
     .headerMenu {
       display: flex;
       justify-content:center;
       align-items:center;
-      flex-direction:column;
-      margin-right:80px;
-      border:1.5px solid #666;
-      border-radius:5px;
       a {
         display: flex;
         justify-content:flex-start;
@@ -49,6 +47,24 @@ export const StyledComponent = styled.header`
         height: 40px;
         margin: 10px;
       }
-      
+      ${mq}{
+        img {
+          width:50px;
+          height:50px;
+          margin:2px;
+        }
+        button {
+          background-color: #C50D1A;
+          color: white;
+          width:100%;
+          height: 100%;
+          margin: 0;
+          border-radius:0;
+          outline: 0.1px solid #aaa;
+          /* border: 0.1px solid #333; */
+          font-size:12px;
+          box-shadow:0 0 0 0;
+      }
+        }
     }
   `;

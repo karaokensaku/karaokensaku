@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { StyledComponent } from './SinUpModal.styled';
 import Modal from 'react-modal';
 import firebase, { storage } from '../../config/firebase';
-import { StyledComponent } from './SinUpModal.styled';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -131,46 +131,46 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
 
     //////js////////js//////////js//////////js///
     return (
-        <StyledComponent>
-            <Modal
-                isOpen={SignUpModalIsOpen}                      //trueなら表示
-                onRequestClose={closeSignUpModal}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
-                style={customStyles}
-                contentLabel="SignUp Modal"
-            >
+        <Modal
+            isOpen={SignUpModalIsOpen}                      //trueなら表示
+            onRequestClose={closeSignUpModal}    //mainDEMOのclassのthisを指定してcloseSignUpModalを実行　SignUpModalIsOpenがfalseになってモーダルが閉じられる
+            // style={customStyles}
+            contentLabel="SignUp Modal"
+        >
+            <StyledComponent>
                 <form onSubmit={onSubmit}>
                     <h2>SIGNUP</h2>
                     <label htmlFor='username'>UserName</label>
-                        <input
-                            name='username'
-                            type='username'
-                            id='username'
-                            placeholder='username'
-                            onChange={e => {
-                                setUserName(e.target.value)
-                            }}
-                        /><br />
-                        <label htmlFor='email'>E-mail</label>
-                        <input
-                            name='email'
-                            type='email'
-                            id='email'
-                            placeholder='Email'
-                            onChange={e => {
-                                setEmail(e.target.value)
-                            }}
-                        /><br/>
-                        <label htmlFor='password'>Password</label>
-                        <input
-                            name='password'
-                            type='password'
-                            id='password'
-                            placeholder='Password'
-                            onChange={e => {
-                                setPassword(e.target.value)
-                            }}
-                        />
-                        {/* material-uiにしたい */}
+                    <input
+                        name='username'
+                        type='username'
+                        id='username'
+                        placeholder='username'
+                        onChange={e => {
+                            setUserName(e.target.value)
+                        }}
+                    /><br />
+                    <label htmlFor='email'>E-mail</label>
+                    <input
+                        name='email'
+                        type='email'
+                        id='email'
+                        placeholder='Email'
+                        onChange={e => {
+                            setEmail(e.target.value)
+                        }}
+                    /><br />
+                    <label htmlFor='password'>Password</label>
+                    <input
+                        name='password'
+                        type='password'
+                        id='password'
+                        placeholder='Password'
+                        onChange={e => {
+                            setPassword(e.target.value)
+                        }}
+                    />
+                    {/* material-uiにしたい */}
                     {/* <TextField label="Username"
                         variant="outlined"
                         name='username'
@@ -209,8 +209,8 @@ const SigunUpModal = ({ SignUpModalIsOpen, closeSignUpModal, }) => {
                     </div>
                     <Button variant="contained" type="submit">登録</Button>
                 </form>
-            </Modal>
-        </StyledComponent>
+            </StyledComponent>
+        </Modal>
 
     );
 }

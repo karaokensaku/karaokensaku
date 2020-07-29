@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
-    border: "3px solid #C50D1A",
-    borderRadius: "10px",
+    // border: "3px solid #C50D1A",
+    // borderRadius: "10px",
   },
   paper: {
     position: 'absolute',

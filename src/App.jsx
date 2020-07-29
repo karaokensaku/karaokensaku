@@ -16,6 +16,14 @@ import LeftSideBar from './components/LeftSideBar/LeftSideBar';
 import { makeStyles } from '@material-ui/core';
 import Footer from './components/Footer';
 import Layout from "./components/Layout"
+import styled, { css } from 'styled-components';
+import { GlobalStyle } from "./GlobalStyle"
+
+// const styled =
+const mixinColor = css`
+  color: white;
+  background: blue;
+`;
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -60,6 +68,7 @@ function App() {
             {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
             <Router>
       <Layout>
+        <GlobalStyle />
               <div className={classes.app}>
                 <Switch>
                   {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
