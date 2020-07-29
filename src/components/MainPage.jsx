@@ -145,7 +145,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
           <button type="submit">追加</button>
         </form>
       }
-      <Fab color="primary" aria-label="add" onClick={onPlusClick}>
+      <Fab size="small" color="primary" aria-label="add" onClick={onPlusClick}>
         <AddIcon />
       </Fab>
     </div>

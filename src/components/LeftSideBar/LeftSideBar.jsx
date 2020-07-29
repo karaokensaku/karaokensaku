@@ -79,7 +79,7 @@ export default function FileSystemNavigator() {
                     <button type="submit">追加</button>
                   </form>
                 }
-                <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
+                <IconButton size="small" aria-label="add" onClick={onPlusClick}>
                   <AddIcon />
                 </IconButton>
               </div>

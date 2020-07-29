@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(19),
     height: theme.spacing(19),
     border: "solid 1px #000",
+    margin: "auto",
   },
   imageContainer: {
     marginRight: theme.spacing(2),
