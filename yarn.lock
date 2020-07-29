@@ -9210,7 +9210,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9395,6 +9395,13 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-avatar-editor@11.0.9:
+  version "11.0.9"
+  resolved "https://registry.yarnpkg.com/react-avatar-editor/-/react-avatar-editor-11.0.9.tgz#74d11f0ccb61dd2aca9c0c1d777d13cfd6ed5530"
+  integrity sha512-FGYdygcY1ca9PVScHCsm4H28ZLaBPxc/jz2cRhPFjmgMD7fwdYTE5AjBGDCr28jIlRNC1Vm4WERTKxSdDscFDA==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -9440,10 +9447,10 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
-react-hook-form@^6.0.7:
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.0.7.tgz#65dc9b110787fef83b4c5fd5ca451bd25ea38207"
-  integrity sha512-9CmZbZLzJlMNda0ot/icEFeCq+MaZlK+j3mjxgLv4Kf2wf1E6hCmSmjHoaDyPIqYCuDUSFO+Lcf+lscBm2tdXg==
+react-hook-form@^6.0.8:
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.0.8.tgz#29319df417c8ba68ee7ce497426c53a69df07aa5"
+  integrity sha512-lf1TTuRuqHkYJqDtNIgDu9Rk7euKWkFaG2+XZ3FSkngiFWR72Lj96/FeSGF+ZMylCLdCFq2F059kzucVKWvDiQ==
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
@@ -11074,6 +11081,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^3.9.7:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

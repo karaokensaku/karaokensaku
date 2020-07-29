@@ -1,7 +1,4 @@
 import React from 'react';
-import Header from '../commonComponents/Header';
-import Footer from '../commonComponents/Footer';
-import LeftSideBar from '../commonComponents/LeftSideBar';
 // APIデータ取得に使うやつ
 import axios from 'axios';
 
@@ -43,34 +40,26 @@ class HOTPage extends React.Component {
 
         const containerCSS = {
             position: "relative",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            border: "red 5px solid",
-            margin: "10px 0",
-            borderRadius: "10px",
             backgroundColor: "orange",
-            minHeight: "100vh",
+            height: "100%",
+            // minHeight: "100vh",
             alignItems: "center",
-            padding: "10px",
             color: "white",
         }
 
         const centerContainer = {
             display: "flex",
-            justifyontent: "center",
+            justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-
-            borderRadius: "10px",
-            border: "red 5px solid",
-            backgroundColor: "white",
+            // position: "absolute",
+            // right: 0,
+            // top: 0,
+            // bottom: 0,
+            // left: "18%",
+            backgroundColor: "#F2F2F2",
             color: "black",
-            minHeight: "100vh",
-            width: "49%",
-            margin: "10px 20px",
-            height: "100%",
-            padding: "10px",
+            padding: "20px",
         }
 
         // 取得したデータを確認(なぜかConsoleに2回表示される)
@@ -78,16 +67,15 @@ class HOTPage extends React.Component {
 
         return (
             <>
-                <Header />
+                {/* <Header /> */}
                 <div style={containerCSS}>
-                    <LeftSideBar />
-                    {/* <RightSideBar /> */}
+                    {/* <LeftSideBar /> */}
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                         <h1>人気のカラオケ動画</h1>
                         {this.state.videos.map((video) => {
                             const ttl = video.snippet.title;
-                            const url = `https://www.youtube.com./watch?v=${video.id.videoId}`;
+                            const url = `https://www.youtube.com./embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
                                 <div>
@@ -101,7 +89,7 @@ class HOTPage extends React.Component {
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </>
         );
     }

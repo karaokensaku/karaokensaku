@@ -12,14 +12,17 @@
     "axios": "^0.19.2",
     "firebase": "^7.15.5",
     "install": "^0.13.0",
+    "lodash": "^4.17.19",
     "react": "^16.13.1",
+    "react-avatar-editor": "11.0.9",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.0.7",
+    "react-hook-form": "^6.0.8",
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "recoil": "^0.0.10",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
