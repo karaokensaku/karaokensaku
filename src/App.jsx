@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AuthProvider } from './store/AuthService';
 import LoggedInRoute from './router/LoggedInRoute'
-import MainPage from './components/MainPage';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HOTPage from './components/HOTPage'
 import UserSettingPage from './components/UserSettings';

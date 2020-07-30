@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   main: {
-    width: '74%',
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
   },
@@ -28,6 +27,19 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  youtube: {
+    position: "relative",
+    width: "80%",
+    margin: "auto",
+    paddingTop: "50.25%",
+  },
+  iframe: {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    width: "100% !important",
+    height: "100% !important",
+  }
 }));
 
 const removeSong = (myPage, song) => {
@@ -91,15 +103,18 @@ const MyPage = () => {
                     <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <iframe
-                      id="ytplayer"
-                      type="ytplayer"
-                      width="480"
-                      height="270"
-                      src={url}
-                      frameborder="0"
-                      title={song.title}
-                    />
+                    <div  className={classes.youtube}>
+                      <iframe
+                        id="ytplayer"
+                        type="ytplayer"
+                        width="640"
+                        height="360"
+                        src={url}
+                        frameborder="0"
+                        title={song.title}
+                        className={classes.iframe}
+                      />
+                    </div>
                   </AccordionDetails>
                   <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
                 </Accordion>

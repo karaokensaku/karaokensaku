@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useState } from "react";
 import _ from "lodash";
 import { makeStyles } from '@material-ui/core';
@@ -11,14 +11,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     margin: "auto",
   },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  }
 }));
 
 const Youtube = ({ onSearchYoutube, videos }) => {
