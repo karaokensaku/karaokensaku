@@ -7,11 +7,9 @@ import { StyledComponent } from './MainPage.styled';
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    width: '100%',
-    backgroundColor: '#F2F2F2',
+    width: '80%',
     textAlign: 'center',
-    border: "3px solid #C50D1A",
-    borderRadius: "10px",
+    margin: "auto",
   },
   paper: {
     position: 'absolute',

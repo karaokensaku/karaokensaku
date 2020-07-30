@@ -33,20 +33,17 @@ class HOTPage extends React.Component {
                     videos: response.data.items,
                 });
             })
-            .catch(() => {
-                console.log('通信に失敗しました');
+            .catch((err) => {
+                console.log(err);
             });
     };
 
     render() {
 
         const containerCSS = {
-            position: "relative",
-            backgroundColor: "orange",
-            height: "100%",
-            // minHeight: "100vh",
-            alignItems: "center",
-            color: "white",
+            width: '80%',
+            textAlign: 'center',
+            margin: "auto",
         }
 
         const centerContainer = {

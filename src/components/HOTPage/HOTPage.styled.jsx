@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const StyledComponent = styled.div`
+    width: 80%;
+    text-align: center;
+    margin: auto;
   .youtube {
     position: relative;
     width: 100%;
