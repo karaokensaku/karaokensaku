@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 function getModalStyle() {
   const top = 50;
@@ -22,6 +23,17 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  removeBtn: {
+    backgroundColor: red[800],
+    color: '#fff',
+    margin: "10px",
+    '&:hover': {
+      backgroundColor: red[600],
+    },
+  },
+  container: {
+    textAlign: "right",
   },
 }));
 
@@ -59,8 +71,12 @@ export default function SimpleModal( {onRemoveClick, song} ) {
   );
 
   return (
-    <div>
-      {song === undefined ? <Button variant="contained" color="secondary" onClick={handleOpen}>削除</Button>: <Button variant="contained" color="secondary" onClick={handleOpen}>-リスト削除</Button>}
+    <div className={classes.container}>
+      {song === undefined ? 
+        <Button variant="contained" className={classes.removeBtn} onClick={handleOpen}>削除</Button>
+        :
+        <Button variant="contained" className={classes.removeBtn} onClick={handleOpen}>-リスト削除</Button>
+      }
       <Modal
         open={open}
         onClose={handleClose}

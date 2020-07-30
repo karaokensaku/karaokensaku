@@ -12,16 +12,11 @@ import ConfirmModal from '../commonComponents/ConfirmModal'
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    width: '100%',
-    margin: (0, 'auto'),
-    display: 'flex',
-    flexWrap: 'wrap',
-    minHeight: "100vh",
-  },
   main: {
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
+    width: "95%",
+    margin: "auto",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -29,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   youtube: {
     position: "relative",
-    width: "80%",
+    width: "100%",
     margin: "auto",
     paddingTop: "50.25%",
   },
@@ -81,7 +76,7 @@ const MyPage = () => {
     const newMyPages = removeMyPage(myPages, selectedMyPage.id);
     setMyPages(newMyPages);
     fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).delete().then(() => {
-      history.push('/main');
+      history.push('/');
     });
   };
 
