@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, makeStyles, Fab } from '@material-ui/core';
+import { Button, Modal, makeStyles, Fab, Typography } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 import { fireStore } from '../../config/firebase';
 import { AuthContext } from '../../store/AuthService';
 import { useForm } from 'react-hook-form';
 import AddIcon from '@material-ui/icons/Add';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -15,7 +16,21 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  }
+  }, 
+  addBtn: {
+    backgroundColor: red[800],
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: red[600],
+    },
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: "5px 0",
+  },
 }));
 
 function getModalStyle() {
@@ -131,7 +146,10 @@ export default ({ video }) => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={() => handleOpen(video)}>追加</Button>
+      <div className={classes.container}>
+        <Typography>{video.snippet.title}</Typography>
+        <Button variant="contained" className={classes.addBtn} onClick={() => handleOpen(video)}>追加</Button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
