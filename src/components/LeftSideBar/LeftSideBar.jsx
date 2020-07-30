@@ -75,7 +75,7 @@ export default function FileSystemNavigator() {
                 <div>
                   {plus &&
                     <form onSubmit={onSubmit}>
-                      <input name="title" value={title} onChange={onTitleChange} />
+                      <input name="title" value={title} onChange={onTitleChange} style={{width: "100%"}} />
                       <button type="submit">追加</button>
                     </form>
                   }
