@@ -131,6 +131,8 @@ const Youtube = ({ onSearchYoutube, videos }) => {
     });
   };
 
+  console.log(videos);
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {myPages.map(myPage => (
@@ -161,7 +163,8 @@ const Youtube = ({ onSearchYoutube, videos }) => {
             width="480"
             height="270"
             src={url}
-            frameborder="0"
+            title={video.snippet.title}
+            frameBorder="0"
           />
           <Button variant="contained" color="primary" onClick={() => handleOpen(video)}>追加</Button>
       </div>

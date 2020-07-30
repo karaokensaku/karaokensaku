@@ -49,44 +49,45 @@ export default function FileSystemNavigator() {
     <StyledComponent className="left">
       <ul>
         <h2>MENU</h2>
-        <li><Link to='/main'>Home</Link></li>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/hotpage'>HOT</Link><br /></li>
-        <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
+        {user && <li><Link to='/userSettingPage'>UserSettingPage</Link></li>}
       </ul>
       {/* <Link to='/'>Home</Link> */}
-
-      <TreeView
-        className="myList"
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-      >
-        <TreeItem nodeId="1" label="My リスト">
-          {myPages.map((myPage, index) => {
-            const number = index + 2
-            return (
-              <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
-                <TreeItem nodeId={number.valueOf()} label={myPage.title} />
-              </Link>
-            )
-          })}
-          <TreeItem
-            nodeId={myPages.length + 2}
-            label={
-              <div>
-                {plus &&
-                  <form onSubmit={onSubmit}>
-                    <input name="title" value={title} onChange={onTitleChange} />
-                    <button type="submit">追加</button>
-                  </form>
-                }
-                <IconButton size="small" aria-label="add" onClick={onPlusClick}>
-                  <AddIcon />
-                </IconButton>
-              </div>
-            }
-          />
-        </TreeItem>
-      </TreeView>
+      {user &&
+        <TreeView
+          className="myList"
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+        >
+          <TreeItem nodeId="1" label="My リスト">
+            {myPages.map((myPage, index) => {
+              const number = index + 2
+              return (
+                <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
+                  <TreeItem nodeId={number.valueOf()} label={myPage.title} />
+                </Link>
+              )
+            })}
+            <TreeItem
+              nodeId={myPages.length + 2}
+              label={
+                <div>
+                  {plus &&
+                    <form onSubmit={onSubmit}>
+                      <input name="title" value={title} onChange={onTitleChange} />
+                      <button type="submit">追加</button>
+                    </form>
+                  }
+                  <IconButton size="small" aria-label="add" onClick={onPlusClick}>
+                    <AddIcon />
+                  </IconButton>
+                </div>
+              }
+            />
+          </TreeItem>
+        </TreeView>
+      }
     </StyledComponent>
   );
 };

@@ -5,7 +5,6 @@ import { AuthProvider } from './store/AuthService';//ユーザー情報を持っ
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage'
-import LIKEPage from './components/LIKEPage'
 import UserSettingPage from './components/UserSettings';
 import { RecoilRoot } from "recoil";
 import axios from "axios";
@@ -57,13 +56,10 @@ function App() {
       <Layout>
               <div className={classes.app}>
                 <Switch>
-                  {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-                  <Route exact path='/' component={MainPage} />
-                  <Route exact path='/myPages/:id' component={MyPage} />
-                  <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
-                  <Route exact path='/hotPage' component={HOTPage} />
-                  <Route exact path='/likePage' component={LIKEPage} />
-                  <Route exact path='/userSettingPage' component={UserSettingPage} />
+                  <Route exact path='/' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
+                  <LoggedInRoute path='/myPages/:id' component={MyPage} />
+                  <Route path='/hotPage' component={HOTPage} />
+                  <LoggedInRoute path='/userSettingPage' component={UserSettingPage} />
                 </Switch>
               </div>
       </Layout>

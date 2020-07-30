@@ -46,33 +46,30 @@ const Header = () => {
   }
   return (
     <>
-      {user ? 
         <StyledComponent className="header">
         <div className="title">
           <Link to="/"><h1>カラオ検索</h1></Link>
         </div>
         <div className="headerMenu">
-          <Link to="/UserSettingPage" >
-            {user.photoURL ? 
-                <Avatar className="avatarImg" src={user.photoURL} />
-                : 
-                <Avatar className="avatarImg">{user.displayName.slice(0,2)}</Avatar>
-              }
-          </Link>
-          <Button  variant="contained" onClick={LogOut}>ログアウト</Button>
+          {user && 
+            <Link to="/UserSettingPage" >
+              {user.photoURL ? 
+                  <Avatar className="avatarImg" src={user.photoURL} />
+                  : 
+                  <Avatar className="avatarImg">{user.displayName.slice(0,2)}</Avatar>
+                }
+            </Link>
+          }
+          {!user ? 
+              <>
+                <LoginModal />
+                <SignUpModal />
+              </>
+            :
+            <Button  variant="contained" onClick={LogOut}>ログアウト</Button>
+          }
         </div>
       </StyledComponent> 
-      :
-      <StyledComponent className="header">
-        <div className="title">
-          <Link to="/"><h1>カラオ検索</h1></Link>
-        </div>
-        <div className="headerMenu">
-          <LoginModal />
-          <SignUpModal />
-        </div>
-      </StyledComponent>
-      }
     </>
   )
 }
