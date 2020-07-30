@@ -3,6 +3,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { makeStyles } from '@material-ui/core';
 import AddMyPage from './AddMyPage';
+import { StyledComponent } from './MainPage.styled';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -41,23 +42,26 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   const video = videos.map((video) => {
     const url = "https://www.youtube.com/embed/" + video.id.videoId;
     return (
-      <div key={video.id.videoId} style={{ margin: "20px", textAlign: "center" }}>
+      <div key={video.id.videoId}>
+        <div className="youtube">
           <iframe
             id="ytplayer"
             type="ytplayer"
-            width="480"
-            height="270"
+            width="640"
+            height="360"
             src={url}
             title={video.snippet.title}
             frameBorder="0"
+            style={{ width: "100%"}}
           />
+        </div>
           <AddMyPage video={video} />
       </div>
     );
   });
 
   return (
-    <>
+    <StyledComponent>
       <div className={classes.main}>
         <input
           type="search"
@@ -71,7 +75,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
         <p>の検索結果</p>
         {video}
       </div>
-    </>
+    </StyledComponent>
   );
 }
 

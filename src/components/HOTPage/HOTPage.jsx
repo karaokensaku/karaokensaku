@@ -2,6 +2,7 @@ import React from 'react';
 // APIデータ取得に使うやつ
 import axios from 'axios';
 import AddMyPage from './AddMyPage';
+import { StyledComponent } from './HOTPage.styled';
 
 //  本当は関数Componentで書きたい
 class HOTPage extends React.Component {
@@ -51,13 +52,7 @@ class HOTPage extends React.Component {
         const centerContainer = {
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
             flexDirection: "column",
-            // position: "absolute",
-            // right: 0,
-            // top: 0,
-            // bottom: 0,
-            // left: "18%",
             backgroundColor: "#F2F2F2",
             color: "black",
             padding: "20px",
@@ -68,9 +63,7 @@ class HOTPage extends React.Component {
 
         return (
             <>
-                {/* <Header /> */}
-                <div style={containerCSS}>
-                    {/* <LeftSideBar /> */}
+                <StyledComponent style={containerCSS}>
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                         <h1>人気のカラオケ動画</h1>
@@ -79,25 +72,26 @@ class HOTPage extends React.Component {
                             const url = `https://www.youtube.com./embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
-                                <div key={video.id.videoId}>
+                                <div key={video.id.videoId} >
                                     <h3>{ttl}</h3>
-                                    <iframe 
-                                        id="ytplayer" 
-                                        type="text/html" 
-                                        width="640" 
-                                        height="360"
-                                        src={url}
-                                        frameBorder="0"
-                                        title={ttl}
-                                    >
-                                    </iframe>
+                                    <div className="youtube">
+                                        <iframe 
+                                            id="ytplayer" 
+                                            type="text/html" 
+                                            width="640" 
+                                            height="360"
+                                            src={url}
+                                            frameBorder="0"
+                                            title={ttl}
+                                        ></iframe>
+                                    </div>
                                     <AddMyPage video={video} />
                                 </div>
                             );
                         })}
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
-                </div>
+                </StyledComponent>
                 {/* <Footer /> */}
             </>
         );
