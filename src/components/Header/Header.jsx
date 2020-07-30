@@ -12,19 +12,16 @@ import DrawerPage from "./DrawerPage";
 import { Hidden, Avatar } from '@material-ui/core';
 
 export default function Header() {
-  // const myPages = useRecoilValue(myPageState)
   const [myPages, setMyPages] = useRecoilState(myPageState);
   const user = useContext(AuthContext);
-  const LogOut = (user) => {                          //ログアウト処理
-    firebase.auth().onAuthStateChanged((user) => {
-      firebase.auth().signOut().then(() => {
-        console.log("ログアウトしました");
-      })
-        .catch((error) => {
-          console.log(`ログアウト時にエラーが発生しました (${error})`);
-        });
+  const LogOut = () => {                          //ログアウト処理
+    firebase.auth().signOut().then(() => {
+      console.log("ログアウトしました");
+    })
+    .catch((error) => {
+      console.log(`ログアウト時にエラーが発生しました (${error})`);
     });
-  }
+  };
 
   useEffect(() => {
     let getMypages = [];
