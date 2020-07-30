@@ -7,9 +7,12 @@ import { StyledComponent } from './MainPage.styled';
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    width: '80%',
+    width: '95%',
     textAlign: 'center',
     margin: "auto",
+  },
+  search: {
+    padding: "7px 0",
   },
 }));
 
@@ -42,7 +45,6 @@ const Youtube = ({ onSearchYoutube, videos }) => {
             src={url}
             title={video.snippet.title}
             frameBorder="0"
-            style={{ width: "100%"}}
           />
         </div>
           <AddMyPage video={video} />
@@ -53,16 +55,16 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   return (
     <StyledComponent>
       <div className={classes.main}>
-        <input
-          type="search"
-          name="search"
-          placeholder="キーワードを入力"
-          onChange={handleChangeInput}
-          value={keyword}
-        />
-        <button onClick={handleClickInput}>検索</button>
-        <h1>{keyword}</h1>
-        <p>の検索結果</p>
+        <div class={classes.search}>
+          <input
+            type="search"
+            name="search"
+            placeholder="キーワードを入力"
+            onChange={handleChangeInput}
+            value={keyword}
+          />
+          <button onClick={handleClickInput}>検索</button>
+        </div>
         {video}
       </div>
     </StyledComponent>

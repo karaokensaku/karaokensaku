@@ -36,7 +36,7 @@ export default () => {
 
   return (
     <div className={classes.userPage}>
-      <Typography variant="h3" align="center">アカウント情報</Typography>
+      <Typography variant="h5" align="center">アカウント情報</Typography>
       {user && 
         <Box display="flex" className={classes.container}>
           <Box textAlign="center" className={classes.imageContainer}>

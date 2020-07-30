@@ -48,10 +48,10 @@ export default function FileSystemNavigator() {
     <StyledComponent className="left">
     <Hidden xsDown>
       <ul>
-        <h2>MENU</h2>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/hotpage'>HOT</Link><br /></li>
-        {user && <li><Link to='/userSettingPage'>UserSettingPage</Link></li>}
+        <h2>メニュー</h2>
+        <li><Link to='/'>検索ページ</Link></li>
+        <li><Link to='/hotpage'>人気ランキング</Link><br /></li>
+        {user && <li><Link to='/userSettingPage'>ユーザー設定</Link></li>}
       </ul>
       {/* <Link to='/'>Home</Link> */}
       {user &&

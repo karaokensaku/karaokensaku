@@ -84,7 +84,7 @@ const MyPage = () => {
       <>
         {selectedMyPage && (
           <div className={classes.main}> 
-            <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
+            <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
             <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
             {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
               const url = "https://www.youtube.com/embed/" + song.videoId;

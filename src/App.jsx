@@ -63,7 +63,7 @@ function App() {
         <GlobalStyle />
               <div className={classes.app}>
                 <Switch>
-                  <Route exact path='/' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
+                  <Route exact path='/' render={() => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
                   <LoggedInRoute path='/myPages/:id' component={MyPage} />
                   <Route path='/hotPage' component={HOTPage} />
                   <LoggedInRoute path='/userSettingPage' component={UserSettingPage} />

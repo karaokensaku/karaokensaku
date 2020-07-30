@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import AddMyPage from './AddMyPage';
 import { StyledComponent } from './HOTPage.styled';
+import { Typography } from '@material-ui/core';
 
 //  本当は関数Componentで書きたい
 class HOTPage extends React.Component {
@@ -41,7 +42,7 @@ class HOTPage extends React.Component {
     render() {
 
         const containerCSS = {
-            width: '80%',
+            width: '95%',
             textAlign: 'center',
             margin: "auto",
         }
@@ -63,14 +64,13 @@ class HOTPage extends React.Component {
                 <StyledComponent style={containerCSS}>
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
-                        <h1>人気のカラオケ動画</h1>
+                        <Typography variant="h5">人気のカラオケ動画</Typography>
                         {this.state.videos.map((video) => {
                             const ttl = video.snippet.title;
                             const url = `https://www.youtube.com./embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
                                 <div key={video.id.videoId} >
-                                    <h3>{ttl}</h3>
                                     <div className="youtube">
                                         <iframe 
                                             id="ytplayer" 

@@ -19,6 +19,7 @@ import SignUpModal from '../SignUpModal';
 import LoginModal from '../LoginModal'                          //ログイン用モーダル
 import { AuthContext } from '../../store/AuthService';
 import { StyledComponent } from "./Header.styled"
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   list: {
@@ -27,6 +28,13 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
   },
+  btn: {
+    backgroundColor: red[800],
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: red[600],
+    },
+  }
 });
 
 export default function Header() {
@@ -62,18 +70,18 @@ export default function Header() {
     >
       <List>
         <ul>
-          <h2>MENU</h2>
-          <li><Link to='/' onClick={toggleDrawer(anchor, false)}>Home</Link></li>
-          <li><Link to='/hotpage' onClick={toggleDrawer(anchor, false)}>HOT</Link><br /></li>
-          <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>UserSettingPage</Link></li>
-          <li>
+          <h2>メニュー</h2>
+          <li><Link to='/' onClick={toggleDrawer(anchor, false)}>検索ページ</Link></li>
+          <li><Link to='/hotpage' onClick={toggleDrawer(anchor, false)}>人気ランキング</Link><br /></li>
+          <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>ユーザー設定</Link></li>
+          <li style={{listStyle: "none"}}>
             {!user ? 
               <>
                 <LoginModal />
                 <SignUpModal />
               </>
               :
-              <Button  variant="contained" onClick={LogOut}>ログアウト</Button>
+              <Button  variant="contained" onClick={LogOut} className={classes.btn}>ログアウト</Button>
             }
           </li>
         </ul>
