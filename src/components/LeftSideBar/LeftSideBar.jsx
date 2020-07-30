@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -7,7 +6,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Hidden } from '@material-ui/core';
 import { AuthContext } from '../../store/AuthService';
 import { fireStore } from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
@@ -47,6 +46,7 @@ export default function FileSystemNavigator() {
 
   return (
     <StyledComponent className="left">
+    <Hidden xsDown>
       <ul>
         <h2>MENU</h2>
         <li><Link to='/'>Home</Link></li>
@@ -87,7 +87,8 @@ export default function FileSystemNavigator() {
             />
           </TreeItem>
         </TreeView>
-      }
+      } 
+      </Hidden>
     </StyledComponent>
   );
 };

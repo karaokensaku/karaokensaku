@@ -3,6 +3,10 @@ import { AuthProvider } from './store/AuthService';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './router/LoggedInRoute'
 import HOTPage from './components/HOTPage/HOTPage'
+import MainPage from './components/MainPage';
+import { AuthProvider } from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HOTPage from './components/HOTPage'
 import UserSettingPage from './components/UserSettings';
 import { RecoilRoot } from "recoil";
 import axios from "axios";
@@ -10,6 +14,14 @@ import Youtube from './components/MainPage';
 import MyPage from './components/MyPage';
 import { makeStyles } from '@material-ui/core';
 import Layout from "./components/Layout"
+// import  { css } from 'styled-components';
+import { GlobalStyle } from "./GlobalStyle"
+
+
+// const mixinColor = css`
+//   color: white;
+//   background: blue;
+// `;
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -52,6 +64,7 @@ function App() {
             {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
             <Router>
       <Layout>
+        <GlobalStyle />
               <div className={classes.app}>
                 <Switch>
                   <Route exact path='/' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />

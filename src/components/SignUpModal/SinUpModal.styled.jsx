@@ -7,4 +7,10 @@ export const StyledComponent = styled.div`
     flex-direction:column;
     background-color:red;
     border:2px solid skyblue;
+    form {
+      background-color:#000;
+    }
+    h2{
+      color:red;
+    }
   `;

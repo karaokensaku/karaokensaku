@@ -1,7 +1,4 @@
 import React from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import LeftSideBar from '../LeftSideBar';
 // APIデータ取得に使うやつ
 import axios from 'axios';
 import AddMyPage from './AddMyPage';

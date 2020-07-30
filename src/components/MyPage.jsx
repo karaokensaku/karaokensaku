@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, makeStyles, Typography, Accordion, AccordionSummary } from '@material-ui/core';
+import { makeStyles, Typography, Accordion, AccordionSummary } from '@material-ui/core';
 import { myPageState } from '../atoms/myPage';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
