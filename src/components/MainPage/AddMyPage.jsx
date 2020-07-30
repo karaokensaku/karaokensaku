@@ -31,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: "5px 0",
   },
+  addContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
 }));
 
 function getModalStyle() {
@@ -127,18 +131,18 @@ export default ({ video }) => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {myPages.map(myPage => (
-        <div key={myPage.id}>
-          <p>{myPage.title}</p>
-          <button onClick={() => onAddClick(myPage)}>追加</button>
+        <div key={myPage.id} className={classes.addContainer}>
+          <p  style={{marginRight: "7px"}}>{myPage.title}</p>
+          <Button className={classes.addBtn} onClick={() => onAddClick(myPage)}>追加</Button>
         </div>
       ))}
       {plus && 
         <form onSubmit={handleSubmit(onSubmit)}>
           <input name="title" ref={register} />
-          <button type="submit">追加</button>
+          <Button variant="contained" color="primary" type="submit">追加</Button>
         </form>
       }
-      <Fab size="small" color="primary" aria-label="add" onClick={onPlusClick}>
+      <Fab size="small" className={classes.addBtn}  aria-label="add" onClick={onPlusClick}>
         <AddIcon />
       </Fab>
     </div>
