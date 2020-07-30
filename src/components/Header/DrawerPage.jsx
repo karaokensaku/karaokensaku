@@ -8,7 +8,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
 import { IconButton, Hidden, Avatar } from '@material-ui/core';
@@ -34,13 +34,14 @@ export default function Header() {
   const [state, setState] = React.useState({
     left: false,
   });
+  const [left, setLeft] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setLeft({ ...left, [anchor]: open });
   };
 
   const onPlusClick = () => {
@@ -49,7 +50,7 @@ export default function Header() {
 
   const [plus, setPlus] = useState(false);
   // const myPages = useRecoilValue(myPageState)
-  const [myPages, setMyPages] = useRecoilState(myPageState);
+  const [myPages] = useRecoilState(myPageState);
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -62,9 +63,9 @@ export default function Header() {
       <List>
         <ul>
           <h2>MENU</h2>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/hotpage'>HOT</Link><br /></li>
-          <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
+          <li><Link to='/' onClick={toggleDrawer(anchor, false)}>Home</Link></li>
+          <li><Link to='/hotpage' onClick={toggleDrawer(anchor, false)}>HOT</Link><br /></li>
+          <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>UserSettingPage</Link></li>
           <li>
             {!user ? 
               <>
@@ -76,7 +77,6 @@ export default function Header() {
             }
           </li>
         </ul>
-
         <TreeView
           className="myList"
           defaultCollapseIcon={<ExpandMoreIcon />}
@@ -86,7 +86,7 @@ export default function Header() {
             {myPages.map((myPage, index) => {
               const number = index + 2
               return (
-                <Link to={`/mypages/${myPage.id}`} key={myPage.id}>
+                <Link to={`/mypages/${myPage.id}`} key={myPage.id} onClick={toggleDrawer(anchor, false)}>
                   <TreeItem nodeId={number.valueOf()} label={myPage.title} />
                 </Link>
               )
@@ -132,7 +132,7 @@ export default function Header() {
           {['left',].map((anchor) => (
             <React.Fragment key={anchor}>
               <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
-              <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+              <Drawer anchor={anchor} open={left[anchor]} onClose={toggleDrawer(anchor, false)}>
                 {list(anchor)}
               </Drawer>
             </React.Fragment>
