@@ -13,7 +13,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
-import { IconButton, Hidden } from '@material-ui/core';
+import { IconButton, Hidden, Avatar } from '@material-ui/core';
 
 import firebase, { fireStore } from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { AuthProvider } from './store/AuthService';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './router/LoggedInRoute'
-import HOTPage from './components/HOTPage/HOTPage'
 import MainPage from './components/MainPage';
-import { AuthProvider } from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HOTPage from './components/HOTPage'
 import UserSettingPage from './components/UserSettings';
