@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import MainPage from './components/MainPage';
-// import LoggedMainPage from './components/LoggedMainPage';
-import { AuthProvider } from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
+import { AuthProvider } from './store/AuthService';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoggedInRoute from './router/LoggedInRoute'
-import HOTPage from './components/HOTPage'
+import HOTPage from './components/HOTPage/HOTPage'
 import UserSettingPage from './components/UserSettings';
 import { RecoilRoot } from "recoil";
 import axios from "axios";
