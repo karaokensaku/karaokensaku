@@ -35,6 +35,17 @@ const useStyles = makeStyles((theme) => ({
   container: {
     textAlign: "right",
   },
+  choiceContainer: {
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: red[800],
+    marginRight: "30px",
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: red[600],
+    },
+  },
 }));
 
 export default function SimpleModal( {onRemoveClick, song} ) {
@@ -63,8 +74,8 @@ export default function SimpleModal( {onRemoveClick, song} ) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">本当に削除しますか？</h2>
-      <div>
-          <Button variant="contained" color="primary" onClick={onYesClick}>はい</Button>:
+      <div className={classes.choiceContainer}>
+          <Button className={classes.button} onClick={onYesClick}>はい</Button>
           <Button variant="contained" color="primary" onClick={handleClose}>いいえ</Button>
       </div>
     </div>

@@ -70,7 +70,7 @@ class HOTPage extends React.Component {
                             const url = `https://www.youtube.com./embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
-                                <div key={video.id.videoId} >
+                                <div key={video.id.videoId} className="youtubeContainer">
                                     <div className="youtube">
                                         <iframe 
                                             id="ytplayer" 

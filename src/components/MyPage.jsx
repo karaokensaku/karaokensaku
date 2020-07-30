@@ -8,10 +8,13 @@ import { fireStore } from '../config/firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../store/AuthService';
 import { useRecoilState } from 'recoil'; 
-import ConfirmModal from '../commonComponents/ConfirmModal'
+import ConfirmModal from './ConfirmModal'
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: "20px",
+  },
   main: {
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
@@ -81,7 +84,7 @@ const MyPage = () => {
   };
 
     return(
-      <>
+      <div className={classes.container}>
         {selectedMyPage && (
           <div className={classes.main}> 
             <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
@@ -120,7 +123,7 @@ const MyPage = () => {
             {}
           </div>
         )}
-      </>
+      </div>
     );
 }
 

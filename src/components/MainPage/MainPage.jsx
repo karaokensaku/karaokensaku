@@ -6,6 +6,9 @@ import AddMyPage from './AddMyPage';
 import { StyledComponent } from './MainPage.styled';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: "20px",
+  },
   main: {
     width: '95%',
     textAlign: 'center',
@@ -35,7 +38,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   const video = videos.map((video) => {
     const url = "https://www.youtube.com/embed/" + video.id.videoId;
     return (
-      <div key={video.id.videoId}>
+      <div key={video.id.videoId} className="youtubeContainer">
         <div className="youtube">
           <iframe
             id="ytplayer"
@@ -53,7 +56,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   });
 
   return (
-    <StyledComponent>
+    <StyledComponent className={classes.container}>
       <div className={classes.main}>
         <div class={classes.search}>
           <input

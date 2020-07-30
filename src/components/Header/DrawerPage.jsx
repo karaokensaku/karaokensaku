@@ -39,9 +39,6 @@ const useStyles = makeStyles({
 
 export default function Header() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false,
-  });
   const [left, setLeft] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {

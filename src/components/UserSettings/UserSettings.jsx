@@ -7,11 +7,14 @@ import PasswordSettingModal from './PasswordSettingModal';
 import ImageSettingModal from './ImageSettingModal';
 
 const useStyles = makeStyles((theme) => ({
+  userPage: {
+    padding: "20px",
+  },
   container: {
     padding: theme.spacing(4),
     backgroundColor: '#fff',
     width: '85%',
-    margin: 'auto',
+    margin: '20px auto 0',
     justifyContent: 'space-around',
     [theme.breakpoints.down('xs')]: {
       display: 'block',
@@ -28,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
   imageContainer: {
     marginRight: theme.spacing(2),
   },
+  changeForm: {
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'center',
+    },
+  }
 }));
 
 export default () => {
@@ -47,7 +55,7 @@ export default () => {
             }
             <ImageSettingModal />
           </Box>
-          <div>
+          <div className={classes.changeForm}>
               <p>ユーザーネーム：　{user.displayName}</p>
               <NameSettingModal />
               <p>メールアドレス：　{user.email}</p>

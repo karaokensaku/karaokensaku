@@ -21,9 +21,8 @@ import { GlobalStyle } from "./GlobalStyle"
 
 const useStyles = makeStyles((theme) => ({
   app: {
-    width: '100%',
     minHeight: "100vh",
-    backgroundColor: '#F2F2F2'
+    backgroundColor: '#F2F2F2',
   },
   main: {
     backgroundColor: '#F2F2F2'
