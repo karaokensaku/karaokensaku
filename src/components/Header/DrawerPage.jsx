@@ -120,13 +120,11 @@ export default function Header() {
   const user = useContext(AuthContext);
 
   const LogOut = (user) => {                          //ログアウト処理
-    firebase.auth().onAuthStateChanged((user) => {
-      firebase.auth().signOut().then(() => {
-        console.log("ログアウトしました");
-      })
-        .catch((error) => {
-          console.log(`ログアウト時にエラーが発生しました (${error})`);
-        });
+    firebase.auth().signOut().then(() => {
+      console.log("ログアウトしました");
+    })
+    .catch((error) => {
+      console.log(`ログアウト時にエラーが発生しました (${error})`);
     });
   }
 

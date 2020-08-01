@@ -26,10 +26,13 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(19),
     height: theme.spacing(19),
     border: "solid 1px #000",
-    margin: "auto",
+    margin: "0 auto 20px",
   },
   imageContainer: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(0),
+    }
   },
   changeForm: {
     [theme.breakpoints.down('xs')]: {

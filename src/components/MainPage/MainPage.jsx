@@ -72,7 +72,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
     <StyledComponent className={classes.container}>
       <div className={classes.main}>
         <div className={classes.search}>
-          <Paper component="div" component="form" className={classes.root} onSubmit={handleSubmitInput} >
+          <Paper component="form" className={classes.root} onSubmit={handleSubmitInput} >
             <InputBase
               className={classes.input}
               placeholder="曲名"
