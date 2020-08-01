@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     backgroundColor: '#fff',
+    [theme.breakpoints.down('xs')]: {
+      width: "300px",
+    },
   },
 }));
 

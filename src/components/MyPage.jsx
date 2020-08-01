@@ -80,47 +80,47 @@ const MyPage = () => {
     });
   };
 
-    return(
-      <>
-        {selectedMyPage && (
-          <div className={classes.main}> 
-            <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
-            <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-            {selectedMyPage.songs.length !== 0 ? selectedMyPage.songs.map((song, index) => {
-              const url = "https://www.youtube.com/embed/" + song.videoId;
-              return (
-                <Accordion key={song.videoId}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <div  className={classes.youtube}>
-                      <iframe
-                        id="ytplayer"
-                        type="ytplayer"
-                        width="640"
-                        height="360"
-                        src={url}
-                        frameborder="0"
-                        title={song.title}
-                        className={classes.iframe}
-                      />
-                    </div>
-                  </AccordionDetails>
-                  <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
-                </Accordion>
-              );
-            }) : 
-              <Typography>まだ歌がありません。</Typography>
-            }
-          </div>
-        )}
-      </>
-    );
-}
+  return(
+    <>
+      {selectedMyPage && (
+        <div className={classes.main}> 
+          <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
+          <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
+          {selectedMyPage.songs.length !== 0 ? selectedMyPage.songs.map((song, index) => {
+            const url = "https://www.youtube.com/embed/" + song.videoId;
+            return (
+              <Accordion key={song.videoId}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div  className={classes.youtube}>
+                    <iframe
+                      id="ytplayer"
+                      type="ytplayer"
+                      width="640"
+                      height="360"
+                      src={url}
+                      frameborder="0"
+                      title={song.title}
+                      className={classes.iframe}
+                    />
+                  </div>
+                </AccordionDetails>
+                <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
+              </Accordion>
+            );
+          }) : 
+            <Typography>まだ歌がありません。</Typography>
+          }
+        </div>
+      )}
+    </>
+  );
+};
 
 export default MyPage

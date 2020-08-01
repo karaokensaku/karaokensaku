@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: blue[400],
     },
+    modalContainer: {
+      [theme.breakpoints.down('xs')]: {
+        width: "300px",
+      },
+    }
   }
 }));
 
