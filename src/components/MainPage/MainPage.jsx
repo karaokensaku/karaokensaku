@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from "react";
 import _ from "lodash";
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Paper, InputBase, IconButton } from '@material-ui/core';
 import AddMyPage from './AddMyPage';
 import { StyledComponent } from './MainPage.styled';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const Youtube = ({ onSearchYoutube, videos }) => {
   const classes = useStyles();
   const [keyword, setKeyword] = useState("");
+  console.log(keyword);
 
   const handleChangeInput = (e) => {
     setKeyword(e.target.value);
@@ -58,15 +60,19 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   return (
     <StyledComponent className={classes.container}>
       <div className={classes.main}>
-        <div class={classes.search}>
-          <input
-            type="search"
-            name="search"
-            placeholder="キーワードを入力"
-            onChange={handleChangeInput}
-            value={keyword}
-          />
-          <button onClick={handleClickInput}>検索</button>
+        <div className={classes.search}>
+          <Paper component="div" className={classes.root} style={{ width: "35%", margin: "auto" }}>
+            <InputBase
+              className={classes.input}
+              placeholder="曲名"
+              inputProps={{ 'aria-label': 'music search' }}
+              value={keyword}
+              onChange={handleChangeInput}
+            />
+            <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={handleClickInput} >
+              <SearchIcon />
+            </IconButton>
+          </Paper>
         </div>
         {video}
       </div>
