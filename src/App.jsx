@@ -34,12 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+
 function App() {
   const classes = useStyles();
   const [video, setVideos] = useState([]);
 
   const onSearchYoutube = (keyword) => {
-    const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${keyword}&maxResults=3&key=AIzaSyB-JHockHi2hKNaGdLBI8u5d3xSPxnWEDc`;
+    const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${keyword}&maxResults=3&key=${YOUTUBE_API_KEY}`;
 
     axios
       .get(url)

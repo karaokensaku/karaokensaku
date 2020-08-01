@@ -5,6 +5,8 @@ import AddMyPage from './AddMyPage';
 import { StyledComponent } from './HOTPage.styled';
 import { Typography } from '@material-ui/core';
 
+const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+
 //  本当は関数Componentで書きたい
 class HOTPage extends React.Component {
     state = {
@@ -18,7 +20,7 @@ class HOTPage extends React.Component {
         // 取得されたパラメータ https://developers.google.com/youtube/v3/docs/activities?hl=ja#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E8%A1%A8%E7%8F%BE
 
         //  検索で,チャンネルID,再生回数,で取得.表示数はデフォで5
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&channelId=UC1tk9F5-MGXEq4LWnjmrtpA&key=AIzaSyA8tNpyBZw1H4HYxOmB8qdFO-ooPwxH1t4`;
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&channelId=UC1tk9F5-MGXEq4LWnjmrtpA&key=${YOUTUBE_API_KEY}`;
 
         // TOP50からランダム5抽出への挑戦
         // const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&maxResults=50&channelId=UC1tk9F5-MGXEq4LWnjmrtpA&key=AIzaSyA8tNpyBZw1H4HYxOmB8qdFO-ooPwxH1t4`;
