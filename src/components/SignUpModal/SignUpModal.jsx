@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     backgroundColor: '#fff',
-    paddingBottom: '40px',
   },
 }));
 
@@ -105,6 +104,7 @@ export default function SignUp() {
                     name="name"
                     autoComplete="lname"
                     inputRef={register} 
+                    autoFocus
                   />
                 </Grid>
                 <Grid item xs={12}>
