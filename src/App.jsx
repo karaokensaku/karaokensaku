@@ -10,14 +10,7 @@ import Youtube from './components/MainPage';
 import MyPage from './components/MyPage';
 import { makeStyles } from '@material-ui/core';
 import Layout from "./components/Layout"
-// import  { css } from 'styled-components';
 import { GlobalStyle } from "./GlobalStyle"
-
-
-// const mixinColor = css`
-//   color: white;
-//   background: blue;
-// `;
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -58,8 +51,6 @@ function App() {
     <div>
         <AuthProvider>
           <RecoilRoot>
-            {/* AuthProviderでラップすることで、 */}
-            {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
             <Router>
       <Layout>
         <GlobalStyle />

@@ -64,7 +64,7 @@ const MyPage = () => {
 
   useEffect(() => {
     setSelectedMyPage(myPages.find(element => element.id === getId))
-  }, [myPages, getId]) //切り替わるタイミングはuseEffectで管理する
+  }, [myPages, getId]) 
   
   const onRemoveSongClick = (song) => {
     const newMyPage = removeSong(selectedMyPage, song);

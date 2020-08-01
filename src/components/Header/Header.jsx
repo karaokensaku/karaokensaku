@@ -5,7 +5,7 @@ import { myPageState } from '../../atoms/myPage';
 import { Link } from 'react-router-dom';
 import firebase, { fireStore } from '../../config/firebase';
 import SignUpModal from '../SignUpModal';
-import LoginModal from '../LoginModal'                          //ログイン用モーダル
+import LoginModal from '../LoginModal'                         
 import { AuthContext } from '../../store/AuthService';
 import { StyledComponent } from "./Header.styled"
 import DrawerPage from "./DrawerPage";
@@ -14,7 +14,7 @@ import { Hidden, Avatar } from '@material-ui/core';
 export default function Header() {
   const [myPages, setMyPages] = useRecoilState(myPageState);
   const user = useContext(AuthContext);
-  const LogOut = () => {                          //ログアウト処理
+  const LogOut = () => {                  
     firebase.auth().signOut().then(() => {
       console.log("ログアウトしました");
     })
