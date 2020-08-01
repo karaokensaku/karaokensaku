@@ -18,18 +18,29 @@ const useStyles = makeStyles((theme) => ({
   search: {
     padding: "7px 0",
   },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+  root: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
 const Youtube = ({ onSearchYoutube, videos }) => {
   const classes = useStyles();
   const [keyword, setKeyword] = useState("");
-  console.log(keyword);
 
   const handleChangeInput = (e) => {
     setKeyword(e.target.value);
   };
 
-  const handleClickInput = () => {
+  const handleSubmitInput = (e) => {
+    e.preventDefault();
     _debounce(keyword);
   };
 
@@ -61,7 +72,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
     <StyledComponent className={classes.container}>
       <div className={classes.main}>
         <div className={classes.search}>
-          <Paper component="div" className={classes.root} style={{ width: "35%", margin: "auto" }}>
+          <Paper component="div" component="form" className={classes.root} onSubmit={handleSubmitInput} >
             <InputBase
               className={classes.input}
               placeholder="曲名"
@@ -69,7 +80,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
               value={keyword}
               onChange={handleChangeInput}
             />
-            <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={handleClickInput} >
+            <IconButton type="submit" className={classes.iconButton} aria-label="search">
               <SearchIcon />
             </IconButton>
           </Paper>
