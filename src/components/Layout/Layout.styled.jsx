@@ -12,18 +12,17 @@ export const StyledComponent = styled.div`
     "... ...... ...... ...... ...... ...... ..." 0 /
      0   23%    0      auto   auto    auto  0;
 
-    /* ${mq}{
+    ${mq}{
           grid-template:
-          "...... ...... ......" 0
-          "header header header" auto
-          "...... ...... ......" 0
-          "main   main   main  " auto
-          "...... ...... ......" 0
-          "footer footer footer" auto
-          "...... ...... ......" 0 /
-            auto   auto   auto;
-        } */
-
+          ".... ...... ...... ...... ..." 0
+          ".... header header header ..." auto
+          ".... ...... ...... ...... ..." 0
+          "left main   main   main   ..." auto
+          ".... ...... ...... ...... ..." 0
+          ".... footer footer footer ..." auto
+          ".... ...... ...... ...... ..." 0 /
+           0   auto   auto   auto   0;
+        }
     .header {
       grid-area: header;
     }

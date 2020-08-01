@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4),
     backgroundColor: '#fff',
     width: '85%',
-    margin: 'auto',
+    margin: '20px auto 0',
     justifyContent: 'space-around',
     [theme.breakpoints.down('xs')]: {
       display: 'block',
@@ -23,10 +23,19 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(19),
     height: theme.spacing(19),
     border: "solid 1px #000",
+    margin: "0 auto 20px",
   },
   imageContainer: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(0),
+    }
   },
+  changeForm: {
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'center',
+    },
+  }
 }));
 
 export default () => {
@@ -35,7 +44,7 @@ export default () => {
 
   return (
     <div className={classes.userPage}>
-      <Typography variant="h3" align="center">アカウント情報</Typography>
+      <Typography variant="h5" align="center">アカウント情報</Typography>
       {user && 
         <Box display="flex" className={classes.container}>
           <Box textAlign="center" className={classes.imageContainer}>
@@ -46,7 +55,7 @@ export default () => {
             }
             <ImageSettingModal />
           </Box>
-          <div>
+          <div className={classes.changeForm}>
               <p>ユーザーネーム：　{user.displayName}</p>
               <NameSettingModal />
               <p>メールアドレス：　{user.email}</p>

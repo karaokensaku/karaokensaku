@@ -1,6 +1,9 @@
 import React from 'react';
 // APIデータ取得に使うやつ
 import axios from 'axios';
+import AddMyPage from './AddMyPage';
+import { StyledComponent } from './HOTPage.styled';
+import { Typography } from '@material-ui/core';
 
 //  本当は関数Componentで書きたい
 class HOTPage extends React.Component {
@@ -31,35 +34,25 @@ class HOTPage extends React.Component {
                     videos: response.data.items,
                 });
             })
-            .catch(() => {
-                console.log('通信に失敗しました');
+            .catch((err) => {
+                console.log(err);
             });
     };
 
     render() {
 
         const containerCSS = {
-            position: "relative",
-            backgroundColor: "orange",
-            height: "100%",
-            // minHeight: "100vh",
-            alignItems: "center",
-            color: "white",
+            width: '95%',
+            textAlign: 'center',
+            margin: "auto",
         }
 
         const centerContainer = {
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
             flexDirection: "column",
-            // position: "absolute",
-            // right: 0,
-            // top: 0,
-            // bottom: 0,
-            // left: "18%",
             backgroundColor: "#F2F2F2",
             color: "black",
-            padding: "20px",
         }
 
         // 取得したデータを確認(なぜかConsoleに2回表示される)
@@ -67,29 +60,34 @@ class HOTPage extends React.Component {
 
         return (
             <>
-                {/* <Header /> */}
-                <div style={containerCSS}>
-                    {/* <LeftSideBar /> */}
+                <StyledComponent style={containerCSS}>
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
-                        <h1>人気のカラオケ動画</h1>
+                        <Typography variant="h5" style={{marginBottom: "20px"}}>人気のカラオケ動画</Typography>
                         {this.state.videos.map((video) => {
                             const ttl = video.snippet.title;
-                            const url = `https://www.youtube.com./embed/${video.id.videoId}`;
+                            const url = `https://www.youtube.com/embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
-                                <div>
-                                    <h3>{ttl}</h3>
-                                    <iframe id="ytplayer" type="text/html" width="640" height="360" title={url.title}
-                                        src={url}
-                                        frameborder="0">
-                                    </iframe>
+                                <div key={video.id.videoId} className="youtubeContainer">
+                                    <div className="youtube">
+                                        <iframe 
+                                            id="ytplayer" 
+                                            type="text/html" 
+                                            width="640" 
+                                            height="360"
+                                            src={url}
+                                            frameBorder="0"
+                                            title={ttl}
+                                        ></iframe>
+                                    </div>
+                                    <AddMyPage video={video} />
                                 </div>
                             );
                         })}
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
                     </div>
-                </div>
+                </StyledComponent>
                 {/* <Footer /> */}
             </>
         );

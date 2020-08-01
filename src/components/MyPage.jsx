@@ -8,26 +8,33 @@ import { fireStore } from '../config/firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../store/AuthService';
 import { useRecoilState } from 'recoil'; 
-import ConfirmModal from '../commonComponents/ConfirmModal'
+import ConfirmModal from './ConfirmModal'
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    width: '100%',
-    margin: (0, 'auto'),
-    display: 'flex',
-    flexWrap: 'wrap',
-    minHeight: "100vh",
-  },
   main: {
-    width: '74%',
     backgroundColor: '#F2F2F2',
     textAlign: 'center',
+    width: "95%",
+    margin: "auto",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  youtube: {
+    position: "relative",
+    width: "100%",
+    margin: "auto",
+    paddingTop: "50.25%",
+  },
+  iframe: {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    width: "100% !important",
+    height: "100% !important",
+  }
 }));
 
 const removeSong = (myPage, song) => {
@@ -69,7 +76,7 @@ const MyPage = () => {
     const newMyPages = removeMyPage(myPages, selectedMyPage.id);
     setMyPages(newMyPages);
     fireStore.collection('user').doc(`${user.uid}`).collection('myPages').doc(`${selectedMyPage.id}`).delete().then(() => {
-      history.push('/main');
+      history.push('/');
     });
   };
 
@@ -77,9 +84,9 @@ const MyPage = () => {
       <>
         {selectedMyPage && (
           <div className={classes.main}> 
-            <Typography align='center' variant='h4' >{selectedMyPage.title}</Typography>
+            <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
             <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-            {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
+            {selectedMyPage.songs.length !== 0 ? selectedMyPage.songs.map((song, index) => {
               const url = "https://www.youtube.com/embed/" + song.videoId;
               return (
                 <Accordion key={song.videoId}>
@@ -91,23 +98,25 @@ const MyPage = () => {
                     <Typography className={classes.heading}>{index + 1} {song.title}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <iframe
-                      id="ytplayer"
-                      type="ytplayer"
-                      width="480"
-                      height="270"
-                      src={url}
-                      frameborder="0"
-                      title={song.title}
-                    />
+                    <div  className={classes.youtube}>
+                      <iframe
+                        id="ytplayer"
+                        type="ytplayer"
+                        width="640"
+                        height="360"
+                        src={url}
+                        frameborder="0"
+                        title={song.title}
+                        className={classes.iframe}
+                      />
+                    </div>
                   </AccordionDetails>
                   <ConfirmModal onRemoveClick={onRemoveSongClick} song={song}/>
                 </Accordion>
               );
             }) : 
-              <p>まだ歌がありません。</p>
+              <Typography>まだ歌がありません。</Typography>
             }
-            {}
           </div>
         )}
       </>

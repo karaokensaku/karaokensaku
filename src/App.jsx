@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MainPage from './components/MainPage';
-import { AuthProvider } from './store/AuthService';//ユーザー情報を持っているコンテキストオブジェクト
+import { AuthProvider } from './store/AuthService';
+import LoggedInRoute from './router/LoggedInRoute'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HOTPage from './components/HOTPage'
 import UserSettingPage from './components/UserSettings';
@@ -21,9 +21,9 @@ import { GlobalStyle } from "./GlobalStyle"
 
 const useStyles = makeStyles((theme) => ({
   app: {
-    width: '100%',
     minHeight: "100vh",
-    backgroundColor: '#F2F2F2'
+    backgroundColor: '#F2F2F2',
+    padding: "20px",
   },
   main: {
     backgroundColor: '#F2F2F2'
@@ -63,13 +63,10 @@ function App() {
         <GlobalStyle />
               <div className={classes.app}>
                 <Switch>
-                  {/* LoggedMainPageをLoggedInRouteのpropsとして渡す */}
-                  <Route exact path='/' component={MainPage} />
-                  <Route exact path='/myPages/:id' component={MyPage} />
-                  <Route exact path='/main' render={props => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
-                  <Route exact path='/hotPage' component={HOTPage} />
-                  {/* <Route exact path='/likePage' component={LIKEPage} /> */}
-                  <Route exact path='/userSettingPage' component={UserSettingPage} />
+                  <Route exact path='/' render={() => <Youtube onSearchYoutube={onSearchYoutube} videos={video} />} />
+                  <LoggedInRoute path='/myPages/:id' component={MyPage} />
+                  <Route path='/hotPage' component={HOTPage} />
+                  <LoggedInRoute path='/userSettingPage' component={UserSettingPage} />
                 </Switch>
               </div>
       </Layout>

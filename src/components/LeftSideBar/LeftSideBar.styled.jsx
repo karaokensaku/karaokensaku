@@ -5,6 +5,8 @@ export const StyledComponent = styled.div`
       list-style: none;
       display: flex;
       flex-direction: column;
+      padding: 0;
+      margin: 10px 10px;
       h2 {
         margin:0;
       }

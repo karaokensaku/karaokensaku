@@ -1,23 +1,14 @@
-import React, { useContext } from 'react';
-import { useState } from "react";
-import _ from "lodash";
-import { Button, makeStyles, Modal, Fab } from '@material-ui/core';
+import React, { useState, useContext } from 'react';
+import { Button, Modal, makeStyles, Fab, Typography } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
-import { myPageState } from '../atoms/myPage';
-import { useForm } from "react-hook-form";
+import { myPageState } from '../../atoms/myPage';
+import { fireStore } from '../../config/firebase';
+import { AuthContext } from '../../store/AuthService';
+import { useForm } from 'react-hook-form';
 import AddIcon from '@material-ui/icons/Add';
-import { fireStore } from '../config/firebase';
-import { AuthContext } from '../store/AuthService';
-// import { Link } from 'react-router-dom';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    width: '100%',
-    backgroundColor: '#F2F2F2',
-    textAlign: 'center',
-    // border: "3px solid #C50D1A",
-    // borderRadius: "10px",
-  },
   paper: {
     position: 'absolute',
     width: 400,
@@ -25,7 +16,25 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  }
+  }, 
+  addBtn: {
+    backgroundColor: red[800],
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: red[600],
+    },
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: "5px 0",
+  },
+  addContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
 }));
 
 function getModalStyle() {
@@ -59,16 +68,16 @@ const addSongs = (myPages, id, updates) => {
   });
 };
 
-const Youtube = ({ onSearchYoutube, videos }) => {
+export default ({ video }) => {
   const classes = useStyles();
-  const [keyword, setKeyword] = useState("");
-  const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState([]);
   const [myPages, setMyPages] = useRecoilState(myPageState);
+  const user = useContext(AuthContext);
   const [plus, setPlus] = useState(false);
   const { register, handleSubmit } = useForm();
-  const user = useContext(AuthContext);
+
   const onSubmit = data => {
     if(data.title.trim() !== '') {
       if(data.title.trim() !== '') {
@@ -81,29 +90,17 @@ const Youtube = ({ onSearchYoutube, videos }) => {
     };
   };
 
-  const handleChangeInput = (e) => {
-    setKeyword(e.target.value);
-  };
-
-  const handleClickInput = () => {
-    _debounce(keyword);
-  };
-
-  const _debounce = _.debounce((value) => {
-    onSearchYoutube(value + "カラオケ");
-  }, 200);
-
-  const handleOpen = (video) => {
-    setSelectedVideo(video);
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
 
   const onPlusClick = () => {
     setPlus(!plus);
+  };
+
+  const handleOpen = (video) => {
+    setSelectedVideo(video);
+    setOpen(true);
   };
 
   const onAddClick = (myPage) => {
@@ -134,9 +131,9 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {myPages.map(myPage => (
-        <div key={myPage.id}>
-          <p>{myPage.title}</p>
-          <button onClick={() => onAddClick(myPage)}>追加</button>
+        <div key={myPage.id} className={classes.addContainer}>
+          <p  style={{marginRight: "7px"}}>{myPage.title}</p>
+          <Button className={classes.addBtn} onClick={() => onAddClick(myPage)}>追加</Button>
         </div>
       ))}
       {plus && 
@@ -145,55 +142,26 @@ const Youtube = ({ onSearchYoutube, videos }) => {
           <button type="submit">追加</button>
         </form>
       }
-      <Fab color="primary" aria-label="add" onClick={onPlusClick}>
+      <Fab size="small" className={classes.addBtn}  aria-label="add" onClick={onPlusClick}>
         <AddIcon />
       </Fab>
     </div>
   )
 
-  const video = videos.map((video) => {
-    const url = "https://www.youtube.com/embed/" + video.id.videoId;
-    return (
-      <div key={video.id.videoId} style={{ margin: "20px", textAlign: "center" }}>
-          <iframe
-            id="ytplayer"
-            type="ytplayer"
-            width="480"
-            height="270"
-            title={url.title}
-            src={url}
-            frameborder="0"
-          />
-          <Button variant="contained" color="primary" onClick={() => handleOpen(video)}>追加</Button>
-      </div>
-    );
-  });
-
   return (
-    <>
-      <div className={classes.main}>
-        <input
-          type="search"
-          name="search"
-          placeholder="キーワードを入力"
-          onChange={handleChangeInput}
-          value={keyword}
-        />
-        <button onClick={handleClickInput}>検索</button>
-        <h1>{keyword}</h1>
-        <p>の検索結果</p>
-        {video}
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          {body}
-        </Modal>
+    <div>
+      <div className={classes.container}>
+        <Typography>{video.snippet.title}</Typography>
+        <Button variant="contained" className={classes.addBtn} onClick={() => handleOpen(video)}>追加</Button>
       </div>
-    </>
-  );
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {body}
+      </Modal>
+    </div>
+  )
 }
-
-export default Youtube;

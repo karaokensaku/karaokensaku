@@ -8,5 +8,4 @@ export const StyledComponent = styled.footer`
         padding: 5px;
         height: 30px;
         color: white;
-        width: 100%;
   `;

@@ -21,5 +21,6 @@ firebase.initializeApp(firebaseConfig)
 //firebaseAppの初期化
 export const storage = firebase.storage();
 export const fireStore = firebase.firestore();
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export default firebase;

@@ -46,15 +46,15 @@ export default function FileSystemNavigator() {
 
   return (
     <StyledComponent className="left">
-      <Hidden xsDown>
-        <ul>
-          <h2>MENU</h2>
-          <li><Link to='/main'>Home</Link></li>
-          <li><Link to='/hotpage'>HOT</Link><br /></li>
-          <li><Link to='/userSettingPage'>UserSettingPage</Link></li>
-        </ul>
- 
-
+    <Hidden xsDown>
+      <ul>
+        <h2>メニュー</h2>
+        <li><Link to='/'>検索ページ</Link></li>
+        <li><Link to='/hotpage'>人気ランキング</Link><br /></li>
+        {user && <li><Link to='/userSettingPage'>ユーザー設定</Link></li>}
+      </ul>
+      {/* <Link to='/'>Home</Link> */}
+      {user &&
         <TreeView
           className="myList"
           defaultCollapseIcon={<ExpandMoreIcon />}
@@ -75,11 +75,11 @@ export default function FileSystemNavigator() {
                 <div>
                   {plus &&
                     <form onSubmit={onSubmit}>
-                      <input name="title" value={title} onChange={onTitleChange} />
+                      <input name="title" value={title} onChange={onTitleChange} style={{width: "100%"}} />
                       <button type="submit">追加</button>
                     </form>
                   }
-                  <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
+                  <IconButton size="small" aria-label="add" onClick={onPlusClick}>
                     <AddIcon />
                   </IconButton>
                 </div>
@@ -87,6 +87,7 @@ export default function FileSystemNavigator() {
             />
           </TreeItem>
         </TreeView>
+      } 
       </Hidden>
     </StyledComponent>
   );

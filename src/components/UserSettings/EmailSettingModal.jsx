@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, TextField } from '@material-ui/core';
@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal() {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [errMess, setErrMess]  = useState('')
   const user = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
@@ -53,12 +54,16 @@ export default function SimpleModal() {
     user.updateEmail(email).then(() => {
       window.location.reload();
     }).catch((err) => {
-      console.log(err);
+      console.log(err.message);
+      if(err.message === "This operation is sensitive and requires recent authentication. Log in again before retrying this request.") {
+        setErrMess('再ログインしてからメールアドレスを変更してください。')
+      }
     });
   };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
+      {errMess && <p>{errMess}</p>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           variant="outlined"
