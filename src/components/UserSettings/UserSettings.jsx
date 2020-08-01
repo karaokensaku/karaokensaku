@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(4),
     backgroundColor: '#fff',
-    width: '85%',
+    width: '90%',
     margin: '20px auto 0',
+    padding: "15px",
     justifyContent: 'space-around',
     [theme.breakpoints.down('xs')]: {
       display: 'block',
