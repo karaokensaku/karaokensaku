@@ -7,9 +7,6 @@ import PasswordSettingModal from './PasswordSettingModal';
 import ImageSettingModal from './ImageSettingModal';
 
 const useStyles = makeStyles((theme) => ({
-  userPage: {
-    padding: "20px",
-  },
   container: {
     padding: theme.spacing(4),
     backgroundColor: '#fff',

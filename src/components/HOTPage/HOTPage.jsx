@@ -53,7 +53,6 @@ class HOTPage extends React.Component {
             flexDirection: "column",
             backgroundColor: "#F2F2F2",
             color: "black",
-            padding: "20px",
         }
 
         // 取得したデータを確認(なぜかConsoleに2回表示される)
@@ -64,10 +63,10 @@ class HOTPage extends React.Component {
                 <StyledComponent style={containerCSS}>
                     <div style={centerContainer}>
                         {/* ここにカラオケで検索したyoutube動画を再生回数順に表示していく */}
-                        <Typography variant="h5">人気のカラオケ動画</Typography>
+                        <Typography variant="h5" style={{marginBottom: "20px"}}>人気のカラオケ動画</Typography>
                         {this.state.videos.map((video) => {
                             const ttl = video.snippet.title;
-                            const url = `https://www.youtube.com./embed/${video.id.videoId}`;
+                            const url = `https://www.youtube.com/embed/${video.id.videoId}`;
                             // comのあとに.をつけると広告が流れない？らしい
                             return (
                                 <div key={video.id.videoId} className="youtubeContainer">

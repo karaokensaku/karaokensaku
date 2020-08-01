@@ -73,7 +73,6 @@ export default function SignIn() {
           onClose={handleClose}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          contentLabel
         >
           <StyledComponent>
             <Container component="main" maxWidth="xs" className="LogIn_Moadl">

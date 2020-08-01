@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   app: {
     minHeight: "100vh",
     backgroundColor: '#F2F2F2',
+    padding: "20px",
   },
   main: {
     backgroundColor: '#F2F2F2'

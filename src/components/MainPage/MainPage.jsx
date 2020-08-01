@@ -7,9 +7,6 @@ import { StyledComponent } from './MainPage.styled';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: "20px",
-  },
   main: {
     width: '95%',
     textAlign: 'center',
@@ -28,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-between",
+    maxWidth: "500px",
+    margin: "auto",
   },
 }));
 
@@ -69,7 +68,7 @@ const Youtube = ({ onSearchYoutube, videos }) => {
   });
 
   return (
-    <StyledComponent className={classes.container}>
+    <StyledComponent>
       <div className={classes.main}>
         <div className={classes.search}>
           <Paper component="form" className={classes.root} onSubmit={handleSubmitInput} >
