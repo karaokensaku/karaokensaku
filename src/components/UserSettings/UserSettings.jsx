@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#fff',
     width: '90%',
     margin: '20px auto 0',
-    padding: "15px",
+    padding: "10px",
     justifyContent: 'space-around',
     [theme.breakpoints.down('xs')]: {
       display: 'block',

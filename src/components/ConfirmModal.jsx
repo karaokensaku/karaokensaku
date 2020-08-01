@@ -12,6 +12,8 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
+    width: "290px",
+    padding: "16px 10px 24px",
   };
 }
 
