@@ -139,7 +139,7 @@ export default ({ video }) => {
       {plus && 
         <form onSubmit={handleSubmit(onSubmit)}>
           <input name="title" ref={register} />
-          <Button variant="contained" color="primary" type="submit">追加</Button>
+          <button type="submit">追加</button>
         </form>
       }
       <Fab size="small" className={classes.addBtn}  aria-label="add" onClick={onPlusClick}>

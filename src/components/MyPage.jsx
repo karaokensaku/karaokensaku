@@ -86,7 +86,7 @@ const MyPage = () => {
           <div className={classes.main}> 
             <Typography align='center' variant='h5' >{selectedMyPage.title}</Typography>
             <ConfirmModal onRemoveClick={onRemoveMyPageClick}/>
-            {selectedMyPage.songs ? selectedMyPage.songs.map((song, index) => {
+            {selectedMyPage.songs.length !== 0 ? selectedMyPage.songs.map((song, index) => {
               const url = "https://www.youtube.com/embed/" + song.videoId;
               return (
                 <Accordion key={song.videoId}>
@@ -115,9 +115,8 @@ const MyPage = () => {
                 </Accordion>
               );
             }) : 
-              <p>まだ歌がありません。</p>
+              <Typography>まだ歌がありません。</Typography>
             }
-            {}
           </div>
         )}
       </>
