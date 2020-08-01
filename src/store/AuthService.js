@@ -1,21 +1,20 @@
-// AuthService.js
 import React, { useState, useEffect, createContext } from 'react'
 import firebase from '../config/firebase'
 
-const AuthContext = createContext()     //Contextオブジェクトを作成
+const AuthContext = createContext()     
 
-const AuthProvider = ({children}) => {  //childrenにして全てのコンポーネントを囲うことでuser情報を全てのページに使えるようにする
+const AuthProvider = ({children}) => {  
 
     const [user, setUser] = useState(null)
 
-    useEffect(() => {                   //外部(APIなど)との通信や、DOMの直接的な更新等、関数の外のスコープに影響を与えるような処理はuseEffectを使って記述する
-                                        // ↓ログイン時に引数のuserにユーザーに関するオブジェクトが渡される
+    useEffect(() => {                   
+                                       
         firebase.auth().onAuthStateChanged(user => {
-            setUser(user)               //引数として渡されたuserから、stateの「setUser」で更新
+            setUser(user)      
         })
-    }, [])                              //空の配列を与えた場合には、初回描写時にのみ実行されます。
+    }, [])                         
 
-    return(                             //App.jsxで囲った物(children)からはVluenに指定しているstate.user情報が扱える
+    return(                          
         <AuthContext.Provider value={user}> 
             {children}
         </AuthContext.Provider>
@@ -23,6 +22,6 @@ const AuthProvider = ({children}) => {  //childrenにして全てのコンポー
 }
 
 export {
-    AuthContext,                        //useContextでvalueのuserが使えるようになる
-    AuthProvider                        //ページがuser情報を使えるように囲むためのプロバイダー（供給者）
+    AuthContext,                        
+    AuthProvider                  
 }

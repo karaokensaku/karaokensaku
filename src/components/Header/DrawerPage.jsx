@@ -16,7 +16,7 @@ import firebase from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import SignUpModal from '../SignUpModal';
-import LoginModal from '../LoginModal'                          //ログイン用モーダル
+import LoginModal from '../LoginModal'                       
 import { AuthContext } from '../../store/AuthService';
 import { StyledComponent } from "./Header.styled"
 import { red } from '@material-ui/core/colors';
@@ -54,7 +54,6 @@ export default function Header() {
   };
 
   const [plus, setPlus] = useState(false);
-  // const myPages = useRecoilValue(myPageState)
   const [myPages] = useRecoilState(myPageState);
   const list = (anchor) => (
     <div
