@@ -8,7 +8,6 @@ import ImageSettingModal from './ImageSettingModal';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(4),
     backgroundColor: '#fff',
     width: '90%',
     margin: '20px auto 0',
