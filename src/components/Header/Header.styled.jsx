@@ -7,7 +7,7 @@ export const StyledComponent = styled.header`
     justify-content:space-between;
     .title {
       display: flex;
-      justify-content:center;
+      justify-content:flex-start;
       flex: 1;
       background-color:#C50D1A;
       a {

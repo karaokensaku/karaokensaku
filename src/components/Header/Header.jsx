@@ -25,8 +25,8 @@ export default function Header() {
 
   useEffect(() => {
     let getMypages = [];
-    {user &&
-      firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
         const uid = user.uid;
         fireStore.collection('user').doc(`${uid}`).collection('myPages').get().then((snapshot) => {
           snapshot.forEach(myPage => {
@@ -38,9 +38,10 @@ export default function Header() {
         }).then(() => {
           setMyPages(getMypages);
         });
-      });
-    }
+      }
+    });
   }, [user]);
+
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function Header() {
                 {user.photoURL ? 
                     <Avatar className="avatarImg" src={user.photoURL} />
                     : 
-                    <Avatar className="avatarImg">{user.displayName.slice(0,2)}</Avatar>
+                    <Avatar className="avatarImg"></Avatar>
                   }
               </Link>
             </Hidden>
