@@ -7,11 +7,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Modal } from '@material-ui/core';
+import { Modal, Divider } from '@material-ui/core';
 import { StyledComponent } from './LoginModal.styled';
-import { red } from '@material-ui/core/colors';
+import { red, blue } from '@material-ui/core/colors';
 import { useForm } from "react-hook-form";
-import firebase from '../../config/firebase';
+import firebase, { googleAuthProvider } from '../../config/firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +36,15 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: red[600],
     },
   },
+  googleButton: {
+    textTransform: "none",
+    margin: theme.spacing(3, 0, 2),
+    color: "#fff",
+    backgroundColor: blue[600],
+    '&:hover': {
+      backgroundColor: blue[400],
+    },
+  }
 }));
 
 export default function SignIn() {
@@ -52,6 +61,10 @@ export default function SignIn() {
     setOpen(false);
     setLogInErr('');
   };
+
+  const onGoogleClick = () => {
+    firebase.auth().signInWithPopup(googleAuthProvider);
+  }
 
   const onSubmit = ({email, password}) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -117,6 +130,15 @@ export default function SignIn() {
                     className={classes.submit}
                   >
                     ログイン
+                  </Button>
+                  <Divider />
+                  <Button  
+                    fullWidth  
+                    variant="contained" 
+                    className={classes.googleButton} 
+                    onClick={onGoogleClick} 
+                  >
+                    Googleアカウント
                   </Button>
                 </form>
               </div>
