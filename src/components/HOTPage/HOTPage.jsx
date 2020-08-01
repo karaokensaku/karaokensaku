@@ -1,5 +1,4 @@
 import React from 'react';
-// APIデータ取得に使うやつ
 import axios from 'axios';
 import AddMyPage from './AddMyPage';
 import { StyledComponent } from './HOTPage.styled';

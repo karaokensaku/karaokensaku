@@ -62,8 +62,6 @@ export default function Header() {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}　消しとけばマイリストクリックしても消えない
-      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         <ul>
@@ -119,7 +117,7 @@ export default function Header() {
   );
   const user = useContext(AuthContext);
 
-  const LogOut = (user) => {                          //ログアウト処理
+  const LogOut = (user) => {                          
     firebase.auth().signOut().then(() => {
       console.log("ログアウトしました");
     })

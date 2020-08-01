@@ -61,7 +61,6 @@ export const StyledComponent = styled.header`
           margin: 0;
           border-radius:0;
           outline: 0.1px solid #aaa;
-          /* border: 0.1px solid #333; */
           font-size:12px;
           box-shadow:0 0 0 0;
       }
