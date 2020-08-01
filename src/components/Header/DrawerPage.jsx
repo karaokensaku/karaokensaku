@@ -75,7 +75,7 @@ export default function Header() {
                 <SignUpModal />
               </>
               :
-              <Button  variant="contained" onClick={LogOut} className={classes.btn}>ログアウト</Button>
+              <Button onClick={LogOut}>ログアウト</Button>
             }
           </li>
         </ul>
