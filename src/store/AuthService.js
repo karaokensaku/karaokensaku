@@ -12,7 +12,7 @@ const AuthProvider = ({children}) => {
         firebase.auth().onAuthStateChanged(user => {
             setUser(user)      
         })
-    }, [])                         
+    }, [user])                         
 
     return(                          
         <AuthContext.Provider value={user}> 

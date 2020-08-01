@@ -52,7 +52,7 @@ export default function Header() {
         <div className="headerMenu">
           {user && 
             <Hidden xsDown>
-              <Link to="/UserSettingPage" >
+              <Link to="/userSettingPage" >
                 {user.photoURL ? 
                     <Avatar className="avatarImg" src={user.photoURL} />
                     : 
