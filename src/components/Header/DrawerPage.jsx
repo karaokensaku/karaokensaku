@@ -67,7 +67,7 @@ export default function Header() {
           <h2>メニュー</h2>
           <li><Link to='/' onClick={toggleDrawer(anchor, false)}>検索ページ</Link></li>
           <li><Link to='/hotpage' onClick={toggleDrawer(anchor, false)}>人気ランキング</Link><br /></li>
-          <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>ユーザー設定</Link></li>
+          {user && <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>ユーザー設定</Link></li> }
           <li style={{listStyle: "none"}}>
             {!user ? 
               <>
@@ -79,38 +79,40 @@ export default function Header() {
             }
           </li>
         </ul>
-        <TreeView
-          className="myList"
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ChevronRightIcon />}
-        >
-          <TreeItem nodeId="1" label="My リスト">
-            {myPages.map((myPage, index) => {
-              const number = index + 2
-              return (
-                <Link to={`/mypages/${myPage.id}`} key={myPage.id} onClick={toggleDrawer(anchor, false)}>
-                  <TreeItem nodeId={number.valueOf()} label={myPage.title} />
-                </Link>
-              )
-            })}
-            <TreeItem
-              nodeId={myPages.length + 2}
-              label={
-                <div>
-                  {plus &&
-                    <form >
-                      <input name="title" />
-                      <button type="submit">追加</button>
-                    </form>
-                  }
-                  <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
-                    <AddIcon />
-                  </IconButton>
-                </div>
-              }
-            />
-          </TreeItem>
-        </TreeView>
+        {user && 
+          <TreeView
+            className="myList"
+            defaultCollapseIcon={<ExpandMoreIcon />}
+            defaultExpandIcon={<ChevronRightIcon />}
+          >
+            <TreeItem nodeId="1" label="My リスト">
+              {myPages.map((myPage, index) => {
+                const number = index + 2
+                return (
+                  <Link to={`/mypages/${myPage.id}`} key={myPage.id} onClick={toggleDrawer(anchor, false)}>
+                    <TreeItem nodeId={number.valueOf()} label={myPage.title} />
+                  </Link>
+                )
+              })}
+              <TreeItem
+                nodeId={myPages.length + 2}
+                label={
+                  <div>
+                    {plus &&
+                      <form >
+                        <input name="title" />
+                        <button type="submit">追加</button>
+                      </form>
+                    }
+                    <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
+                      <AddIcon />
+                    </IconButton>
+                  </div>
+                }
+              />
+            </TreeItem>
+          </TreeView>
+        }
       </List>
     </div>
   );
