@@ -48,8 +48,14 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.down('xs')]: {
         width: "300px",
       },
-    }
-  }
+    },
+  },
+  modal: {
+    backgroundColor: '#fff',
+    [theme.breakpoints.down('xs')]: {
+      width: "300px",
+    },
+  },
 }));
 
 export default function SignIn() {
@@ -93,9 +99,9 @@ export default function SignIn() {
           aria-describedby="simple-modal-description"
         >
           <StyledComponent>
-            <Container component="main" maxWidth="xs" className="LogIn_Moadl">
+            <Container component="main" maxWidth="xs" className={classes.modal}>
               <CssBaseline />
-              <div className="paper">
+              <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
