@@ -16,7 +16,7 @@ import firebase from '../../config/firebase';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import SignUpModal from '../SignUpModal';
-import LoginModal from '../LoginModal'                          //ログイン用モーダル
+import LoginModal from '../LoginModal'                       
 import { AuthContext } from '../../store/AuthService';
 import { StyledComponent } from "./Header.styled"
 import { red } from '@material-ui/core/colors';
@@ -54,7 +54,6 @@ export default function Header() {
   };
 
   const [plus, setPlus] = useState(false);
-  // const myPages = useRecoilValue(myPageState)
   const [myPages] = useRecoilState(myPageState);
   const list = (anchor) => (
     <div
@@ -62,15 +61,13 @@ export default function Header() {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}　消しとけばマイリストクリックしても消えない
-      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         <ul>
           <h2>メニュー</h2>
           <li><Link to='/' onClick={toggleDrawer(anchor, false)}>検索ページ</Link></li>
           <li><Link to='/hotpage' onClick={toggleDrawer(anchor, false)}>人気ランキング</Link><br /></li>
-          <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>ユーザー設定</Link></li>
+          {user && <li><Link to='/userSettingPage' onClick={toggleDrawer(anchor, false)}>ユーザー設定</Link></li> }
           <li style={{listStyle: "none"}}>
             {!user ? 
               <>
@@ -78,48 +75,50 @@ export default function Header() {
                 <SignUpModal />
               </>
               :
-              <Button  variant="contained" onClick={LogOut} className={classes.btn}>ログアウト</Button>
+              <Button onClick={LogOut}>ログアウト</Button>
             }
           </li>
         </ul>
-        <TreeView
-          className="myList"
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ChevronRightIcon />}
-        >
-          <TreeItem nodeId="1" label="My リスト">
-            {myPages.map((myPage, index) => {
-              const number = index + 2
-              return (
-                <Link to={`/mypages/${myPage.id}`} key={myPage.id} onClick={toggleDrawer(anchor, false)}>
-                  <TreeItem nodeId={number.valueOf()} label={myPage.title} />
-                </Link>
-              )
-            })}
-            <TreeItem
-              nodeId={myPages.length + 2}
-              label={
-                <div>
-                  {plus &&
-                    <form >
-                      <input name="title" />
-                      <button type="submit">追加</button>
-                    </form>
-                  }
-                  <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
-                    <AddIcon />
-                  </IconButton>
-                </div>
-              }
-            />
-          </TreeItem>
-        </TreeView>
+        {user && 
+          <TreeView
+            className="myList"
+            defaultCollapseIcon={<ExpandMoreIcon />}
+            defaultExpandIcon={<ChevronRightIcon />}
+          >
+            <TreeItem nodeId="1" label="My リスト">
+              {myPages.map((myPage, index) => {
+                const number = index + 2
+                return (
+                  <Link to={`/mypages/${myPage.id}`} key={myPage.id} onClick={toggleDrawer(anchor, false)}>
+                    <TreeItem nodeId={number.valueOf()} label={myPage.title} />
+                  </Link>
+                )
+              })}
+              <TreeItem
+                nodeId={myPages.length + 2}
+                label={
+                  <div>
+                    {plus &&
+                      <form >
+                        <input name="title" />
+                        <button type="submit">追加</button>
+                      </form>
+                    }
+                    <IconButton aria-label="settings" component="span" onClick={onPlusClick} >
+                      <AddIcon />
+                    </IconButton>
+                  </div>
+                }
+              />
+            </TreeItem>
+          </TreeView>
+        }
       </List>
     </div>
   );
   const user = useContext(AuthContext);
 
-  const LogOut = (user) => {                          //ログアウト処理
+  const LogOut = (user) => {                          
     firebase.auth().signOut().then(() => {
       console.log("ログアウトしました");
     })

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#C50D1A',
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',  
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: blue[400],
     },
+    modalContainer: {
+      [theme.breakpoints.down('xs')]: {
+        width: "300px",
+      },
+    }
   }
 }));
 

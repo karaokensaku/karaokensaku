@@ -10,20 +10,13 @@ import Youtube from './components/MainPage';
 import MyPage from './components/MyPage';
 import { makeStyles } from '@material-ui/core';
 import Layout from "./components/Layout"
-// import  { css } from 'styled-components';
 import { GlobalStyle } from "./GlobalStyle"
-
-
-// const mixinColor = css`
-//   color: white;
-//   background: blue;
-// `;
 
 const useStyles = makeStyles((theme) => ({
   app: {
     minHeight: "100vh",
     backgroundColor: '#F2F2F2',
-    padding: "20px",
+    padding: "20px 0",
   },
   main: {
     backgroundColor: '#F2F2F2'
@@ -34,12 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+
 function App() {
   const classes = useStyles();
   const [video, setVideos] = useState([]);
 
   const onSearchYoutube = (keyword) => {
-    const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${keyword}&maxResults=3&key=AIzaSyB-JHockHi2hKNaGdLBI8u5d3xSPxnWEDc`;
+    const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${keyword}&maxResults=3&key=${YOUTUBE_API_KEY}`;
 
     axios
       .get(url)
@@ -56,8 +51,6 @@ function App() {
     <div>
         <AuthProvider>
           <RecoilRoot>
-            {/* AuthProviderでラップすることで、 */}
-            {/* その子孫コンポーネント全てでログイン済みユーザーのデータにアクセスできます */}
             <Router>
       <Layout>
         <GlobalStyle />

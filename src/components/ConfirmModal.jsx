@@ -12,6 +12,8 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
+    width: "290px",
+    padding: "16px 10px 24px",
   };
 }
 
@@ -50,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal( {onRemoveClick, song} ) {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
